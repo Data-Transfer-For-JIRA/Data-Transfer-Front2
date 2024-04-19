@@ -1,5 +1,7 @@
 import App from '../App';
+import LoginPage from '../components/Pages/LoginPage';
 import MainPage from '../components/Pages/mainPage';
+import Test from '../components/Test/Test';
 
 export const Router = [
   {
@@ -11,7 +13,12 @@ export const Router = [
     ]
   },
   {
+    path: '/Login',
+    element: <LoginPage />,
+    errorElment: <div>error</div>,
+  },
+  {
     path: '/ComponentTest',
-    element: <div></div>
+    element: <Test />
   }
 ]
