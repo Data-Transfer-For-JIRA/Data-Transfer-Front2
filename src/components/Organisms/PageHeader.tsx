@@ -5,19 +5,19 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useNavigate } from 'react-router-dom';
+import { useDarkModeContext } from '../../Context/CustomDarkmodeProvider';
 
 type props = {
-  handleDarkMode: () => void
   handleDrawerOpen: () => void
   naviOpen: boolean;
-  theme: string
 }
 
-export default function PageHeader({ handleDarkMode, handleDrawerOpen, theme }: props) {
+export default function PageHeader({ handleDrawerOpen }: props) {
   const navigator = useNavigate();
   const handleLogin = () => {
     navigator('/Login');
   }
+  const theme = useDarkModeContext();
   return (
     <AppBar position='static'>
       <Toolbar>
@@ -39,9 +39,9 @@ export default function PageHeader({ handleDarkMode, handleDrawerOpen, theme }: 
           <IconButton
             color="inherit"
             aria-label="toggle-Theme"
-            onClick={handleDarkMode}
+            onClick={theme.switchTheme}
           >
-            {theme === 'lightTheme' ? <DarkModeIcon /> : <LightModeIcon />}
+            {theme.themeState === 'lightTheme' ? <DarkModeIcon /> : <LightModeIcon />}
           </IconButton>
           <IconButton
             color="inherit"

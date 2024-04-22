@@ -26,7 +26,7 @@ export default function PageNavigator({ naviOpen, handleDrawerClose }: props) {
       open={naviOpen}
       onClose={handleDrawerClose}
     >
-      <Box sx={{ width: 250 }} role="presentation" onClick={handleDrawerClose}>
+      <Box component="nav" sx={{ width: 250 }} role="presentation" onClick={handleDrawerClose}>
         <DrawerItemList items={commonContentsList} />
         <Divider />
         <DrawerItemList items={adminContentsList} />
