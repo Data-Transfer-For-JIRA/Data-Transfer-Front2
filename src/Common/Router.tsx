@@ -1,7 +1,7 @@
 import App from '../App';
 import ErrorPage from '../components/Pages/ErrorPage';
 import LoginPage from '../components/Pages/LoginPage';
-import MainPage from '../components/Pages/mainPage';
+import MainPage from '../components/Pages/MainPage';
 import Test from '../components/Test/Test';
 
 export const Router = [
