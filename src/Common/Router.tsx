@@ -11,6 +11,7 @@ export const Router = [
     errorElment: <div>error</div>,
     children: [
       { index: true, element: <MainPage /> },
+      { path: 'projectDetail', element: <MainPage /> },
     ]
   },
   {

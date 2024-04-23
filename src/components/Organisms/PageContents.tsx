@@ -1,14 +1,17 @@
 import { Paper } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GetAxiosResultType } from '../../Apis/ApiTypes';
-import SerchProjectInput from './SerchProjectInput';
+import SerchInput from './SerchInput';
 import SerchResult from './SerchResult';
 
 export default function PageContents() {
   const [projectList, setProjectList] = useState<GetAxiosResultType[]>([]);
+  const handleSearchResult = (searchResult: GetAxiosResultType[]) => {
+    setProjectList(projectList);
+  }
   return (
     <Paper sx={{ p: 3 }}>
-      <SerchProjectInput setProjectList={setProjectList} />
+      <SerchInput handleSearchResult={handleSearchResult} />
       <SerchResult />
     </Paper>
   );
