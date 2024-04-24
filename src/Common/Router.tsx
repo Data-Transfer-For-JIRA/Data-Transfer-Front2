@@ -12,6 +12,10 @@ export const Router = [
     children: [
       { index: true, element: <MainPage /> },
       { path: 'projectDetail', element: <MainPage /> },
+      { path: 'projectCreate', element: <LoginPage /> },
+      { path: 'projectFix', element: <ErrorPage /> },
+      { path: 'projectDelete', element: <ErrorPage /> },
+      { path: 'deleteStay', element: <ErrorPage /> },
     ]
   },
   {

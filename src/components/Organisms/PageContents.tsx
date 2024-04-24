@@ -1,5 +1,6 @@
 import { Paper } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { GetAxiosResultType } from '../../Apis/ApiTypes';
 import SerchInput from './SerchInput';
 import SerchResult from './SerchResult';
@@ -11,8 +12,11 @@ export default function PageContents() {
   }
   return (
     <Paper sx={{ p: 3 }}>
-      <SerchInput handleSearchResult={handleSearchResult} />
-      <SerchResult />
+      <Outlet />
     </Paper>
   );
 }
+
+
+{/* <SerchInput handleSearchResult={handleSearchResult} />
+      <SerchResult /> */}

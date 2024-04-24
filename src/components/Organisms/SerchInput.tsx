@@ -6,6 +6,8 @@ import SearchIcon from '@mui/icons-material/Search';
 /**
  * 검색어 입력 컴포넌트
  * 추후 상세 검색(연동 종류 등)을 고려하여 확장성 있게 개발 필요.
+ * @handleSearchResult : 검색결과를 저장할 상위 컴포넌트의 State를 변경하는 함수.
+ * @getAxiosFunction : 해당 검색창이 사용할 API \
  * prosType : setState를 감싼 핸들러 함수로, 컴포넌트를 범용성 있게 제작하기 위해 사용. + 제네릭타입
  */
 type SerchProjectInputType<T> = { handleSearchResult: (searchResult: T) => void; };

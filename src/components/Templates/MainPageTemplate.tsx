@@ -12,14 +12,7 @@ export default function MainPageTemplate() {
   const handleDrawerClose = () => { setNaviOpen(false); };
   return (
     <Box>
-      <CssBaseline />
-      <Box component="header">
-        <PageHeader handleDrawerOpen={handleDrawerOpen} naviOpen={naviOpen} />
-      </Box>
-      <PageNavigator naviOpen={naviOpen} handleDrawerClose={handleDrawerClose} />
-      <Box component="main" sx={{ height: 'calc(100vh - 64px)' }}>
-        <PageContents />
-      </Box>
+      여기 테이블 나옴
     </Box>
   );
 }

@@ -12,6 +12,7 @@ export const GetAxiosSearchJiraList = async (searchKeyWord: string = " ") => {
   const defaultValue: GetAxiosResultType[] = [];
   try {
     const { data } = await axios(URL);
+    console.log(data);
     return data;
   }
   catch (Error) {
