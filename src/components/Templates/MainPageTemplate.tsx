@@ -1,18 +1,23 @@
-import { Box } from '@mui/material';
-import { CssBaseline } from '@mui/material';
-import { useState } from 'react';
-import PageContents from '../Organisms/PageContents';
-import PageHeader from '../Organisms/PageHeader';
-import PageNavigator from '../Organisms/PageNavigator';
+import { useState } from 'react'
+import { Box } from '@mui/material'
 
-export default function MainPageTemplate() {
-  //Set Navigator
+import PageHeader from '../Organisms/PageHeader'
+import PageNavigator from '../Organisms/PageNavigator'
+
+type propsType = { children: React.ReactNode }
+export default function MainPageTemplate({ children }: propsType) {
   const [naviOpen, setNaviOpen] = useState(false);
   const handleDrawerOpen = () => { setNaviOpen(true); };
   const handleDrawerClose = () => { setNaviOpen(false); };
+
   return (
     <Box>
-      여기 테이블 나옴
+      <PageHeader handleDrawerOpen={handleDrawerOpen} naviOpen={naviOpen} />
+      <PageNavigator naviOpen={naviOpen} handleDrawerClose={handleDrawerClose} />
+      <Box component="main" sx={{ height: 'calc(100vh - 64px)' }}>
+        {children}
+      </Box>
     </Box>
-  );
+  )
 }
+

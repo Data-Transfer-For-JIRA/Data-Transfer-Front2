@@ -1,25 +1,25 @@
-import AppBar from '@mui/material/AppBar';
-import { Box, IconButton, Toolbar, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import { useNavigate } from 'react-router-dom';
-import { useDarkModeContext } from '../../Context/CustomDarkmodeProvider';
+import AppBar from "@mui/material/AppBar";
+import { Box, IconButton, Toolbar, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import { useNavigate } from "react-router-dom";
+import { useDarkModeContext } from "../../Context/CustomDarkmodeProvider";
 
 type props = {
-  handleDrawerOpen: () => void
+  handleDrawerOpen: () => void;
   naviOpen: boolean;
-}
+};
 
 export default function PageHeader({ handleDrawerOpen }: props) {
   const navigator = useNavigate();
   const handleLogin = () => {
-    navigator('/Login');
-  }
+    navigator("/Login");
+  };
   const theme = useDarkModeContext();
   return (
-    <AppBar position='static'>
+    <AppBar position="static">
       <Toolbar>
         <IconButton
           color="inherit"
@@ -41,17 +41,17 @@ export default function PageHeader({ handleDrawerOpen }: props) {
             aria-label="toggle-Theme"
             onClick={theme.switchTheme}
           >
-            {theme.themeState === 'lightTheme' ? <DarkModeIcon /> : <LightModeIcon />}
+            {theme.themeState === "lightTheme" ? (
+              <DarkModeIcon />
+            ) : (
+              <LightModeIcon />
+            )}
           </IconButton>
-          <IconButton
-            color="inherit"
-            aria-label="login"
-            onClick={handleLogin}
-          >
+          <IconButton color="inherit" aria-label="login" onClick={handleLogin}>
             <VpnKeyIcon />
           </IconButton>
         </Box>
       </Toolbar>
     </AppBar>
-  )
+  );
 }

@@ -1,5 +1,3 @@
 export default function SearchIconBtn() {
-  return (
-    <div>SearchIconBtn</div>
-  );
+  return <div>SearchIconBtn</div>;
 }
