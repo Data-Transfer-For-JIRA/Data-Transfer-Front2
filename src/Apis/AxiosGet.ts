@@ -1,5 +1,6 @@
 import axios from "axios";
-import { GetAxiosResultType } from "./ApiTypes";
+
+import { GetAxiosResultType } from "@Api/ApiTypes";
 
 /**
  * 프로젝트 리스트 가져오는 Axios Get 방식

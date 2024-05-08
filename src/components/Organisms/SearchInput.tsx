@@ -1,5 +1,5 @@
-import { Box, FormControl, IconButton, InputBase } from "@mui/material";
 import { useState } from "react";
+import { Box, FormControl, IconButton, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 /**

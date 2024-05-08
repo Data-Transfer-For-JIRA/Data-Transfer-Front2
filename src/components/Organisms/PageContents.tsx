@@ -1,10 +1,10 @@
-import { Paper } from "@mui/material";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
-import { GetAxiosResultType } from "../../Apis/ApiTypes";
-import { GetAxiosSearchJiraList } from "../../Apis/AxiosGet";
-import SearchInput from "./SearchInput";
-import SearchResult from "./SearchResult";
+import { Paper } from "@mui/material";
+
+import { GetAxiosResultType } from "@Api/ApiTypes";
+import { GetAxiosSearchJiraList } from "@Api/AxiosGet";
+import SearchInput from "@Components/Organisms/SearchInput";
+import SearchResult from "@Components/Organisms/SearchResult";
 
 export default function PageContents() {
   const [projectList, setProjectList] = useState<GetAxiosResultType[]>([]);
