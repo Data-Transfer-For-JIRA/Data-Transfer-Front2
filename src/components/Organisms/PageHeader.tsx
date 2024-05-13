@@ -5,7 +5,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { useNavigate } from "react-router-dom";
-import { useDarkModeContext } from "../../Context/CustomDarkmodeProvider";
+import { useDarkModeContext } from "@context/CustomDarkmodeProvider";
 
 type props = {
   handleDrawerOpen: () => void;

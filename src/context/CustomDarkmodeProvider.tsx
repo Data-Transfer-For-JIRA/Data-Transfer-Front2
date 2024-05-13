@@ -1,6 +1,5 @@
-import { createTheme } from '@mui/material';
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { ThemeProvider } from '@mui/material/styles'; // MUI의 ThemeProvider를 import
+import { createTheme, ThemeProvider } from '@mui/material/styles'; // MUI의 ThemeProvider를 import
 
 interface DarkModeContextType {
   themeState: string;
@@ -13,6 +12,7 @@ const DarkModeContext = createContext<DarkModeContextType>({
 });
 
 type ThemeProviderType = { children: ReactNode };
+
 export function CustomDarkModeProvider({ children }: ThemeProviderType) {
   const [themeState, setThemeState] = useState(
     window.localStorage.getItem('ma_theme') || 'lightTheme'

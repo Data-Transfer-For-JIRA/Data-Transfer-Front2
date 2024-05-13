@@ -1,8 +1,8 @@
-import App from "../App";
-import ErrorPage from "../components/Pages/ErrorPage";
-import LoginPage from "../components/Pages/LoginPage";
-import MainPage from "../components/Pages/MainPage";
-import Test from "../components/test/Test";
+import App from "@App";
+import ErrorPage from "@pages/ErrorPage";
+import LoginPage from "@pages/LoginPage";
+import MainPage from "@pages/MainPage";
+import Test from "@tests/Test";
 
 export const Router = [
   {

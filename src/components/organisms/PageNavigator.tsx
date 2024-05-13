@@ -1,7 +1,5 @@
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import { Box } from "@mui/system";
 import DrawerItemList from "../atoms/DrawerItemList";
+import { Box, Divider, Drawer } from "@mui/material";
 
 type props = {
   naviOpen: boolean;
