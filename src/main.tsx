@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom/client";
-import "module-alias/register";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Router } from "@Common/Router";
+import { Router } from "@common/router";
 
 const router = createBrowserRouter(Router);
 
