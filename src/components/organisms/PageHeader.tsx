@@ -19,7 +19,7 @@ export default function PageHeader({ handleDrawerOpen }: props) {
   };
   const theme = useDarkModeContext();
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{height: '64px'}}>
       <Toolbar>
         <IconButton
           color="inherit"

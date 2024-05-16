@@ -7,8 +7,8 @@ type props = {
 };
 
 const commonContentsList = [
-  { value: "프로젝트 조회", link: "/main" },
-  { value: "프로젝트 생성", link: "/create-project" },
+  { value: "프로젝트 조회", link: "/" },
+  { value: "프로젝트 생성", link: "/projectCreate" },
   { value: "프로젝트 연결", link: "/link-project" },
 ];
 

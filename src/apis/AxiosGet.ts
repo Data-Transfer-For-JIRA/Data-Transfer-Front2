@@ -11,17 +11,13 @@ import { GetAxiosResultType } from "@apis/ApiTypes";
 export const GetAxiosSearchJiraList = async (
   searchKeyWord: string = " "
 ): Promise<GetAxiosResultType[]> => {
-  const URL = `${
-    import.meta.env.VITE_API_ADDRESS
-  }/jira/project/search?searchKeyword=${searchKeyWord}`;
+  const URL = `${import.meta.env.VITE_API_ADDRESS}/jira/project/search?searchKeyword=${searchKeyWord}`;
   const defaultValue: GetAxiosResultType[] = [];
   try {
     const { data } = await axios(URL);
-    console.log(data);
     return data;
   } catch (Error) {
     console.log(Error);
-    //return undefined;
     return defaultValue;
   }
 };

@@ -1,7 +1,8 @@
-import App from "@App";
+import App from "../App";
 import ErrorPage from "@pages/ErrorPage";
 import LoginPage from "@pages/LoginPage";
 import MainPage from "@pages/MainPage";
+import ProjectDetailPage from '@pages/ProjectDetailPage';
 import Test from "@tests/Test";
 
 export const Router = [
@@ -11,7 +12,7 @@ export const Router = [
     errorElement: <div>error</div>,
     children: [
       { index: true, element: <MainPage /> },
-      { path: "projectDetail", element: <MainPage /> },
+      { path: "projectDetail/:jiraProjectCode", element: <ProjectDetailPage /> },
       { path: "projectCreate", element: <LoginPage /> },
       { path: "projectFix", element: <ErrorPage /> },
       { path: "projectDelete", element: <ErrorPage /> },

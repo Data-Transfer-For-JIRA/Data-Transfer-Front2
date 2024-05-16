@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Box } from '@mui/material'
 
-import PageHeader from '@components/organisms/PageHeader'
-import PageNavigator from '@components/organisms/PageNavigator'
+import PageHeader from '@organisms/PageHeader'
+import PageNavigator from '@organisms/PageNavigator'
 
 type propsType = { children: React.ReactNode }
 export default function MainPageTemplate({ children }: propsType) {

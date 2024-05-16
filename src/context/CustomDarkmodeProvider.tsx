@@ -20,11 +20,9 @@ export function CustomDarkModeProvider({ children }: ThemeProviderType) {
 
   const switchTheme = () => {
     if (themeState === 'lightTheme') {
-      console.log(themeState);
       setThemeState('darkTheme');
       window.localStorage.setItem('ma_theme', 'darkTheme');
     } else if (themeState === 'darkTheme') {
-      console.log(themeState);
       setThemeState('lightTheme');
       window.localStorage.setItem('ma_theme', 'lightTheme');
     }
