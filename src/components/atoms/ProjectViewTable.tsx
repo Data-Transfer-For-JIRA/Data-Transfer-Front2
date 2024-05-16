@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination } from '@mui/material';
 import { GetAxiosResultType } from '@apis/ApiTypes';
-import { useNavigate } from "react-router-dom";
 
 type ProjectViewTableType = {
   tableData: GetAxiosResultType[],
+  handleMovePage : (jiraCode:string)=>void
 };
 
 type RowType = {
@@ -40,8 +40,7 @@ function createRowData(
   return { jiraProjectCode, jiraProjectName, projectAssignees, projectType, jiraUrl };
 }
 
-export default function ProjectViewTable({ tableData }: ProjectViewTableType) {
-  const navigator = useNavigate();
+export default function ProjectViewTable({ tableData, handleMovePage }: ProjectViewTableType) {
   const rows: RowType[] = [];
   tableData.forEach((item) => {
     rows.push(createRowData(item.key, item.jiraProjectName, item.projectAssignees, item.flag));
@@ -77,9 +76,7 @@ export default function ProjectViewTable({ tableData }: ProjectViewTableType) {
       setPage(newPage);
     }
   };
-  const handleMovePage = (jiraCode :string)=>{
-    navigator(`projectDetail/${jiraCode}`)
-  }
+
   return (
     <Paper>
       <TableContainer>
