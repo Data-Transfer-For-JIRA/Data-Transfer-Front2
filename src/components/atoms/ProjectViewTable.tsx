@@ -55,8 +55,8 @@ export default function ProjectViewTable({ tableData, handleMovePage }: ProjectV
   useEffect(() => {
     const handleResize = () => {
       const displayHeight = window.innerHeight;
-      const rowHeight = 50; // 각 행의 높이 (예상 값, 필요 시 조정)
-      const tableHeaderHeight = 50; // 테이블 헤더의 높이 (예상 값, 필요 시 조정)
+      const rowHeight = 53; // 각 행의 높이 (예상 값, 필요 시 조정)
+      const tableHeaderHeight = 56; // 테이블 헤더의 높이 (예상 값, 필요 시 조정)
       const paginationHeight = 56; // 페이지네이션 컴포넌트의 높이 (예상 값, 필요 시 조정)
       const appHeaderHeight = 64;
       const contesAreaPadding= 16;
