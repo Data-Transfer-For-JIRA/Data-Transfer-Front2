@@ -9,6 +9,7 @@ type ProjectViewTableType = {
 
 type RowType = {
   jiraProjectCode: string,
+  projectCode:string,
   jiraProjectName: string,
   projectAssignees: string,
   projectType: string,
@@ -23,27 +24,29 @@ type ColumnsType = {
 
 const columns: ColumnsType[] = [
   { label: '지라코드', id: 'jiraProjectCode', width: '5%' },
-  { label: '프로젝트이름', id: 'jiraProjectName', width: '40%' },
-  { label: '담당자', id: 'projectAssignees', width: '5%' },
+  { label: '프로젝트코드', id: 'projectCode', width: '7%' },
   { label: '유형', id: 'projectType', width: '5%' },
-  { label: '지라URL', id: 'jiraUrl', width: '20%' },
+  { label: '프로젝트이름', id: 'jiraProjectName', width: '40%' },
+  { label: '담당자', id: 'projectAssignees', width: '7%' },
+  { label: '지라URL', id: 'jiraUrl', width: '10%' },
 ];
 
 function createRowData(
   jiraProjectCode: string,
+  projectCode:string,
   jiraProjectName: string,
   projectAssignees: string,
   flag: string
 ): RowType {
   const jiraUrl = `https://markany.atlassian.net/jira/core/projects/${jiraProjectCode}/board`;
   const projectType = flag === "P" ? "프로젝트" : "유지보수";
-  return { jiraProjectCode, jiraProjectName, projectAssignees, projectType, jiraUrl };
+  return { jiraProjectCode,projectCode, jiraProjectName, projectAssignees, projectType, jiraUrl };
 }
 
 export default function ProjectViewTable({ tableData, handleMovePage }: ProjectViewTableType) {
   const rows: RowType[] = [];
   tableData.forEach((item) => {
-    rows.push(createRowData(item.key, item.jiraProjectName, item.projectAssignees, item.flag));
+    rows.push(createRowData(item.key,item.projectCode, item.jiraProjectName, item.projectAssignees, item.flag));
   });
 
   const [page, setPage] = useState(0);
@@ -52,8 +55,8 @@ export default function ProjectViewTable({ tableData, handleMovePage }: ProjectV
   useEffect(() => {
     const handleResize = () => {
       const displayHeight = window.innerHeight;
-      const rowHeight = 53; // 각 행의 높이 (예상 값, 필요 시 조정)
-      const tableHeaderHeight = 56; // 테이블 헤더의 높이 (예상 값, 필요 시 조정)
+      const rowHeight = 50; // 각 행의 높이 (예상 값, 필요 시 조정)
+      const tableHeaderHeight = 50; // 테이블 헤더의 높이 (예상 값, 필요 시 조정)
       const paginationHeight = 56; // 페이지네이션 컴포넌트의 높이 (예상 값, 필요 시 조정)
       const appHeaderHeight = 64;
       const contesAreaPadding= 16;

@@ -1,82 +1,188 @@
-import * as React from 'react';
-import { Box, List, ListItem, ListItemButton, ListItemText, Divider, Button, Drawer } from '@mui/material';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import UnControlledMultiSelectedBox from '@atoms/UnControlledMultiSelectedBox';
+import UnControlledSelectedBox from '@atoms/UnControlledSelectedBox';
+import UnControlledTextField from '@atoms/UnControlledTextField';
+import { Box, FormControl, Paper } from '@mui/material';
 
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
+type TestType = {
+  defaultValue :object;
+}
 
-export default function AnchorTemporaryDrawer() {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
-
-  const toggleDrawer =
-    (anchor: Anchor, open: boolean) =>
-      (event: React.KeyboardEvent | React.MouseEvent) => {
-        if (
-          event.type === 'keydown' &&
-          ((event as React.KeyboardEvent).key === 'Tab' ||
-            (event as React.KeyboardEvent).key === 'Shift')
-        ) {
-          return;
-        }
-
-        setState({ ...state, [anchor]: open });
-      };
-
-  const list = (anchor: Anchor) => (
-    <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
+export default function Test(){
   return (
-    <div>
-      {(['left', 'right', 'top', 'bottom'] as const).map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
-    </div>
-  );
+    <Paper>
+    <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "15px" }}>
+      <FormControl style={{ width: '20%' }}>
+        <UnControlledTextField
+          control={control}
+          name="essential.projectFlag"
+          textFieldProps={{
+            label: "프로젝트 유형",
+            disabled: true,
+            size: "small",
+            style: { width: '100%' },
+            inputProps: {
+              style: {
+                width: '100%', margin: 0
+              }
+            }
+          }} />
+      </FormControl>
+
+      <FormControl style={{ width: '80%' }}>
+        <UnControlledTextField
+          control={control}
+          name="common.projectCode"
+          textFieldProps={{
+            label: "프로젝트 코드",
+            size: "small",
+            style: { width: '100%' },
+            inputProps: {
+              style: {
+                width: '100%', margin: 0
+              }
+            }
+          }} />
+      </FormControl>
+
+      <FormControl style={{ width: '100%' }}>
+        <UnControlledTextField
+          control={control}
+          name="essential.projectName"
+          rules={{ required: "프로젝트 이름은 필수 입력 값입니다." }}
+          textFieldProps={{
+            label: "프로젝트 이름",
+            size: "small",
+            style: { width: '100%' },
+            inputProps: {
+              style: {
+                width: '100%', margin: 0
+              }
+            }
+          }} />
+      </FormControl>
+
+      <Box style={{ width: '50%' }}>
+        <UnControlledSelectedBox
+          control={control}
+          name="common.assignee"
+          item={USER.Engineer}
+          selectBoxProps={{
+            label: "담당자",
+            style: { width: '100%' },
+            size: "small",
+            inputProps: {
+              style: {
+                width: '100%',
+              }
+            }
+          }}
+        />
+      </Box>
+      <Box style={{ width: '50%' }}>
+        <UnControlledSelectedBox
+          control={control}
+          name="common.salesManager"
+          item={projectFlag === 'P' ? USER.Sales_P : USER.Sales_M}
+          rules={{ required: "영업대표는 필수 입력 값입니다." }}
+          selectBoxProps={{
+            label: "영업대표",
+            id: "assignee-select",
+            style: { width: '100%' },
+            size: "small",
+            inputProps: {
+              style: {
+                width: '100%'
+              }
+            }
+          }}
+        />
+      </Box>
+      <FormControl style={{ width: '50%' }}>
+        <UnControlledTextField
+          control={control}
+          name="common.contractor"
+          textFieldProps={{
+            label: "계약사",
+            size: "small",
+            style: { width: '100%' },
+            inputProps: {
+              style: {
+                width: '100%', margin: 0
+              }
+            }
+          }} />
+      </FormControl>
+
+      <FormControl style={{ width: '50%' }}>
+        <UnControlledTextField
+          control={control}
+          name="common.client"
+          textFieldProps={{
+            label: "고객사",
+            size: "small",
+            style: { width: '100%' },
+            inputProps: {
+              style: {
+                width: '100%', margin: 0
+              }
+            }
+          }} />
+      </FormControl>
+
+      <UnControlledMultiSelectedBox
+        control={control}
+        name="common.productInfo1"
+        item={PRODUCT}
+        selectBoxProps={{
+          label: "1.제품정보",
+          id: "productInfo1-select",
+          style: { width: '100%' },
+          size: "small",
+          defaultValue: "",
+          multiple: true,
+          inputProps: {
+            style: {
+              width: '100%'
+            }
+          }
+        }} />
+      <Box sx={{ width: '50%' }}>
+        <UnControlledSelectedBox
+          control={control}
+          name="common.barcodeType"
+          item={VARCODETYPE}
+          selectBoxProps={{
+            label: "바코드 타입",
+            id: "assignee-select",
+            style: { width: '100%' },
+            size: "small",
+            inputProps: {
+              style: {
+                width: '100%'
+              }
+            }
+          }}
+        />
+      </Box>
+      <Box sx={{ width: '50%' }}>
+        <UnControlledSelectedBox
+          control={control}
+          name="common.subAssignee"
+          item={USER.Engineer}
+          selectBoxProps={{
+            label: "부 담당자",
+            id: "assignee-select",
+            style: { width: '100%' },
+            size: "small",
+            inputProps: {
+              style: {
+                width: '100%'
+              }
+            }
+          }}
+        />
+      </Box>
+    </Box>
+    </Paper>
+  )
 }

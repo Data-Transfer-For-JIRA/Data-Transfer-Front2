@@ -1,3 +1,6 @@
+/** 검색에 사용되는 타입
+ * 
+ */
 type GetAxiosResultType = {
   key: string;
   id: string;
