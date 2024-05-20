@@ -2,7 +2,7 @@ import DrawerItemList from "../atoms/DrawerItemList";
 import { Box, Divider, Drawer } from "@mui/material";
 
 type props = {
-  naviOpen: boolean;
+  naveOpen: boolean;
   handleDrawerClose: () => void;
 };
 
@@ -17,9 +17,9 @@ const adminContentsList = [
   { value: "프로젝트 삭제", link: "/del-project" },
 ];
 
-export default function PageNavigator({ naviOpen, handleDrawerClose }: props) {
+export default function PageNavigator({ naveOpen: naveOpen, handleDrawerClose }: props) {
   return (
-    <Drawer anchor="left" open={naviOpen} onClose={handleDrawerClose}>
+    <Drawer anchor="left" open={naveOpen} onClose={handleDrawerClose}>
       <Box
         component="nav"
         sx={{ width: 250 }}

@@ -4,7 +4,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs, { Dayjs } from 'dayjs';
 import { FieldPath, FieldValues, useController, UseControllerProps } from 'react-hook-form';
-import { TextField } from '@mui/material';
+import TextField from '@mui/material/TextField';
 
 type MuiDatePickerType = {
   datePickerProps?: Omit<DatePickerProps<Dayjs>, 'error'> & React.RefAttributes<HTMLDivElement>;
@@ -32,13 +32,14 @@ export default function UnControlledDatePicker<
               // Handle error here
             }
           }}
-          renderInput={(params) => <TextField {...params} />}
+          slots={{ textField: TextField }}
+          slotProps={{
+            textField: {
+              helperText: error ? error.message : '',
+              error: !!error,
+            },
+          }}
         />
-        {error && (
-          <div style={{ color: 'red' }}>
-            {error.message}
-          </div>
-        )}
       </DemoContainer>
     </LocalizationProvider>
   );

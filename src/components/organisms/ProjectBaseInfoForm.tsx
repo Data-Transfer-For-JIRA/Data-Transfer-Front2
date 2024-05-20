@@ -2,12 +2,12 @@ import { Control } from 'react-hook-form';
 import { Box, FormControl, Typography } from '@mui/material'
 
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
-import UnControlledDataPicker from '@atoms/UnControlledDataPicker';
 import UnControlledMultiSelectedBox from '@atoms/UnControlledMultiSelectedBox';
 import UnControlledSelectedBox from '@atoms/UnControlledSelectedBox';
 import UnControlledTextField from '@atoms/UnControlledTextField';
 
 import { PRODUCT, USER, VARCODETYPE, contractStatus, inspectionCycle, inspectionMethod, projectProgressStep } from '@common/FormValue';
+import UnControlledDatePicker from '@atoms/UnControlledDatePicker';
 
 type ProjectBaseInfoFormType = {
   jiraProjectFlag :string;
@@ -15,7 +15,7 @@ type ProjectBaseInfoFormType = {
 }
 export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBaseInfoFormType){
   return (
-    <Box sx={{  width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "15px", marginTop: '15px' }}>
+    <Box sx={{  width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px", marginTop: '15px' }}>
       <Typography variant="h5" sx={{width: '100%'}}>프로젝트 정보 입력</Typography>
         <FormControl style={{ width: '20%' }}>
           <UnControlledTextField
@@ -205,9 +205,9 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
 //프로젝트일때 common에 해당하는 value를 위한 Form 추가
 function BaseInfoProject({ control }: { control: Control<ProjectTotalInfoType> }){
   return (
-    <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "15px", marginTop: '15px' }}>
+    <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px"}}>
       <FormControl style={{ width: '100%' }}>
-        <UnControlledDataPicker
+        <UnControlledDatePicker
           control={control}
           name="selected.projectAssignmentDate"
           datePickerProps={{
@@ -241,7 +241,7 @@ function BaseInfoProject({ control }: { control: Control<ProjectTotalInfoType> }
 //유지보수인경우 common에 추가될 value를 위한 Form 추가
 function BaseInfoMaintenance({ control }: { control: Control<ProjectTotalInfoType> }){
   return (
-    <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "15px", marginTop: '15px' }}>
+    <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px"}}>
       <FormControl style={{ width: '100%' }}>
         <UnControlledSelectedBox
           control={control}
@@ -260,7 +260,7 @@ function BaseInfoMaintenance({ control }: { control: Control<ProjectTotalInfoTyp
         />
       </FormControl>
       <FormControl style={{ width: '100%' }}>
-        <UnControlledDataPicker
+        <UnControlledDatePicker
           control={control}
           name="selected.maintenanceStartDate"
           rules={{}}
@@ -272,7 +272,7 @@ function BaseInfoMaintenance({ control }: { control: Control<ProjectTotalInfoTyp
       </FormControl>
 
       <FormControl style={{ width: '100%' }}>
-        <UnControlledDataPicker
+        <UnControlledDatePicker
           control={control}
           name="selected.maintenanceEndDate"
           datePickerProps={{
