@@ -1,8 +1,9 @@
 import { ModalType } from '@common/CommonType';
 import ModalBase from '@organisms/ModalBase'; 
 
-import { Container, DialogContent, DialogTitle, IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import { DialogContent } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { ModalTittle } from '@common/CommonValue';
 
 type ModalContentsType ={
   open : boolean;
@@ -12,24 +13,26 @@ type ModalContentsType ={
 }
 
 export default function ModalContents({ open, onClose, modalData, modalType }:ModalContentsType){
+  const [modalTittle, setModalTittle] = useState(ModalTittle.NONE);
+  useEffect(()=>{
+    setModalTittle(ModalTittle[modalType]);
+  },[])
+
   return (
-    <ModalBase open={open} onClose={onClose}>
-      <Container>
-      <DialogTitle id="alert-dialog-title">
-        테스트
-          <IconButton
-          aria-label="modal-close"
-          onClick={onClose}
-          sx={{float : 'right'}}    
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
+    <ModalBase open={open} onClose={onClose} modalTittle={modalTittle}>
         <DialogContent>
-        <div>{modalType}</div>
-        <div>{modalData}</div>
+          {modalType==='CREATE_CHECK'&&(<CheckCreateProjectInfo modalData={modalData}/>)}
+          {modalType==='CREATE_SUCCESS'&&(<div>hi2</div>)}
         </DialogContent>
-      </Container>
     </ModalBase>
+  )
+}
+
+//프로젝트 생성정보 Modal
+function CheckCreateProjectInfo({modalData}:{modalData:string}){
+  return(
+    <div>      
+      {modalData}
+    </div> 
   )
 }
