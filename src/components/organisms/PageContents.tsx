@@ -19,7 +19,10 @@ export default function PageContents({fixFlag}: PageContentsType) {
 
   const handleMovePage = (jiraCode :string)=>{
     if(fixFlag)navigator(`/projectFix/${jiraCode}`)
-    else navigator(`projectDetail/${jiraCode}`)
+    else {
+      navigator(`projectDetail/${jiraCode}`)
+      alert(`projectDetail/${jiraCode}`);
+    }
     
   }
 

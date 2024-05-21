@@ -4,6 +4,7 @@ import { useController, FieldValues, FieldPath, UseControllerProps } from 'react
 
 interface MuiProps {
   checkBoxProps?: CheckboxProps;
+  label : string;
 }
 
 export default function UnControlledCheckBox<
@@ -19,7 +20,7 @@ export default function UnControlledCheckBox<
         {...checkBoxProps}
         {...field}
       />}
-      label="인력배정 보드 추가 생성" />
+      label={props.label} />
   )
 }
 

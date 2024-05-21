@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
 import { Box, Button, Grid, Tab, Tabs } from '@mui/material';
 import MainPageTemplate from '@templates/MainPageTemplate';
-import { defaultProjectTotalInfo } from '@common/DefaultValue';
+import { TestDefaultValue, defaultProjectTotalInfo } from '@common/DefaultValue';
 import ProjectBaseInfoForm from '@organisms/ProjectBaseInfoForm';
 import ProjectAdditionalInfo from '@organisms/ProjectAdditionalInfo';
 import ModalContents from '@atoms/ModalContents';
@@ -33,8 +33,9 @@ export default function ProjectCreatePage(){
   }
 
   //react-hook-form 셋팅
-  const { control, handleSubmit } = useForm<ProjectTotalInfoType>({
+  const { control, handleSubmit, setValue  } = useForm<ProjectTotalInfoType>({
     defaultValues: defaultProjectTotalInfo });
+
   //모달에 전달할 form 데이터
   const [modalData, setModalData] = useState('NONE');
   const handlePostForm:SubmitHandler<ProjectTotalInfoType> =  (data)=>{
@@ -52,8 +53,8 @@ export default function ProjectCreatePage(){
   const handleModalOpen = () => { setModalOpen(true) };
   
   useEffect(()=>{
-    defaultProjectTotalInfo.essential.projectFlag = projectFlag;
-  },[projectFlag])
+    setValue('essential.projectFlag',projectFlag)
+  },[projectFlag, setValue])
   return(
     <MainPageTemplate>
       <Box sx={{padding: '10px'}}>
@@ -64,7 +65,7 @@ export default function ProjectCreatePage(){
         <form autoComplete="off" onSubmit={handleSubmit(handlePostForm)}>
           <Grid container sx={{height: '100%', padding:'5px'}} spacing={2}>
             <Grid item xs={5}> 
-              <ProjectBaseInfoForm jiraProjectFlag={projectFlag} control={control}/>
+              <ProjectBaseInfoForm jiraProjectFlag={projectFlag} control={control} defaultValue={TestDefaultValue}/>
             </Grid>
 
             <Grid item xs={7}>
