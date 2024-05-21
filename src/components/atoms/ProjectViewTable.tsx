@@ -105,9 +105,16 @@ export default function ProjectViewTable({ tableData, handleMovePage }: ProjectV
                       </TableCell>
                     )
                   }
+                  else if(column.id=== 'jiraProjectCode' ||column.id=== 'projectCode'){
+                    return(
+                      <TableCell key={column.id} onClick={()=>handleMovePage(row.jiraProjectCode)}>
+                      {value}
+                    </TableCell>
+                    )
+                  }
                   else{
                     return (
-                      <TableCell key={column.id} onClick={()=>handleMovePage(row.jiraProjectCode)}>
+                      <TableCell key={column.id}>
                         {value}
                       </TableCell>
                     );  

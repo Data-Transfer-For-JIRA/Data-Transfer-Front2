@@ -34,8 +34,7 @@ export default function ProjectCreatePage(){
 
   //react-hook-form 셋팅
   const { control, handleSubmit } = useForm<ProjectTotalInfoType>({
-    defaultValues: { ...defaultProjectTotalInfo, essential: { ...defaultProjectTotalInfo.essential, projectFlag: projectFlag } }
-  });
+    defaultValues: defaultProjectTotalInfo });
   //모달에 전달할 form 데이터
   const [modalData, setModalData] = useState('NONE');
   const handlePostForm:SubmitHandler<ProjectTotalInfoType> =  (data)=>{
@@ -52,7 +51,9 @@ export default function ProjectCreatePage(){
   const handleModalClose = () => {setModalOpen(false)};
   const handleModalOpen = () => { setModalOpen(true) };
   
-  useEffect(()=>{},[projectFlag])
+  useEffect(()=>{
+    defaultProjectTotalInfo.essential.projectFlag = projectFlag;
+  },[projectFlag])
   return(
     <MainPageTemplate>
       <Box sx={{padding: '10px'}}>

@@ -1,4 +1,5 @@
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
+import UnControlledCheckBox from '@atoms/UnControlledCheckBox';
 import UnControlledMultiSelectedBox from '@atoms/UnControlledMultiSelectedBox';
 import UnControlledReactQuill from '@atoms/UnControlledReactQuill';
 import UnControlledSelectedBox from '@atoms/UnControlledSelectedBox';
@@ -14,6 +15,7 @@ export default function ProjectAdditionalInfo({jiraProjectFlag,control}:ProjectA
   return(
     <Box sx={{ width: "100%",padding: '10px', marginTop: '10px'}}>
       <Typography variant="h5" gutterBottom>계약정보 입력</Typography>
+      <UnControlledCheckBox control={control} name="common.allocationFlag"/>
       <UnControlledReactQuill jiraProjectFlag={jiraProjectFlag} control={control} />
       <Typography variant="h5" gutterBottom sx={{marginTop: '20px'}}>추가 데이터 입력</Typography>
       <Box sx={{display:'flex', flexFlow: 'wrap', rowGap: "10px"}}>

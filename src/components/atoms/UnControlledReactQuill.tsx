@@ -1,5 +1,5 @@
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
-import {useMemo,} from 'react';
+import {useEffect, useMemo,} from 'react';
 import { Control, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -52,7 +52,9 @@ export default function UnControlledReactQuill({ jiraProjectFlag, control }: Rea
       },
     };
   }, []);
-
+  useEffect(()=>{
+    
+  },[jiraProjectFlag])
   return (
     <Controller
       name="common.description"
