@@ -1,9 +1,11 @@
 import { ModalType } from '@common/CommonType';
 import ModalBase from '@organisms/ModalBase'; 
 
-import { DialogContent } from '@mui/material';
+import { Box, DialogContent } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ModalTittle } from '@common/CommonValue';
+import { useForm } from 'react-hook-form';
+import { ProjectTotalInfoType } from '@apis/ApiTypes';
 
 type ModalContentsType ={
   open : boolean;
@@ -30,9 +32,11 @@ export default function ModalContents({ open, onClose, modalData, modalType }:Mo
 
 //프로젝트 생성정보 Modal
 function CheckCreateProjectInfo({modalData}:{modalData:string}){
+  const formData:ProjectTotalInfoType = JSON.parse(modalData);
+  const { control, handleSubmit } = useForm<ProjectTotalInfoType>({defaultValues: formData });
   return(
-    <div>      
+    <Box>      
       {modalData}
-    </div> 
+    </Box> 
   )
 }

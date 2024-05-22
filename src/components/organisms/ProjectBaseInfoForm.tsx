@@ -13,9 +13,8 @@ import dayjs, { Dayjs } from 'dayjs';
 type ProjectBaseInfoFormType = {
   jiraProjectFlag :string;
   control : Control<ProjectTotalInfoType>;
-  defaultValue?:ProjectTotalInfoType;
 }
-export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultValue}:ProjectBaseInfoFormType){
+export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBaseInfoFormType){
   return (
     <Box sx={{  width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px", marginTop: '15px' }}>
       <Typography variant="h5" sx={{width: '100%'}}>프로젝트 정보 입력</Typography>
@@ -28,7 +27,6 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
               disabled: true,
               size: "small",
               style: { width: '100%' },
-              defaultValue : defaultValue ? defaultValue.essential.projectFlag : '',
               inputProps: {
                 style: {
                   width: '100%', margin: 0
@@ -46,7 +44,6 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
             label: "프로젝트 코드",
             size: "small",
             style: { width: '100%' },
-            defaultValue : defaultValue ? defaultValue.common.projectCode : '',
             inputProps: {
               style: {
                 width: '100%', margin: 0
@@ -64,7 +61,6 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
             label: "프로젝트 이름",
             size: "small",
             style: { width: '100%' },
-            defaultValue : defaultValue ? defaultValue.essential.projectName : '',
             inputProps: {
               style: {
                 width: '100%', margin: 0
@@ -82,7 +78,6 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
               label: "담당자",
               style: { width: '100%' },
               size: "small",
-              defaultValue : defaultValue ? defaultValue.common.assignee : '',
               inputProps: {
                 style: {
                   width: '100%',
@@ -103,7 +98,6 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
               id: "assignee-select",
               style: { width: '100%' },
               size: "small",
-              defaultValue : defaultValue ? defaultValue.common.salesManager : '',
               inputProps: {
                 style: {
                   width: '100%'
@@ -121,7 +115,6 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
             label: "계약사",
             size: "small",
             style: { width: '100%' },
-            defaultValue : defaultValue ? defaultValue.common.contractor : '',
             inputProps: {
               style: {
                 width: '100%', margin: 0
@@ -138,7 +131,6 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
             label: "고객사",
             size: "small",
             style: { width: '100%' },
-            defaultValue : defaultValue ? defaultValue.common.client : '',
             inputProps: {
               style: {
                 width: '100%', margin: 0
@@ -158,7 +150,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
             style: { width: '100%' },
             size: "small",
             multiple: true,
-            // defaultValue : defaultValue ? defaultValue.common.productInfo1 : '',
+
             inputProps: {
               style: {
                 width: '100%'
@@ -177,7 +169,6 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
               id: "assignee-select",
               style: { width: '100%' },
               size: "small",
-              defaultValue : defaultValue ? defaultValue.common.barcodeType : '',
               inputProps: {
                 style: {
                   width: '100%'
@@ -197,7 +188,6 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
               id: "assignee-select",
               style: { width: '100%' },
               size: "small",
-              defaultValue : defaultValue ? defaultValue.common.subAssignee : '',
               inputProps: {
                 style: {
                   width: '100%'
@@ -216,12 +206,11 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control,defaultVal
 //프로젝트일때 common에 해당하는 value를 위한 Form 추가
 type ProjectMaintainFormType = {
   control: Control<ProjectTotalInfoType>; 
-  defaultValue?: ProjectTotalInfoType;
 }
-function BaseInfoProject({ control, defaultValue }: ProjectMaintainFormType){
-  const parseStringToDate = (dateString: string | null): Dayjs | null => {
-    return dateString ? dayjs(dateString) : null;
-  };
+function BaseInfoProject({ control }: ProjectMaintainFormType){
+  // const parseStringToDate = (dateString: string | null): Dayjs | null => {
+  //   return dateString ? dayjs(dateString) : null;
+  // };
   return (
     <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px"}}>
       <FormControl style={{ width: '100%' }}>
@@ -229,7 +218,6 @@ function BaseInfoProject({ control, defaultValue }: ProjectMaintainFormType){
           control={control}
           name="selected.projectAssignmentDate"
           datePickerProps={{
-            defaultValue : defaultValue ? parseStringToDate(defaultValue.selected.projectAssignmentDate) : null,
             label: "프로젝트 배정일",
             format: 'YYYY-MM-DD',
             sx: { width: '100%' }
@@ -245,7 +233,6 @@ function BaseInfoProject({ control, defaultValue }: ProjectMaintainFormType){
             label: "프로젝트 진행 단계",
             style: { width: '100%' },
             size: "small",
-            defaultValue : defaultValue ? defaultValue.selected.projectProgressStep : '',
             inputProps: {
               style: {
                 width: '100%',
@@ -259,10 +246,7 @@ function BaseInfoProject({ control, defaultValue }: ProjectMaintainFormType){
 }
 
 //유지보수인경우 common에 추가될 value를 위한 Form 추가
-function BaseInfoMaintenance({ control, defaultValue }: ProjectMaintainFormType){
-  const parseStringToDate = (dateString: string | null): Dayjs | null => {
-    return dateString ? dayjs(dateString) : null;
-  };
+function BaseInfoMaintenance({ control }: ProjectMaintainFormType){
   return (
     <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px"}}>
       <FormControl style={{ width: '100%' }}>
@@ -274,7 +258,6 @@ function BaseInfoMaintenance({ control, defaultValue }: ProjectMaintainFormType)
             label: "계약여부",
             style: { width: '100%' },
             size: "small",
-            defaultValue : defaultValue ? defaultValue.selected.contractStatus : '',
             inputProps: {
               style: {
                 width: '100%',
@@ -291,7 +274,6 @@ function BaseInfoMaintenance({ control, defaultValue }: ProjectMaintainFormType)
           datePickerProps={{
             label: "유지보수 시작일",
             format: 'YYYY-MM-DD',
-            defaultValue : defaultValue ? parseStringToDate(defaultValue.selected.maintenanceStartDate) : null,
             sx: { width: '100%' }
           }} />
       </FormControl>
@@ -303,7 +285,6 @@ function BaseInfoMaintenance({ control, defaultValue }: ProjectMaintainFormType)
           datePickerProps={{
             label: "유지보수 종료일",
             format: 'YYYY-MM-DD',
-            defaultValue : defaultValue ? parseStringToDate(defaultValue.selected.maintenanceEndDate) : null,
             sx: { width: '100%' }
           }} />
       </FormControl>
@@ -317,7 +298,6 @@ function BaseInfoMaintenance({ control, defaultValue }: ProjectMaintainFormType)
             label: "점검 주기",
             style: { width: '100%' },
             size: "small",
-            defaultValue : defaultValue ? defaultValue.selected.inspectionCycle : '',
             inputProps: {
               style: {
                 width: '100%',
@@ -336,7 +316,6 @@ function BaseInfoMaintenance({ control, defaultValue }: ProjectMaintainFormType)
             label: "점검 방법",
             style: { width: '100%' },
             size: "small",
-            defaultValue : defaultValue ? defaultValue.selected.inspectionMethod : '',
             inputProps: {
               style: {
                 width: '100%',
@@ -355,7 +334,6 @@ function BaseInfoMaintenance({ control, defaultValue }: ProjectMaintainFormType)
             size: "small",
             multiline: true,
             style: { width: '100%' },
-            defaultValue : defaultValue ? defaultValue.selected.inspectionMethodEtc : '',
             inputProps: {
               style: {
                 width: '100%', margin: 0

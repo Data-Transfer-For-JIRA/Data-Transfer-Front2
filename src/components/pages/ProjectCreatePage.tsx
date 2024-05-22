@@ -11,7 +11,7 @@ import ProjectAdditionalInfo from '@organisms/ProjectAdditionalInfo';
 import ModalContents from '@atoms/ModalContents';
 import { ModalType } from '@common/CommonType';
 
-/** 프로젝트 생성 컴포넌트
+/** 프로젝트 생성 컴포넌트 및 수정 컴포넌트
  *  ProjectBaseInfoForm => 기본정보 티켓중 필드에 입력될 값들
  *  ProjectAdditionalInfo=> NoAX정보값 또는 추가 제품군 선택 값들
  *  ProjectContractInfo=> reactQuill 에디터 컴포넌트
@@ -33,6 +33,7 @@ export default function ProjectCreatePage(){
   }
 
   //react-hook-form 셋팅
+  //여기 DefaultValue에값을 설정하면 Form에 값들이 들어감
   const { control, handleSubmit, setValue  } = useForm<ProjectTotalInfoType>({
     defaultValues: defaultProjectTotalInfo });
 
@@ -65,7 +66,7 @@ export default function ProjectCreatePage(){
         <form autoComplete="off" onSubmit={handleSubmit(handlePostForm)}>
           <Grid container sx={{height: '100%', padding:'5px'}} spacing={2}>
             <Grid item xs={5}> 
-              <ProjectBaseInfoForm jiraProjectFlag={projectFlag} control={control} defaultValue={TestDefaultValue}/>
+              <ProjectBaseInfoForm jiraProjectFlag={projectFlag} control={control}/>
             </Grid>
 
             <Grid item xs={7}>
