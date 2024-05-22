@@ -26,8 +26,9 @@ const formats = [
 type ReactQuillEditorType = {
   jiraProjectFlag: string;
   control: Control<ProjectTotalInfoType>;
+  disabled:boolean;
 }
-export default function UnControlledReactQuill({ jiraProjectFlag, control }: ReactQuillEditorType) {
+export default function UnControlledReactQuill({ jiraProjectFlag, control, disabled }: ReactQuillEditorType) {
   let defaultValue: string;
   if (jiraProjectFlag === 'P') {
     defaultValue = "<p>1.고객사 :</p><p>2. 계약 업체 :</p><p>3. 프로젝트 명 : </p><p>4. 프로젝트 코드 :</p><p>5. 지원 일정 :</p><p>6. 담당자 :</p><p>7. 지원 범위 :</p><p>&nbsp;&nbsp;&nbsp;&nbsp;가. 지원 형태 :</p><p>&nbsp;&nbsp;&nbsp;&nbsp;나. 연동 형태 :</p><p>&nbsp;&nbsp;&nbsp;&nbsp;다. 사용자 지원 환경 :</p><p>&nbsp;&nbsp;&nbsp;&nbsp;라. 서버 수량 :<p>8. 장소 :</p><p>9. 영업 담당 :</p><p>10. 기타 :</p>"
@@ -67,6 +68,7 @@ export default function UnControlledReactQuill({ jiraProjectFlag, control }: Rea
           modules={modules}
           formats={formats}
           value={field.value || defaultValue}
+          readOnly={disabled}
         />
       )}
     />

@@ -8,7 +8,7 @@ export default function ProjectFixedDetail(){
   return (
     <MainPageTemplate>
       <p>프로젝트 수정할때 쓸 디테일 페이지</p>
-      <ProjectBaseInfo jiraProjectCode={jiraProjectCode}/>
+      <div>{jiraProjectCode}</div>
     </MainPageTemplate>
   )
 }

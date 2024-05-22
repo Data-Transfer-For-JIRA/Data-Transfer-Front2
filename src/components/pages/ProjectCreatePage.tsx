@@ -1,20 +1,19 @@
 import ReactDOM from 'react-dom';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Box, Button, Tab, Tabs } from '@mui/material';
 
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
-import { Box, Button, Grid, Tab, Tabs } from '@mui/material';
-import MainPageTemplate from '@templates/MainPageTemplate';
-import { TestDefaultValue, defaultProjectTotalInfo } from '@common/DefaultValue';
-import ProjectBaseInfoForm from '@organisms/ProjectBaseInfoForm';
-import ProjectAdditionalInfo from '@organisms/ProjectAdditionalInfo';
-import ModalContents from '@atoms/ModalContents';
 import { ModalType } from '@common/CommonType';
+
+import MainPageTemplate from '@templates/MainPageTemplate';
+import { defaultProjectTotalInfo } from '@common/DefaultValue';
+import ProjectInfoGrid from '@organisms/ProjectInfoGrid';
+import ModalContents from '@atoms/ModalContents';
 
 /** 프로젝트 생성 컴포넌트 및 수정 컴포넌트
  *  ProjectBaseInfoForm => 기본정보 티켓중 필드에 입력될 값들
- *  ProjectAdditionalInfo=> NoAX정보값 또는 추가 제품군 선택 값들
- *  ProjectContractInfo=> reactQuill 에디터 컴포넌트
+ *  ProjectAdditionalInfo=> NoAX용 추가 데이터 및 ReactQuill
  */
 
 export default function ProjectCreatePage(){
@@ -64,16 +63,8 @@ export default function ProjectCreatePage(){
           <Tab label="유지보수"/>
         </Tabs>
         <form autoComplete="off" onSubmit={handleSubmit(handlePostForm)}>
-          <Grid container sx={{height: '100%', padding:'5px'}} spacing={2}>
-            <Grid item xs={5}> 
-              <ProjectBaseInfoForm jiraProjectFlag={projectFlag} control={control}/>
-            </Grid>
-
-            <Grid item xs={7}>
-              <ProjectAdditionalInfo jiraProjectFlag={projectFlag} control={control} />
-              <Button type='submit' variant="contained" sx={{float:'right', marginRight:'1rem'}}>프로젝트 생성</Button>
-            </Grid>
-          </Grid>      
+          <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={false}/>
+          <Button type='submit' variant="contained" sx={{float:'right', marginRight:'1rem'}}>프로젝트 생성</Button>
         </form>
       </Box>
       {modalOpen && modalRoot && ReactDOM.createPortal(
@@ -82,6 +73,7 @@ export default function ProjectCreatePage(){
           onClose={handleModalClose}
           modalData = {modalData}
           modalType = {modalType}
+          setModalType={setModalType}
         />, 
         modalRoot
       )}

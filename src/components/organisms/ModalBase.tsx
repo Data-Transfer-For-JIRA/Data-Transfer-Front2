@@ -11,10 +11,10 @@ export default function ModalBase({ open, onClose, children,modalTittle }:ModalB
     <Dialog
       open={open}
       onClose={onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
+      fullWidth // 다이얼로그를 가득 채우도록 설정
+      sx={{ '& .MuiDialog-paper': { width: '70rem', maxWidth: 'none' } }}
     >
-      <DialogTitle id="alert-dialog-title">
+      <DialogTitle id="alert-dialog-title" sx={{padding : '5px', textAlign:'center'}}>
       <Typography variant="h5" gutterBottom>{modalTittle}
           <IconButton
           aria-label="modal-close"

@@ -10,8 +10,9 @@ import { Control } from 'react-hook-form';
 type ProjectAdditionalInfoType ={
   jiraProjectFlag :string;
   control : Control<ProjectTotalInfoType>;
+  readOnlyMode : boolean;
 };
-export default function ProjectAdditionalInfo({jiraProjectFlag,control}:ProjectAdditionalInfoType){
+export default function ProjectAdditionalInfoForm({jiraProjectFlag,control,readOnlyMode}:ProjectAdditionalInfoType){
   return(
     <Box sx={{ width: "100%",padding: '10px', marginTop: '10px'}}>
       <Typography variant="h5" gutterBottom>계약정보 입력</Typography>
@@ -20,11 +21,12 @@ export default function ProjectAdditionalInfo({jiraProjectFlag,control}:ProjectA
         control={control} 
         name="common.allocationFlag"
         checkBoxProps={{
+          disabled: readOnlyMode,
           defaultChecked : true,
         }}
         label = '인력배정 보드 추가 생성'
         />
-      <UnControlledReactQuill jiraProjectFlag={jiraProjectFlag} control={control} />
+      <UnControlledReactQuill jiraProjectFlag={jiraProjectFlag} control={control} disabled={readOnlyMode}/>
       <Typography variant="h5" gutterBottom sx={{marginTop: '20px'}}>추가 데이터 입력</Typography>
       <Box sx={{display:'flex', flexFlow: 'wrap', rowGap: "10px"}}>
         <UnControlledMultiSelectedBox
@@ -33,6 +35,7 @@ export default function ProjectAdditionalInfo({jiraProjectFlag,control}:ProjectA
           item={PRODUCT}
           selectBoxProps={{
             label: "2.제품정보",
+            disabled: readOnlyMode,
             id: "productInfo1-select",
             style: { width: '100%' },
             size: "small",
@@ -50,6 +53,7 @@ export default function ProjectAdditionalInfo({jiraProjectFlag,control}:ProjectA
           item={PRODUCT}
           selectBoxProps={{
             label: "3.제품정보",
+            disabled: readOnlyMode,
             id: "productInfo1-select",
             style: { width: '100%' },
             size: "small",
@@ -67,6 +71,7 @@ export default function ProjectAdditionalInfo({jiraProjectFlag,control}:ProjectA
           item={PRODUCT}
           selectBoxProps={{
             label: "4.제품정보",
+            disabled: readOnlyMode,
             id: "productInfo1-select",
             style: { width: '100%' },
             size: "small",
@@ -84,6 +89,7 @@ export default function ProjectAdditionalInfo({jiraProjectFlag,control}:ProjectA
           item={PRODUCT}
           selectBoxProps={{
             label: "5.제품정보",
+            disabled: readOnlyMode,
             id: "productInfo1-select",
             style: { width: '100%' },
             size: "small",
@@ -103,6 +109,7 @@ export default function ProjectAdditionalInfo({jiraProjectFlag,control}:ProjectA
             item={MULTIOSSUPPORT}
             selectBoxProps={{
               label: "멀티OS지원여부",
+              disabled: readOnlyMode,
               id: "assignee-select",
               style: { width: '100%' },
               size: "small",
@@ -121,6 +128,7 @@ export default function ProjectAdditionalInfo({jiraProjectFlag,control}:ProjectA
             item={PRINTSUPPORTRANGE}
             selectBoxProps={{
               label: "프린터 지원 범위",
+              disabled: readOnlyMode,
               id: "assignee-select",
               style: { width: '100%' },
               size: "small",

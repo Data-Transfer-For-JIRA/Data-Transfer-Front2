@@ -8,13 +8,13 @@ import UnControlledTextField from '@atoms/UnControlledTextField';
 
 import { PRODUCT, USER, VARCODETYPE, contractStatus, inspectionCycle, inspectionMethod, projectProgressStep } from '@common/FormValue';
 import UnControlledDatePicker from '@atoms/UnControlledDatePicker';
-import dayjs, { Dayjs } from 'dayjs';
 
 type ProjectBaseInfoFormType = {
   jiraProjectFlag :string;
   control : Control<ProjectTotalInfoType>;
+  readOnlyMode : boolean;
 }
-export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBaseInfoFormType){
+export default function ProjectBaseInfoForm({jiraProjectFlag, control, readOnlyMode}:ProjectBaseInfoFormType){
   return (
     <Box sx={{  width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px", marginTop: '15px' }}>
       <Typography variant="h5" sx={{width: '100%'}}>프로젝트 정보 입력</Typography>
@@ -42,6 +42,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
           name="common.projectCode"
           textFieldProps={{
             label: "프로젝트 코드",
+            disabled: readOnlyMode,
             size: "small",
             style: { width: '100%' },
             inputProps: {
@@ -59,6 +60,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
           rules={{ required: "프로젝트 이름은 필수 입력 값입니다." }}
           textFieldProps={{
             label: "프로젝트 이름",
+            disabled: readOnlyMode,
             size: "small",
             style: { width: '100%' },
             inputProps: {
@@ -76,6 +78,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
             item={USER.Engineer}
             selectBoxProps={{
               label: "담당자",
+              disabled: readOnlyMode,
               style: { width: '100%' },
               size: "small",
               inputProps: {
@@ -95,6 +98,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
             rules={{ required: "영업대표는 필수 입력 값입니다." }}
             selectBoxProps={{
               label: "영업대표",
+              disabled: readOnlyMode,
               id: "assignee-select",
               style: { width: '100%' },
               size: "small",
@@ -113,6 +117,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
           name="common.contractor"
           textFieldProps={{
             label: "계약사",
+            disabled: readOnlyMode,
             size: "small",
             style: { width: '100%' },
             inputProps: {
@@ -129,6 +134,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
           name="common.client"
           textFieldProps={{
             label: "고객사",
+            disabled: readOnlyMode,
             size: "small",
             style: { width: '100%' },
             inputProps: {
@@ -146,6 +152,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
           item={PRODUCT}
           selectBoxProps={{
             label: "1.제품정보",
+            disabled: readOnlyMode,
             id: "productInfo1-select",
             style: { width: '100%' },
             size: "small",
@@ -166,6 +173,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
             item={VARCODETYPE}
             selectBoxProps={{
               label: "바코드 타입",
+              disabled: readOnlyMode,
               id: "assignee-select",
               style: { width: '100%' },
               size: "small",
@@ -185,6 +193,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
             item={USER.Engineer}
             selectBoxProps={{
               label: "부 담당자",
+              disabled: readOnlyMode,
               id: "assignee-select",
               style: { width: '100%' },
               size: "small",
@@ -197,7 +206,8 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
           />
       </FormControl>
 
-      {jiraProjectFlag=='P'?<BaseInfoProject control={control}/>:<BaseInfoMaintenance control={control}/>}
+      {jiraProjectFlag=='P'?<BaseInfoProject control={control} readOnlyMode ={readOnlyMode}/>:
+      <BaseInfoMaintenance control={control} readOnlyMode ={readOnlyMode}/>}
       
     </Box>
   )
@@ -206,8 +216,9 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control}:ProjectBa
 //프로젝트일때 common에 해당하는 value를 위한 Form 추가
 type ProjectMaintainFormType = {
   control: Control<ProjectTotalInfoType>; 
+  readOnlyMode:boolean;
 }
-function BaseInfoProject({ control }: ProjectMaintainFormType){
+function BaseInfoProject({ control,readOnlyMode }: ProjectMaintainFormType){
   // const parseStringToDate = (dateString: string | null): Dayjs | null => {
   //   return dateString ? dayjs(dateString) : null;
   // };
@@ -219,6 +230,7 @@ function BaseInfoProject({ control }: ProjectMaintainFormType){
           name="selected.projectAssignmentDate"
           datePickerProps={{
             label: "프로젝트 배정일",
+            disabled: readOnlyMode,
             format: 'YYYY-MM-DD',
             sx: { width: '100%' }
           }} />
@@ -231,6 +243,7 @@ function BaseInfoProject({ control }: ProjectMaintainFormType){
           item={projectProgressStep}
           selectBoxProps={{
             label: "프로젝트 진행 단계",
+            disabled: readOnlyMode,
             style: { width: '100%' },
             size: "small",
             inputProps: {
@@ -246,7 +259,7 @@ function BaseInfoProject({ control }: ProjectMaintainFormType){
 }
 
 //유지보수인경우 common에 추가될 value를 위한 Form 추가
-function BaseInfoMaintenance({ control }: ProjectMaintainFormType){
+function BaseInfoMaintenance({ control,readOnlyMode }: ProjectMaintainFormType){
   return (
     <Box sx={{ width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px"}}>
       <FormControl style={{ width: '100%' }}>
@@ -256,6 +269,7 @@ function BaseInfoMaintenance({ control }: ProjectMaintainFormType){
           item={contractStatus}
           selectBoxProps={{
             label: "계약여부",
+            disabled: readOnlyMode,
             style: { width: '100%' },
             size: "small",
             inputProps: {
@@ -273,6 +287,7 @@ function BaseInfoMaintenance({ control }: ProjectMaintainFormType){
           rules={{}}
           datePickerProps={{
             label: "유지보수 시작일",
+            disabled: readOnlyMode,
             format: 'YYYY-MM-DD',
             sx: { width: '100%' }
           }} />
@@ -284,6 +299,7 @@ function BaseInfoMaintenance({ control }: ProjectMaintainFormType){
           name="selected.maintenanceEndDate"
           datePickerProps={{
             label: "유지보수 종료일",
+            disabled: readOnlyMode,
             format: 'YYYY-MM-DD',
             sx: { width: '100%' }
           }} />
@@ -296,6 +312,7 @@ function BaseInfoMaintenance({ control }: ProjectMaintainFormType){
           item={inspectionCycle}
           selectBoxProps={{
             label: "점검 주기",
+            disabled: readOnlyMode,
             style: { width: '100%' },
             size: "small",
             inputProps: {
@@ -314,6 +331,7 @@ function BaseInfoMaintenance({ control }: ProjectMaintainFormType){
           item={inspectionMethod}
           selectBoxProps={{
             label: "점검 방법",
+            disabled: readOnlyMode,
             style: { width: '100%' },
             size: "small",
             inputProps: {
@@ -331,6 +349,7 @@ function BaseInfoMaintenance({ control }: ProjectMaintainFormType){
           name="selected.inspectionMethodEtc"
           textFieldProps={{
             label: "점검 방법(기타)",
+            disabled: readOnlyMode,
             size: "small",
             multiline: true,
             style: { width: '100%' },

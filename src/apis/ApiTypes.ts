@@ -58,4 +58,11 @@ type ProjectTotalInfoType ={
   }
 }
 
-export type { GetAxiosResultType, ProjectTotalInfoType };
+//지라 프로젝트 생성 결과 타입
+type PostProjectCreateResultType = {
+  result: string;
+  jiraProjectCode: string;
+  jiraProjectName: string;
+}
+
+export type { GetAxiosResultType, ProjectTotalInfoType, PostProjectCreateResultType };
