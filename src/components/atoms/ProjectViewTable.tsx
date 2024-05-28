@@ -4,7 +4,7 @@ import { GetAxiosResultType } from '@apis/ApiTypes';
 
 type ProjectViewTableType = {
   tableData: GetAxiosResultType[],
-  handleMovePage : (jiraCode:string)=>void
+  handleMovePage ?: (jiraCode:string)=>void
 };
 
 type RowType = {
@@ -107,7 +107,7 @@ export default function ProjectViewTable({ tableData, handleMovePage }: ProjectV
                   }
                   else if(column.id=== 'jiraProjectCode' ||column.id=== 'projectCode'){
                     return(
-                      <TableCell key={column.id} onClick={()=>handleMovePage(row.jiraProjectCode)}>
+                      <TableCell key={column.id} onClick={()=>handleMovePage&&handleMovePage(row.jiraProjectCode)}>
                       {value}
                     </TableCell>
                     )

@@ -64,5 +64,12 @@ type PostProjectCreateResultType = {
   jiraProjectCode: string;
   jiraProjectName: string;
 }
+//지라 프로젝트 링크 결과 타입
+export type UpdateProjectLinkType = {
+  errorMessages: string[],
+  result: boolean,
+  resultMessage: string,
+  value: string
+}
 
 export type { GetAxiosResultType, ProjectTotalInfoType, PostProjectCreateResultType };

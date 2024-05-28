@@ -50,6 +50,7 @@ const lightTheme = createTheme({
   },
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useDarkModeContext = (): DarkModeContextType => {
   const context = useContext(DarkModeContext);
   return context;

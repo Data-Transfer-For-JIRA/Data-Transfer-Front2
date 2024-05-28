@@ -1,4 +1,3 @@
-import ProjectBaseInfo from '@organisms/ProjectBaseInfoForm';
 import MainPageTemplate from '@templates/MainPageTemplate';
 import { useParams } from 'react-router-dom';
 

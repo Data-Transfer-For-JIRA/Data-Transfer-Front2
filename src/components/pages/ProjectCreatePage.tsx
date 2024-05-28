@@ -37,7 +37,7 @@ export default function ProjectCreatePage(){
     defaultValues: defaultProjectTotalInfo });
 
   //모달에 전달할 form 데이터
-  const [modalData, setModalData] = useState('NONE');
+  const [modalData, setModalData] = useState<string>('NONE');
   const handlePostForm:SubmitHandler<ProjectTotalInfoType> =  (data)=>{
     const stringData = JSON.stringify(data);
     setModalData(stringData);
@@ -72,6 +72,7 @@ export default function ProjectCreatePage(){
           open={modalOpen} 
           onClose={handleModalClose}
           modalData = {modalData}
+          setModalData={setModalData}
           modalType = {modalType}
           setModalType={setModalType}
         />, 

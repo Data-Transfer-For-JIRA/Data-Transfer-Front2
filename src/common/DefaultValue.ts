@@ -1,4 +1,4 @@
-import { ProjectTotalInfoType } from '@apis/ApiTypes';
+import { GetAxiosResultType, ProjectTotalInfoType } from '@apis/ApiTypes';
 
 export const defaultProjectTotalInfo: ProjectTotalInfoType = {
   essential: {
@@ -36,6 +36,18 @@ export const defaultProjectTotalInfo: ProjectTotalInfoType = {
     inspectionMethodEtc: "",
     inspectionCycle: ""
   }
+}
+export const defaultProjectList : GetAxiosResultType ={
+  key: "",
+  id: "",
+  jiraProjectName: "",
+  migratedDate: "",
+  projectCode: "",
+  wssProjectName: "",
+  flag: "",
+  projectAssignees: "",
+  updateDate: "",
+  updateIssueFlag: false,
 }
 
 export const TestDefaultValue: ProjectTotalInfoType = {

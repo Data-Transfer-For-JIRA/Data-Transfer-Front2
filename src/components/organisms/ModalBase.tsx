@@ -1,12 +1,19 @@
 import { Box, Dialog, DialogTitle, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { ModalType } from '@common/CommonType';
+import { useNavigate } from 'react-router-dom';
 type ModalBaseType = {
   open : boolean;
   onClose : () => void; 
   children: React.ReactNode;
   modalTittle: string;
+  modalType: ModalType;
 }
-export default function ModalBase({ open, onClose, children,modalTittle }:ModalBaseType){
+export default function ModalBase({ open, onClose, children,modalTittle, modalType }:ModalBaseType){
+  const navigator = useNavigate();
+  const onClickRefresh = ()=>{
+    navigator('/');
+  }
   return (
     <Dialog
       open={open}
@@ -18,7 +25,7 @@ export default function ModalBase({ open, onClose, children,modalTittle }:ModalB
       <Typography variant="h5" gutterBottom>{modalTittle}
           <IconButton
           aria-label="modal-close"
-          onClick={onClose}
+          onClick={modalType==='CREATE_SUCCESS'?onClickRefresh:onClose}
           sx={{float : 'right'}}    
           >
             <CloseIcon />

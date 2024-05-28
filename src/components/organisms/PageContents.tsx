@@ -27,7 +27,6 @@ export default function PageContents({fixFlag}: PageContentsType) {
   }
 
   useEffect(()=>{
-    console.log(projectList);
     const requestDefaultApi = async ()=>{
       const result = await GetAxiosSearchJiraList(undefined);
       handleSearchResult(result);

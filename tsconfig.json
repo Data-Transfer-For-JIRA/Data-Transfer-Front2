@@ -20,6 +20,7 @@
     "baseUrl": "./src",
     "paths": {
       "@common/*": ["common/*"],
+      "@util/*": ["util/*"],
       "@apis/*": ["apis/*"],
       "@context/*": ["context/*"],
       "@pages/*": ["components/pages/*"],

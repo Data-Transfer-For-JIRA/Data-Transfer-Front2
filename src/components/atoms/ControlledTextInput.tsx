@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
  * @handleSearchResult : 검색결과를 저장할 배열형태의 State
  * @requestSearchApi : 검색에 사용될 Axios 함수
  */
+
 type InputType<T> = {
   handleSearchResult : (searchResult : T) => void;
   requestSearchApi : (searchKeyWord:string)=>Promise<T|undefined>;
@@ -31,10 +32,10 @@ export default function ControlledTextInput<T> ({handleSearchResult,requestSearc
     callSearchApi();
   }
   return (
-    <Box>
+    <Box sx={{display : 'flex'}}>
       <Input 
         placeholder="프로젝트 검색" 
-        sx={{width:'95%'}}
+        sx={{width:'93%'}}
         onChange ={handleSearchKeyWord}
         onKeyDown = {handleKeyDown}
       />
