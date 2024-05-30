@@ -35,7 +35,7 @@ export default function ControlledTextInput<T> ({handleSearchResult,requestSearc
     <Box sx={{display : 'flex'}}>
       <Input 
         placeholder="프로젝트 검색" 
-        sx={{width:'93%'}}
+        sx={{width:'100%'}}
         onChange ={handleSearchKeyWord}
         onKeyDown = {handleKeyDown}
       />

@@ -1,7 +1,6 @@
 import { SelectedProjectType } from '@common/CommonType';
 import { Box, Button } from '@mui/material';
-import { useEffect } from 'react';
-import SecondaryTextList from './SecondaryTextList';
+import SecondaryTextList from '@atoms/SecondaryTextList';
 
 type RequestApiFunctionType<T>= 
 |((mainJiraKey: string, subJiraKeyList: string[]) => Promise<T>)
@@ -13,9 +12,6 @@ type TargetChipType<T> = {
   requestApiFunction : RequestApiFunctionType<T>
 }
 export default function TargetChip<T>({itemList,handleTargetDelete, requestApiFunction}:TargetChipType<T> ){
-  useEffect(()=>{
-    console.log(itemList)
-  },[])
   return (
     <Box sx={{height :'85%', width:'100%', display : 'flex 1'}}>
       <Box sx={{ width:'100%', height :'100%'}} style={{ overflowY:'scroll'}}>
@@ -26,7 +22,7 @@ export default function TargetChip<T>({itemList,handleTargetDelete, requestApiFu
         color='primary'
         onClick={()=>requestApiFunction}
         sx={{float : 'right'}}
-      >삭제
+      >요청
       </Button >
     </Box>
   )

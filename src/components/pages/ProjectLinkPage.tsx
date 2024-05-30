@@ -12,6 +12,7 @@ import { SelectedProjectType } from '@common/CommonType';
 import { AxiosPutProjectLink } from '@apis/AxiosUpdate';
 import TargetChip from '@atoms/TargetChip';
 import { setSelectProjectList } from '@util/function';
+import SearchAndSetInput from '@atoms/SearchAndSetInput';
 
 
 
@@ -23,11 +24,7 @@ export default function ProjectLinkPage(){
 
   //MainJiraKey검색State
   const [mainJiraKey, setMainJiraKey] = useState("");
-  const handleSearchMainResult = (searchResult:GetAxiosResultType[],searchKeyWord:stirng) => {
-    if(searchResult[0]===searchKeyWord){
-      setMainJiraKey(searchKeyWord);
-    }
-  };
+  const handleJiraMainKey = (searchKeyword : string)=>{setMainJiraKey(searchKeyword);}
 
   //SubJiraKey검색 State
   const [projectList, setProjectList] = useState<GetAxiosResultType[]>([]); //조회된 프로젝트 리스트
@@ -71,14 +68,14 @@ export default function ProjectLinkPage(){
   return (
     <MainPageTemplate>
       <Grid container paddingLeft={"10px"} sx={{height : '100%'}}>
-        <Grid item xs={10}>
+        <Grid item xs={9}>
           <Box>
             <ControlledTextInput handleSearchResult={handleSearchResult} requestSearchApi={GetAxiosSearchJiraList}/>
             <SelectedData gridData={projectList} setSubJiraKey={setSubJiraKey}/>
           </Box>
         </Grid>
-        <Grid item xs={2}>
-          <ControlledTextInput handleSearchResult={handleSearchMainResult} requestSearchApi={GetAxiosSearchJiraList}/>
+        <Grid item xs={3}>
+          <SearchAndSetInput handleJiraMainKey={handleJiraMainKey}/>
           <Typography variant='h6'>신규 프로젝트 : {mainJiraKey} </Typography> 
           <TargetChip itemList={itemList} handleTargetDelete={handleTargetDelete} requestApiFunction={AxiosPutProjectLink}/>
         </Grid>
