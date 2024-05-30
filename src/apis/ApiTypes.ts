@@ -1,4 +1,4 @@
-/** 검색에 사용되는 타입
+/** 검색후 응답으로 받을 데이터의 타입
  *  프로젝트 조회, 프로젝트 링크, 프로젝트 수정, 프로젝트 삭제.
  */
 type GetAxiosResultType = {
@@ -15,6 +15,7 @@ type GetAxiosResultType = {
 };
 
 /** 프로젝트 기본정보 티켓들 타입
+ * 프로젝트 생성 및 수정 API 파라미터로 사용
  * essential  : 백엔드에서 필수로 요구하는 타입
  * common     : 유지보수, 프로젝트에 공통적으로 사용하는 타입
  * selected   : 유지보수, 프로젝트에서 각각 필요로 하는 타입
@@ -64,6 +65,13 @@ type PostProjectCreateResultType = {
   jiraProjectCode: string;
   jiraProjectName: string;
 }
+
+//프로젝트 링크 API 파라미터 타입
+export type UpdateProjectInfoType = {
+  mainJiraKey : string,
+  subJiraKeyList : string[]
+}
+
 //지라 프로젝트 링크 결과 타입
 export type UpdateProjectLinkType = {
   errorMessages: string[],

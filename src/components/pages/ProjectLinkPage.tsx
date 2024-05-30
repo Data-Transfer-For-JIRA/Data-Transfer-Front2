@@ -53,7 +53,10 @@ export default function ProjectLinkPage(){
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType,setModalType] =useState<ModalType>('NONE');
   const [modalData, setModalData] = useState<string>('NONE');
-  const handleModalClose = () => {setModalOpen(false)};
+  const handleModalClose = () => {
+    setModalType('NONE');
+    setModalOpen(false);
+  };
   const handleModalOpen = () => { setModalOpen(true) };
 
   //API요청 버튼 onClick함수

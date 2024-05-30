@@ -3,13 +3,14 @@ import { useForm } from 'react-hook-form';
 import { Box, Button, CircularProgress, DialogContent, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 
 import { PostCreateProject, PostTest } from '@apis/AxiosPost';
-import { PostProjectCreateResultType, ProjectTotalInfoType } from '@apis/ApiTypes';
+import { PostProjectCreateResultType, ProjectTotalInfoType, UpdateProjectInfoType } from '@apis/ApiTypes';
 import { ModalType } from '@common/CommonType';
 import { ModalTittle } from '@common/CommonValue';
 
 import ModalBase from '@organisms/ModalBase'; 
 import ProjectInfoGrid from '@organisms/ProjectInfoGrid';
 import { useNavigate } from 'react-router-dom';
+import { AxiosPutProjectLink, testPutProjectLink } from '@apis/AxiosUpdate';
 
 type ModalContentsType ={
   open : boolean;
@@ -37,7 +38,7 @@ export default function ModalContents({ open, onClose, modalData, setModalData, 
           {modalType==='CREATE_CHECK'&&(<CheckCreateProjectInfo modalData={modalData} setModalData={setModalData} onClose={onClose} setModalType={setModalType}/>)}
           {modalType==='CREATE_SUCCESS'&&(<CreateSuccess stringData={modalData}/>)}
           {/* {프로젝트 연결} */}
-          {modalType==='LINK_CHECK'&&<div>{modalData}</div>}
+          {modalType==='LINK_CHECK'&&<LinkProjectInfo  modalData={modalData} setModalData={setModalData} setModalType={setModalType} onClose={onClose}/>}
           {modalType==='LINK_SUCCESS'&&<div>프로젝트 링크 성공</div>}
           {/* {프로젝트 삭제} */}
           {modalType==='DELETE_CHECK'&&<div>프로젝트 삭제 체크</div>}
@@ -47,6 +48,47 @@ export default function ModalContents({ open, onClose, modalData, setModalData, 
           {modalType==='UPDATE_SUCCESS'&&<div>프로젝트 수정 실패</div>}
         </DialogContent>
     </ModalBase>
+  )
+}
+
+type LinkProjectInfoType = {
+  modalData:string,
+  setModalType : React.Dispatch<React.SetStateAction<ModalType>>
+  onClose : () => void;
+  setModalData:React.Dispatch<React.SetStateAction<string>>
+}
+function LinkProjectInfo({modalData, setModalType,onClose, setModalData}:LinkProjectInfoType){
+  const putLinkData:UpdateProjectInfoType = JSON.parse(modalData);
+  const handleConfirmLink = async()=>{
+    setModalType('API_LOADING');
+    const apiResult  = await testPutProjectLink(putLinkData);
+    if(apiResult!==undefined){
+      const stringData = JSON.stringify(apiResult);
+      setModalData(stringData);
+      setModalType('LINK_SUCCESS');
+    }
+  }
+  return(
+    <DialogContent>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="left">지라 메인 코드</TableCell>
+              <TableCell align="left">지라 서브 코드</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell align="left">{putLinkData.mainJiraKey}</TableCell>
+              <TableCell align="left">{putLinkData.subJiraKeyList.join(' , ')}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Button variant='contained' sx={{ margin: 3 }} onClick={handleConfirmLink} >링크 진행</Button>
+      <Button variant='contained' color='error' onClick={onClose} sx={{ margin: "5px" }}>취소</Button>
+  </DialogContent >
   )
 }
 
