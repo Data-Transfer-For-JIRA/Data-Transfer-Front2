@@ -30,9 +30,21 @@ export default function ModalContents({ open, onClose, modalData, setModalData, 
   return (
     <ModalBase open={open} onClose={onClose} modalTittle={modalTittle} modalType={modalType}>
         <DialogContent sx={{padding : '3px'}}>
+          {/* {모달 공통} */}
           {modalType==='API_LOADING'&&(<ModalLoading/>)}
+          {modalType==='API_FAIL'&&<div>API요청실패</div>}
+          {/* {프로젝트 생성} */}
           {modalType==='CREATE_CHECK'&&(<CheckCreateProjectInfo modalData={modalData} setModalData={setModalData} onClose={onClose} setModalType={setModalType}/>)}
           {modalType==='CREATE_SUCCESS'&&(<CreateSuccess stringData={modalData}/>)}
+          {/* {프로젝트 연결} */}
+          {modalType==='LINK_CHECK'&&<div>{modalData}</div>}
+          {modalType==='LINK_SUCCESS'&&<div>프로젝트 링크 성공</div>}
+          {/* {프로젝트 삭제} */}
+          {modalType==='DELETE_CHECK'&&<div>프로젝트 삭제 체크</div>}
+          {modalType==='DELETE_SUCCESS'&&<div>프로젝트 삭제 실패</div>}
+          {/* {프로젝트 수정} */}
+          {modalType==='UPDATE_CHECK'&&<div>프로젝트 수정 체크</div>}
+          {modalType==='UPDATE_SUCCESS'&&<div>프로젝트 수정 실패</div>}
         </DialogContent>
     </ModalBase>
   )
@@ -59,7 +71,7 @@ function CheckCreateProjectInfo({modalData,onClose, setModalType, setModalData}:
       setModalType('CREATE_SUCCESS');
     }
     else{
-      setModalType('CREATE_FAIL');
+      setModalType('API_FAIL');
     }
   }
   return(

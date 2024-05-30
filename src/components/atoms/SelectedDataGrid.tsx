@@ -1,5 +1,5 @@
 import { GetAxiosResultType } from '@apis/ApiTypes';
-import { DataGrid, GridCellParams, GridColDef, GridRowId, GridRowSelectionModel, GridTreeNode } from '@mui/x-data-grid';
+import { DataGrid, GridCellParams, GridColDef, GridRowId, GridRowSelectionModel } from '@mui/x-data-grid';
 import { useState } from 'react';
 
 const columns: GridColDef[] = [

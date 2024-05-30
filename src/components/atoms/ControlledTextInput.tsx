@@ -9,39 +9,49 @@ import SearchIcon from '@mui/icons-material/Search';
  */
 
 type InputType<T> = {
-  handleSearchResult : (searchResult : T) => void;
-  requestSearchApi : (searchKeyWord:string)=>Promise<T|undefined>;
-}
-export default function ControlledTextInput<T> ({handleSearchResult,requestSearchApi }:InputType<T>) {
+  handleSearchResult: (searchResult: T) => void;
+  requestSearchApi: (searchKeyWord: string) => Promise<T | null | undefined>;
+};
+
+export default function ControlledTextInput<T>({ handleSearchResult, requestSearchApi }: InputType<T>) {
   const [searchKeyWord, setSearchKeyWord] = useState<string>("");
-  const handleSearchKeyWord = (event :React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement> )=>{
+
+  const handleSearchKeyWord = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setSearchKeyWord(event.target.value);
-  }
-  const callSearchApi = async()=>{
+  };
+
+  const callSearchApi = async () => {
     const result = await requestSearchApi(searchKeyWord);
-    if(result !==undefined) {
-      handleSearchResult(result); 
+    if (result !== null && result !== undefined) {
+      if (Array.isArray(result) && result.length === 0) {
+        alert("검색 결과가 없습니다.");
+      } else {
+        handleSearchResult(result);
+      }
     }
-  }
-  const handleKeyDown = (event :React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement> )=>{
-    if(event.key==='Enter'){
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (event.key === 'Enter') {
       callSearchApi();
     }
-  }
-  const handleBtnOnClick = ()=>{
+  };
+
+  const handleBtnOnClick = () => {
     callSearchApi();
-  }
+  };
+
   return (
-    <Box sx={{display : 'flex'}}>
-      <Input 
-        placeholder="프로젝트 검색" 
-        sx={{width:'100%'}}
-        onChange ={handleSearchKeyWord}
-        onKeyDown = {handleKeyDown}
+    <Box sx={{ display: 'flex' }}>
+      <Input
+        placeholder="프로젝트 검색"
+        sx={{ width: '100%' }}
+        onChange={handleSearchKeyWord}
+        onKeyDown={handleKeyDown}
       />
-        <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={handleBtnOnClick}>
-          <SearchIcon />
-        </IconButton>     
-      </Box>
-  )
+      <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={handleBtnOnClick}>
+        <SearchIcon />
+      </IconButton>
+    </Box>
+  );
 }

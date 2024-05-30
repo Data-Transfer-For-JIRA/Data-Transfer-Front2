@@ -2,14 +2,10 @@ import { SelectedProjectType } from '@common/CommonType';
 import { Box, Button } from '@mui/material';
 import SecondaryTextList from '@atoms/SecondaryTextList';
 
-type RequestApiFunctionType<T>= 
-|((mainJiraKey: string, subJiraKeyList: string[]) => Promise<T>)
-| ((deleteCodeList: string[]) => Promise<T>);
-
-type TargetChipType<T> = {
+type TargetChipType = {
   itemList : SelectedProjectType[]
   handleTargetDelete : (deleteCode : string)=>void
-  requestApiFunction : RequestApiFunctionType<T>
+  requestApiFunction : () => void
 }
 export default function TargetChip<T>({itemList,handleTargetDelete, requestApiFunction}:TargetChipType<T> ){
   return (
@@ -19,8 +15,9 @@ export default function TargetChip<T>({itemList,handleTargetDelete, requestApiFu
       </Box>
       <Button
         variant="contained"
+        type='button'
         color='primary'
-        onClick={()=>requestApiFunction}
+        onClick={requestApiFunction}
         sx={{float : 'right'}}
       >요청
       </Button >
