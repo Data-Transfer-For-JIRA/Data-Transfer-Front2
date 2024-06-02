@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Box, Button, CircularProgress, DialogContent, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 
 import { PostCreateProject, PostTest } from '@apis/AxiosPost';
-import { PostProjectCreateResultType, ProjectTotalInfoType, UpdateProjectInfoType } from '@apis/ApiTypes';
+import { AxiosPutProjectLink, testPutProjectLink } from '@apis/AxiosUpdate';
+import { PostProjectCreateResultType, ProjectTotalInfoType, UpdateProjectInfoType, UpdateProjectLinkType } from '@apis/ApiTypes';
 import { ModalType } from '@common/CommonType';
+
 import { ModalTittle } from '@common/CommonValue';
 
 import ModalBase from '@organisms/ModalBase'; 
 import ProjectInfoGrid from '@organisms/ProjectInfoGrid';
-import { useNavigate } from 'react-router-dom';
-import { AxiosPutProjectLink, testPutProjectLink } from '@apis/AxiosUpdate';
 
 type ModalContentsType ={
   open : boolean;
@@ -39,7 +40,7 @@ export default function ModalContents({ open, onClose, modalData, setModalData, 
           {modalType==='CREATE_SUCCESS'&&(<CreateSuccess stringData={modalData}/>)}
           {/* {프로젝트 연결} */}
           {modalType==='LINK_CHECK'&&<LinkProjectInfo  modalData={modalData} setModalData={setModalData} setModalType={setModalType} onClose={onClose}/>}
-          {modalType==='LINK_SUCCESS'&&<div>프로젝트 링크 성공</div>}
+          {modalType==='LINK_SUCCESS'&&<LinkProjectResult modalData={modalData} setModalType={setModalType}/>}
           {/* {프로젝트 삭제} */}
           {modalType==='DELETE_CHECK'&&<div>프로젝트 삭제 체크</div>}
           {modalType==='DELETE_SUCCESS'&&<div>프로젝트 삭제 실패</div>}
@@ -50,6 +51,42 @@ export default function ModalContents({ open, onClose, modalData, setModalData, 
     </ModalBase>
   )
 }
+type LinkProjectResultType = {
+  modalData:string;
+  setModalType : React.Dispatch<React.SetStateAction<ModalType>>
+}
+function LinkProjectResult({modalData, setModalType}:LinkProjectResultType){
+  const navigate = useNavigate();
+  alert(modalData);
+  const putSuccessResult:UpdateProjectLinkType[] = JSON.parse(modalData);
+  const handleConfirmLink = () => {
+    setModalType('NONE');
+    navigate("/");
+  }
+  return(
+    <DialogContent>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">결과</TableCell>
+                  <TableCell align="left">로그</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {putSuccessResult.map((_item, index) => (
+                  <TableRow key={index}>
+                    <TableCell align="left" sx={{ width: '100px' }}>{putSuccessResult[index].result === true ? "성공" : "실패"}</TableCell>
+                    <TableCell align="left">{putSuccessResult[index].resultMessage}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Button variant='contained' sx={{ margin: 3 }} onClick={handleConfirmLink} >확인</Button>
+        </DialogContent >
+  )
+}
 
 type LinkProjectInfoType = {
   modalData:string,
@@ -57,6 +94,7 @@ type LinkProjectInfoType = {
   onClose : () => void;
   setModalData:React.Dispatch<React.SetStateAction<string>>
 }
+/** 프로젝트 연결 페이지 API이전 정보 확인용 모달 컴포넌트 */
 function LinkProjectInfo({modalData, setModalType,onClose, setModalData}:LinkProjectInfoType){
   const putLinkData:UpdateProjectInfoType = JSON.parse(modalData);
   const handleConfirmLink = async()=>{
@@ -92,13 +130,13 @@ function LinkProjectInfo({modalData, setModalType,onClose, setModalData}:LinkPro
   )
 }
 
-//프로젝트 생성정보 컨펌용 Modal
 type CheckCreateProjectInfoType ={
   modalData : string;
   onClose : () => void; 
   setModalType : React.Dispatch<React.SetStateAction<ModalType>>
   setModalData : React.Dispatch<React.SetStateAction<string>>
 }
+/**프로젝트 생성정보 컨펌용 모달 컴포넌트*/
 function CheckCreateProjectInfo({modalData,onClose, setModalType, setModalData}:CheckCreateProjectInfoType){
   const formData:ProjectTotalInfoType = JSON.parse(modalData);
   const {control, getValues } = useForm<ProjectTotalInfoType>({defaultValues: formData });

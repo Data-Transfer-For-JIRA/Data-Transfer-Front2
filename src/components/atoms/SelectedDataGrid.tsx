@@ -1,12 +1,12 @@
-import { GetAxiosResultType } from '@apis/ApiTypes';
-import { DataGrid, GridCellParams, GridColDef, GridRowId, GridRowSelectionModel } from '@mui/x-data-grid';
+import { DataGrid, GridCellParams, GridColDef, GridRowId, GridRowSelectionModel, GridTreeNode } from '@mui/x-data-grid';
 import { useState } from 'react';
+import { GetAxiosResultType } from '@apis/ApiTypes';  // Import your API types here
 
 const columns: GridColDef[] = [
   { field: 'key', headerName: '지라코드', width: 100, sortable: false },
   { field: 'projectCode', headerName: '프로젝트 코드', width: 150, sortable: false },
   { field: 'flag', headerName: '유형', width: 50, sortable: false },
-  { field: 'jiraProjectName', headerName: '프로젝트 이름', sortable: false, flex: 1 },
+  { field: 'jiraProjectName', headerName: '프로젝트이름', sortable: false, flex: 1 },
   { field: 'projectAssignees', headerName: '담당자', width: 150, sortable: false },
 ];
 
@@ -16,16 +16,19 @@ type MuiSelectedTableType = {
 };
 
 export default function SelectedDataGrid({ setSubJiraKey, gridData }: MuiSelectedTableType) {
-  const [rowSelected, setRowSelected] = useState<GridRowId[]>([]);
+  const [selectedRow, setSelectedRow] = useState<GridRowId[]>([]);
 
-  const handleSelectedRow = (selection: GridRowSelectionModel) => {
-    const selectionSet = new Set(selection);
-    const result = Array.from(selectionSet);
-    setRowSelected(result);
+  const handleRowSelection = (selection: GridRowSelectionModel) => {
+    if (selection.length > 0) {
+      const latestSelection = selection[selection.length - 1]; // 가장 최근에 선택된 행
+      setSelectedRow([latestSelection]); // 단일 선택을 유지
+    } else {
+      setSelectedRow([]);
+    }
   };
 
-  const handleOnClickRow = (params: GridCellParams<GetAxiosResultType>) => {
-    setSubJiraKey(params.row);
+  const handleOnClickRow = (params: GridCellParams) => {
+    setSubJiraKey(params.row as GetAxiosResultType);
   };
 
   return (
@@ -34,14 +37,13 @@ export default function SelectedDataGrid({ setSubJiraKey, gridData }: MuiSelecte
       columns={columns}
       autoHeight
       localeText={{
-        noRowsLabel: '검색 결과가 없습니다.'
+        noRowsLabel: '검색 결과가 없습니다.',
       }}
-      rowSelectionModel={rowSelected}
+      rowSelectionModel={selectedRow}
       checkboxSelection
-      hideFooterSelectedRowCount
-      onRowSelectionModelChange={(selection) => handleSelectedRow(selection)}
-      onCellClick={(params) => handleOnClickRow(params)}
-      getRowId={(obj) => obj.id}
+      onRowSelectionModelChange={handleRowSelection}
+      onCellClick={handleOnClickRow}
+      getRowId={(row) => row.id}
       sx={{
         "& .MuiDataGrid-columnHeaderCheckbox .MuiDataGrid-columnHeaderTitleContainer": {
           display: "none",
