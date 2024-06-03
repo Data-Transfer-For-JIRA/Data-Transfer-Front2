@@ -80,4 +80,8 @@ export type UpdateProjectLinkType = {
   value: string
 }
 
+export type UserLoginInfoType = {
+  id : string,
+  pwd : string,
+}
 export type { GetAxiosResultType, ProjectTotalInfoType, PostProjectCreateResultType };

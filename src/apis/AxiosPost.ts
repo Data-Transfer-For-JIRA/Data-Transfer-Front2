@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ProjectTotalInfoType } from './ApiTypes';
+import { ProjectTotalInfoType, UserLoginInfoType } from '@apis/ApiTypes';
 
 /**
  * 지라 프로젝트 생성 API
@@ -15,6 +15,22 @@ export const PostCreateProject= async (postJson : ProjectTotalInfoType)=>{
       data: {
         ...postJson
       }
+    })
+    return data;
+  }
+  catch (Error) {
+    console.log(Error);
+    return undefined;
+  }
+}
+
+export const PostLogin = async ( userLoginInfo: UserLoginInfoType)=>{
+  const URL = `${import.meta.env.VITE_API_ADDRESS}/login/temp`;
+  try {
+    const { data } = await axios({
+      url: URL,
+      method: 'post',
+      data: { ...userLoginInfo }
     })
     return data;
   }

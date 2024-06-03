@@ -5,7 +5,7 @@ import MainPageTemplate from "@templates/MainPageTemplate";
 type MainPageType = {
   fixFlag :boolean;
 }
-export default function MainPage({fixFlag}:MainPageType) {
+export default function MainPage({fixFlag =false}:MainPageType) {
   return (
     <MainPageTemplate>
       <PageContents fixFlag={fixFlag}/>

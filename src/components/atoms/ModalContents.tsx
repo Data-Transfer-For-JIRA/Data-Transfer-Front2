@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Box, Button, CircularProgress, DialogContent, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 
-import { PostCreateProject, PostTest } from '@apis/AxiosPost';
-import { AxiosPutProjectLink, testPutProjectLink } from '@apis/AxiosUpdate';
+import { PostCreateProject } from '@apis/AxiosPost';
+import { AxiosPutProjectLink } from '@apis/AxiosUpdate';
 import { PostProjectCreateResultType, ProjectTotalInfoType, UpdateProjectInfoType, UpdateProjectLinkType } from '@apis/ApiTypes';
 import { ModalType } from '@common/CommonType';
 
@@ -99,7 +99,7 @@ function LinkProjectInfo({modalData, setModalType,onClose, setModalData}:LinkPro
   const putLinkData:UpdateProjectInfoType = JSON.parse(modalData);
   const handleConfirmLink = async()=>{
     setModalType('API_LOADING');
-    const apiResult  = await testPutProjectLink(putLinkData);
+    const apiResult  = await AxiosPutProjectLink(putLinkData);
     if(apiResult!==undefined){
       const stringData = JSON.stringify(apiResult);
       setModalData(stringData);
@@ -144,7 +144,7 @@ function CheckCreateProjectInfo({modalData,onClose, setModalType, setModalData}:
 
   const handleApiRequest=async ()=>{
     setModalType('API_LOADING');
-    const apiResult:PostProjectCreateResultType = await PostTest(formData);
+    const apiResult:PostProjectCreateResultType = await PostCreateProject(formData);
     if(apiResult!==undefined){
       const stringData = JSON.stringify(apiResult);
       setModalData(stringData);

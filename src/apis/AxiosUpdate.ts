@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { UpdateProjectInfoType, UpdateProjectLinkType } from './ApiTypes';
 
+/** 연관 프로젝트 링크 API
+ * mainJiraKey 는 단일 스트링
+ * subJiraKeyList는 연결할 프로젝트의 List형태. 사용자 input에서 중첩 막혀있음.
+ * @returns 연결결과JsonArray
+ */
 export const AxiosPutProjectLink = async (linkData : UpdateProjectInfoType)
   : Promise<UpdateProjectLinkType[] | undefined> => {
   const URL = `${import.meta.env.VITE_API_ADDRESS}/api/platform/weblink`;

@@ -4,8 +4,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import { useNavigate } from "react-router-dom";
 import { useDarkModeContext } from "@context/CustomDarkmodeProvider";
+import { useLoginContext } from '@context/LoginProvider';
 
 type props = {
   handleDrawerOpen: () => void;
@@ -13,9 +13,9 @@ type props = {
 };
 
 export default function PageHeader({ handleDrawerOpen }: props) {
-  const navigator = useNavigate();
+  const {switchLogin} = useLoginContext();
   const handleLogin = () => {
-    navigator("/Login");
+    switchLogin(false);
   };
   const theme = useDarkModeContext();
   return (

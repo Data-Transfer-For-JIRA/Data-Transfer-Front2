@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -5,16 +6,15 @@ import { Box, Grid, Typography } from '@mui/material';
 
 import { GetAxiosResultType } from '@apis/ApiTypes';
 import { GetAxiosSearchJiraList } from '@apis/AxiosGet';
+import { ModalType, SelectedProjectType } from '@common/CommonType';
+import { setSelectProjectList } from '@util/function';
+
 import ControlledTextInput from '@atoms/ControlledTextInput';
 import MainPageTemplate from '@templates/MainPageTemplate';
 import SelectedData from '@atoms/SelectedData';
-import { ModalType, SelectedProjectType } from '@common/CommonType';
-import { AxiosPutProjectLink } from '@apis/AxiosUpdate';
 import TargetChip from '@atoms/TargetChip';
-import { setSelectProjectList } from '@util/function';
 import SearchAndSetInput from '@atoms/SearchAndSetInput';
 import ModalContents from '@atoms/ModalContents';
-import ReactDOM from 'react-dom';
 
 /** 프로젝트 연결 컴포넌트
  * Grid왼쪽은 연결대상 프로젝트 검색해서 선택하는 컴포넌트
