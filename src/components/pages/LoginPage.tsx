@@ -74,7 +74,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     switchLogin(false);
-  }, [])
+  })
   return (
     <Box sx={{ height: '100vh' }}>
       <Container fixed maxWidth="lg" sx={{ height: '100vh', display: 'flex', alignItems: 'center' }}>

@@ -21,7 +21,6 @@ export default function PageContents({fixFlag}: PageContentsType) {
     if(fixFlag)navigator(`/projectFix/${jiraCode}`)
     else {
       navigator(`projectDetail/${jiraCode}`)
-      alert(`projectDetail/${jiraCode}`);
     }
     
   }

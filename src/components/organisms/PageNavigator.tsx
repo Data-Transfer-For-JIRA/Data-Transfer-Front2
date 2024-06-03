@@ -14,7 +14,7 @@ const commonContentsList = [
 
 const adminContentsList = [
   { value: "프로젝트 정보 수정", link: `/projectFix` },
-  { value: "프로젝트 삭제", link: "/del-project" },
+  { value: "프로젝트 삭제", link: "/projectDelete" },
 ];
 
 export default function PageNavigator({ naveOpen: naveOpen, handleDrawerClose }: props) {

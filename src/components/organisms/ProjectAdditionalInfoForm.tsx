@@ -22,7 +22,6 @@ export default function ProjectAdditionalInfoForm({jiraProjectFlag,control,readO
         name="common.allocationFlag"
         checkBoxProps={{
           disabled: readOnlyMode,
-          defaultChecked : true,
         }}
         label = '인력배정 보드 추가 생성'
         />

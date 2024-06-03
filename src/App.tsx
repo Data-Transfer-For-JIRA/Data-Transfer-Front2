@@ -12,7 +12,6 @@ function AppLogin() {
 
   useEffect(()=>{
     if (!loginState) {
-      alert('in here');
       navigator("/Login")
     }
   })

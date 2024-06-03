@@ -3,6 +3,7 @@ import ErrorPage from "@pages/ErrorPage";
 import LoginPage from "@pages/LoginPage";
 import MainPage from "@pages/MainPage";
 import ProjectCreatePage from '@pages/ProjectCreatePage';
+import ProjectDeletePage from '@pages/ProjectDeletePage';
 import ProjectDetailPage from '@pages/ProjectDetailPage';
 import ProjectFixedDetail from '@pages/ProjectFixedDetail';
 import ProjectLinkPage from '@pages/ProjectLinkPage';
@@ -20,7 +21,7 @@ export const Router = [
       { path: "projectLink", element: <ProjectLinkPage /> },
       { path: "projectFix", element: <MainPage fixFlag={true} /> },
       { path: "projectFix/:jiraProjectCode", element: <ProjectFixedDetail/> },
-      { path: "projectDelete", element: <ErrorPage /> },
+      { path: "projectDelete", element: <ProjectDeletePage /> },
       { path: "deleteStay", element: <ErrorPage /> },
       { path: "/Login", element: <LoginPage /> },
       { path: "/ComponentTest", element: <Test /> },

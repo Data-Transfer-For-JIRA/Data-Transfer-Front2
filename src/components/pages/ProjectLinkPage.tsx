@@ -20,7 +20,6 @@ import ModalContents from '@atoms/ModalContents';
  * Grid왼쪽은 연결대상 프로젝트 검색해서 선택하는 컴포넌트
  * Grid 오른쪽 
  * 상단검색은 MainProjectCode 검색(생성에서 넘어오면 자동 선택)
- * 하단은 선택된 녀석들 표시
  */
 export default function ProjectLinkPage(){
   const location = useLocation();

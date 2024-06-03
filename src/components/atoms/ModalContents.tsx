@@ -57,7 +57,6 @@ type LinkProjectResultType = {
 }
 function LinkProjectResult({modalData, setModalType}:LinkProjectResultType){
   const navigate = useNavigate();
-  alert(modalData);
   const putSuccessResult:UpdateProjectLinkType[] = JSON.parse(modalData);
   const handleConfirmLink = () => {
     setModalType('NONE');
