@@ -42,8 +42,8 @@ function createRowData(
   const projectType = flag === "P" ? "프로젝트" : "유지보수";
   return { jiraProjectCode,projectCode, jiraProjectName, projectAssignees, projectType, jiraUrl };
 }
-
-export default function ProjectViewTable({ tableData, handleMovePage }: ProjectViewTableType) {
+//handleMovePag 상세사용시 추가
+export default function ProjectViewTable({ tableData }: ProjectViewTableType) {
   const rows: RowType[] = [];
   tableData.forEach((item) => {
     rows.push(createRowData(item.key,item.projectCode, item.jiraProjectName, item.projectAssignees, item.flag));
@@ -105,13 +105,13 @@ export default function ProjectViewTable({ tableData, handleMovePage }: ProjectV
                       </TableCell>
                     )
                   }
-                  else if(column.id=== 'jiraProjectCode' ||column.id=== 'projectCode'){
-                    return(
-                      <TableCell key={column.id} onClick={()=>handleMovePage&&handleMovePage(row.jiraProjectCode)}>
-                      {value}
-                    </TableCell>
-                    )
-                  }
+                  // else if(column.id=== 'jiraProjectCode' ||column.id=== 'projectCode'){
+                  //   return(
+                  //     <TableCell key={column.id} onClick={()=>handleMovePage&&handleMovePage(row.jiraProjectCode)}>
+                  //     {value}
+                  //   </TableCell>
+                  //   )
+                  // }
                   else{
                     return (
                       <TableCell key={column.id}>

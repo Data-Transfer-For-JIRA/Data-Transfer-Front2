@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { DeleteProjectType } from './ApiTypes';
 
 /** 프로젝트 삭제 API
  * @param deleteProjectList 삭제할 프로젝트 리스트
@@ -12,13 +11,13 @@ if(forceFlag===true) {deleteType="ALL";}
   else {deleteType="TRASH"}
   const URL = `${import.meta.env.VITE_API_ADDRESS}/jira/project/delete?deleteProject=${deleteType}`;
   try{
-    const apiResult:DeleteProjectType[] = await axios.delete(URL,{
+    const {data} = await axios.delete(URL,{
       data : deleteProjectList,
       headers: {
         'Content-Type': 'application/json',
       },
     })
-    return apiResult;
+    return data;
   }
   catch(err){
     console.log(err)

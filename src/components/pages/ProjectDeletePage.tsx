@@ -5,7 +5,7 @@ import ModalContents from '@atoms/ModalContents';
 import SelectedData from '@atoms/SelectedData';
 import TargetChip from '@atoms/TargetChip';
 import { ModalType, SelectedProjectType } from '@common/CommonType';
-import { Box, Divider, Grid, Paper, Typography } from '@mui/material';
+import { Box, Divider, Grid, Typography } from '@mui/material';
 import MainPageTemplate from '@templates/MainPageTemplate';
 import { setSelectProjectList } from '@util/function';
 import { useEffect, useState } from 'react';

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PostProjectCreateResultType, ProjectTotalInfoType, UserLoginInfoType } from '@apis/ApiTypes';
+import { ProjectTotalInfoType, UserLoginInfoType } from '@apis/ApiTypes';
 
 /**
  * 지라 프로젝트 생성 API

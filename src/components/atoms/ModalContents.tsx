@@ -358,7 +358,7 @@ function ModalFailApiCall({modalData,onClose}:ModalFailApiCallType){
     </Box>
     <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
       <Button variant="outlined" size="medium" onClick={onClose} sx={{ width: '150px' }}>
-        <Typography variant="h7" fontWeight="fontWeightMedium">닫기</Typography>
+        <Typography variant="h6" fontWeight="fontWeightMedium">닫기</Typography>
       </Button>
     </Box>
   </Box>
