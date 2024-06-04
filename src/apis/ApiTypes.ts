@@ -80,6 +80,14 @@ export type UpdateProjectLinkType = {
   value: string
 }
 
+//지라 프로젝트 삭제 결과 타입
+export type DeleteProjectType = {
+  result1 : string;   //지라에서의 삭제 유/무
+  result2 : string;   //DB에서의 삭제 유/무
+  jiraProjectCode : string;
+}
+
+//플렛폼 Login 타입
 export type UserLoginInfoType = {
   id : string,
   pwd : string,

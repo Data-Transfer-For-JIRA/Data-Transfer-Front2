@@ -56,7 +56,7 @@ export default function DeleteProject(){
       alert('삭제할 프로젝트가 선택되지 않았습니다.');
       return;
     }
-    const modalData = JSON.stringify(targetProject);
+    const modalData = JSON.stringify(itemList);
     setModalData(modalData);
     setModalType('DELETE_CHECK');
     handleModalOpen();

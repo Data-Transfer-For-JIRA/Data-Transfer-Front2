@@ -22,7 +22,7 @@ export const defaultProjectTotalInfo: ProjectTotalInfoType = {
     printerSupportRange: "",
     etc: "",
     description: "",
-    allocationFlag: true
+    allocationFlag: false
   },
   selected: {
     //프로젝트

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ProjectTotalInfoType, UserLoginInfoType } from '@apis/ApiTypes';
+import { PostProjectCreateResultType, ProjectTotalInfoType, UserLoginInfoType } from '@apis/ApiTypes';
 
 /**
  * 지라 프로젝트 생성 API
@@ -9,13 +9,17 @@ import { ProjectTotalInfoType, UserLoginInfoType } from '@apis/ApiTypes';
 export const PostCreateProject= async (postJson : ProjectTotalInfoType)=>{
   const URL = `${import.meta.env.VITE_API_ADDRESS}/api/platform/service`;
   try {
-    const {data} = await axios({
+    const {data}= await axios({
       url: URL,
       method: 'post',
       data: {
         ...postJson
       }
     })
+    console.log(data);
+    if(data.result==="프로젝트 생성 실패"){
+      return undefined;
+    }
     return data;
   }
   catch (Error) {

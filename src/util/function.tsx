@@ -16,3 +16,5 @@ export const setSelectProjectList = (targetProject:string[], searchResult:GetAxi
   })
   return tempArray;
 }
+
+
