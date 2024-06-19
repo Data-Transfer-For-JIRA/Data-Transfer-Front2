@@ -14,7 +14,7 @@ export default function MainPageTemplate({ children }: propsType) {
     <Box>
       <PageHeader handleDrawerOpen={handleDrawerOpen} naviOpen={neviOpen} />
       <PageNavigator naveOpen={neviOpen} handleDrawerClose={handleDrawerClose} />
-      <Box component="main" sx={{ height: 'calc(100vh - 64px)' }}>
+      <Box component="main" sx={{ height: 'calc(100vh - 64px)',overflow: 'auto' }}>
         {children}
       </Box>
     </Box>

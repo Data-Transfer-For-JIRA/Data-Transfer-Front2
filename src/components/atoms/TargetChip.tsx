@@ -10,7 +10,7 @@ type TargetChipType = {
 export default function TargetChip({itemList,handleTargetDelete, requestApiFunction}:TargetChipType ){
   return (
     <Box sx={{height :'85%', width:'100%', display : 'flex 1'}}>
-      <Box sx={{ width:'100%', height :'100%'}} style={{ overflowY:'scroll'}}>
+      <Box sx={{ width:'100%', height :'100%'}}>
         <SecondaryTextList itemList={itemList} handleTargetDelete={handleTargetDelete}/>
       </Box>
       <Button

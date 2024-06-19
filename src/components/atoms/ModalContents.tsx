@@ -106,7 +106,8 @@ function DeleteProjectCheckInfo ({modalData, onClose,setModalData, setModalType}
   const [deleteForce, setDeleteForce] = useState<boolean>(false);
   const handleChecked = () => {
     if (!deleteForce) {
-      alert("휴지통 보관없이 삭제할 경우 지라에서 복구 할 수 없습니다.");
+      // alert("휴지통 보관없이 삭제할 경우 지라에서 복구 할 수 없습니다.");
+      alert("아직 지원하지 않는 기능입니다.");
     }
     setDeleteForce((prev) => !prev);
   };
