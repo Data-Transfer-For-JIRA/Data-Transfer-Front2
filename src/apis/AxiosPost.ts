@@ -16,7 +16,7 @@ export const PostCreateProject= async (postJson : ProjectTotalInfoType)=>{
         ...postJson
       }
     })
-    console.log(data);
+
     if(data.result==="프로젝트 생성 실패"){
       return undefined;
     }
@@ -38,6 +38,9 @@ export const PostLogin = async ( userLoginInfo: UserLoginInfoType)=>{
     })
     return data;
   }
+
+
+
   catch (Error) {
     console.log(Error);
     return undefined;

@@ -8,13 +8,12 @@ type ProjectInfoGridType = {
   projectFlag : string;
   control : Control<ProjectTotalInfoType>;
   readOnlyMode : boolean;
-  handleCheckProject : ()=>void;
 }
-export default function ProjectInfoGrid({projectFlag, control ,readOnlyMode,handleCheckProject}:ProjectInfoGridType){
+export default function ProjectInfoGrid({projectFlag, control ,readOnlyMode}:ProjectInfoGridType){
   return (
     <Grid container sx={{height: '100%', padding:'5px'}} spacing={2}>
       <Grid item xs={5}> 
-        <ProjectBaseInfoForm jiraProjectFlag={projectFlag} control={control} readOnlyMode={readOnlyMode} handleCheckProject={handleCheckProject}/>
+        <ProjectBaseInfoForm jiraProjectFlag={projectFlag} control={control} readOnlyMode={readOnlyMode} />
       </Grid>
 
       <Grid item xs={7}>
