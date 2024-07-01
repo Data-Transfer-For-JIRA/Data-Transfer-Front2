@@ -19,6 +19,7 @@ export default function UnControlledCheckBox<
       <Checkbox
         {...checkBoxProps}
         {...field}
+        checked ={field.value}
       />}
       label={props.label} />
   )

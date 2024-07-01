@@ -1,5 +1,5 @@
 import { Control } from 'react-hook-form';
-import { Box, FormControl, Typography } from '@mui/material'
+import { Box, Button, FormControl, Typography } from '@mui/material'
 
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
 import UnControlledMultiSelectedBox from '@atoms/UnControlledMultiSelectedBox';
@@ -13,8 +13,14 @@ type ProjectBaseInfoFormType = {
   jiraProjectFlag :string;
   control : Control<ProjectTotalInfoType>;
   readOnlyMode : boolean;
+  handleCheckProject ?: ()=>void
 }
-export default function ProjectBaseInfoForm({jiraProjectFlag, control, readOnlyMode}:ProjectBaseInfoFormType){
+export default function ProjectBaseInfoForm({jiraProjectFlag, control, readOnlyMode, handleCheckProject}:ProjectBaseInfoFormType){
+  let inputWidth;
+  if(handleCheckProject===undefined){inputWidth = '100%';} 
+  else {inputWidth = '90%';}
+
+
   return (
     <Box sx={{  width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px", marginTop: '15px' }}>
       <Typography variant="h5" sx={{width: '100%'}}>프로젝트 정보 입력</Typography>
@@ -35,7 +41,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control, readOnlyM
             }} />
         </FormControl>
 
-        
+         
       <FormControl style={{ width: '80%' }}>
         <UnControlledTextField
           control={control}
@@ -53,7 +59,7 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control, readOnlyM
           }} />
       </FormControl>
 
-      <FormControl style={{ width: '100%' }}>
+      <FormControl style={{ width: inputWidth }}>
         <UnControlledTextField
           control={control}
           name="essential.projectName"
@@ -70,6 +76,12 @@ export default function ProjectBaseInfoForm({jiraProjectFlag, control, readOnlyM
             }
           }} />
       </FormControl>
+
+      {inputWidth!=='100%'?
+      <Button 
+        onClick={handleCheckProject}
+      >중복확인</Button>:
+      <></>}
 
       <FormControl style={{ width: '50%' }}>
         <UnControlledSelectedBox

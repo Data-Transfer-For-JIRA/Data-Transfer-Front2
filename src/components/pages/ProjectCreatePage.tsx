@@ -30,6 +30,10 @@ export default function ProjectCreatePage(){
       setProjectFlag('P');
     }
   }
+  const [checkProjectName,setCheckProjectName] = useState<boolean>(false);
+  const handleCheckProject = ()=>{
+    setCheckProjectName(prev=>!prev)
+  }
 
   //react-hook-form 셋팅
   //여기 DefaultValue에값을 설정하면 Form에 값들이 들어감
@@ -39,7 +43,7 @@ export default function ProjectCreatePage(){
   //모달에 전달할 form 데이터
   const [modalData, setModalData] = useState<string>('NONE');
   const handlePostForm:SubmitHandler<ProjectTotalInfoType> =  (data)=>{
-    console.log(data.common.description);
+    console.log(data.common.allocationFlag);
     const stringData = JSON.stringify(data);
     setModalData(stringData);
     setModalType('CREATE_CHECK');
@@ -64,8 +68,8 @@ export default function ProjectCreatePage(){
           <Tab label="유지보수"/>
         </Tabs>
         <form autoComplete="off" onSubmit={handleSubmit(handlePostForm)}>
-          <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={false}/>
-          <Button type='submit' variant="contained" sx={{float:'right', marginRight:'1rem'}}>프로젝트 생성</Button>
+          <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={false} handleCheckProject={handleCheckProject}/>
+          <Button type='submit' disabled={!checkProjectName} variant="contained" sx={{float:'right', marginRight:'1rem'}}>프로젝트 생성</Button>
         </form>
       </Box>
       {modalOpen && modalRoot && ReactDOM.createPortal(

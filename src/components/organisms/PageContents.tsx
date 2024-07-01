@@ -40,5 +40,5 @@ export default function PageContents({fixFlag}: PageContentsType) {
       <ControlledTextInput handleSearchResult={handleSearchResult} requestSearchApi={GetAxiosSearchJiraList}/>
       <ProjectViewTable tableData ={projectList} handleMovePage={(jiraCode)=>handleMovePage(jiraCode)}/>
     </Paper>
-  );
+  ); 
 }

@@ -20,6 +20,7 @@ export default function ProjectAdditionalInfoForm({jiraProjectFlag,control,readO
       <UnControlledCheckBox 
         control={control} 
         name="common.allocationFlag"
+        defaultValue={true}
         checkBoxProps={{
           disabled: readOnlyMode,
         }}
