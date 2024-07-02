@@ -23,7 +23,6 @@ export const PostCreateProject= async (postJson : ProjectTotalInfoType)=>{
     return data;
   }
   catch (Error) {
-    console.log(Error);
     return undefined;
   }
 }
