@@ -1,4 +1,4 @@
-import { Box, Dialog, DialogTitle, IconButton, Typography } from '@mui/material';
+import { Box, Dialog, DialogTitle, IconButton  } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { ModalType } from '@common/CommonType';
 import { useNavigate } from 'react-router-dom';
@@ -21,8 +21,8 @@ export default function ModalBase({ open, onClose, children,modalTittle, modalTy
       fullWidth // 다이얼로그를 가득 채우도록 설정
       sx={{ '& .MuiDialog-paper': { width: '70rem', maxWidth: 'none' } }}
     >
-      <DialogTitle id="alert-dialog-title" sx={{padding : '5px', textAlign:'center', paddingTop:'30px'}}>
-      <Typography variant="h5" gutterBottom>{modalTittle}
+      <DialogTitle id="alert-dialog-title" sx={{padding : '5px', textAlign:'center', paddingTop:'10px',fontSize : '1.5rem'}}>
+        {modalTittle}
           <IconButton
           aria-label="modal-close"
           onClick={modalType==='CREATE_SUCCESS'?onClickRefresh:onClose}
@@ -30,7 +30,6 @@ export default function ModalBase({ open, onClose, children,modalTittle, modalTy
           >
             <CloseIcon />
           </IconButton>
-          </Typography>
         </DialogTitle>
       <Box>
       {children}

@@ -37,9 +37,6 @@ export const PostLogin = async ( userLoginInfo: UserLoginInfoType)=>{
     })
     return data;
   }
-
-
-
   catch (Error) {
     console.log(Error);
     return undefined;

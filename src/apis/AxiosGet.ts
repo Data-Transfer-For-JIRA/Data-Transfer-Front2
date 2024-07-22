@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { GetAxiosResultType } from "@apis/ApiTypes";
+import { sortObjectDate } from "@util/function";
 
 /**
  * 프로젝트 리스트 가져오는 Axios Get 방식
@@ -15,7 +16,8 @@ export const GetAxiosSearchJiraList = async (
   const defaultValue: GetAxiosResultType[] = [];
   try {
     const { data } = await axios(URL);
-    return data;
+    const sortData = sortObjectDate(data);
+    return sortData;
   } catch (Error) {
     console.log(Error);
     return defaultValue;
