@@ -27,6 +27,11 @@ export const PostCreateProject= async (postJson : ProjectTotalInfoType)=>{
   }
 }
 
+/**
+ * 임시로그인 함수
+ * @param userLoginInfo : id/pw 오브젝트
+ * @returns 
+ */
 export const PostLogin = async ( userLoginInfo: UserLoginInfoType)=>{
   const URL = `${import.meta.env.VITE_API_ADDRESS}/login/temp`;
   try {
