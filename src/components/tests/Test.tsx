@@ -1,15 +1,35 @@
-// import { Box } from '@mui/material';
-// import { JIRATransformer  } from '@atlaskit/editor-jira-transformer';
-// import { JiraSchema as schema } from '@atlaskit/editor-common';
-// import { adfData } from '@common/DefaultValue';
+// import { EditorContext, WithEditorActions } from '@atlaskit/editor-core';
+// import { ComposableEditor } from '@atlaskit/editor-core/composable-editor';
+// import { createDefaultPreset } from '@atlaskit/editor-core/preset-default';
 
-// export default function Test(){
-//   const transformer = new JIRATransformer(schema);
-//   const test = transformer.parse(JSON.stringify(adfData));
-//   console.log(test);
+// const ADFEditor = () => {
+//   const presetProps = {
+//     props: {},
+//   };
+//   const defaultPreset = createDefaultPreset(presetProps);
+//   const initialADFDocument = {
+//     version: 1,
+//     type: 'doc',
+//     content: [
+//       {
+//         type: 'paragraph',
+//         content: [{ type: 'text', text: 'Hello World!' }],
+//       },
+//     ],
+//   };
+
 //   return (
-//     <Box>
-//       hi
-//     </Box>
-//   )
-// }
+//     <EditorContext>
+//       <WithEditorActions
+//         render={(editorActions) => (
+//           <ComposableEditor
+//             preset={defaultPreset}
+//             defaultValue={initialADFDocument}
+//             onChange={async () => console.log('The current doc is: ', await editorActions.getValue())}
+//           />
+//         )}
+//       />
+//     </EditorContext>
+//   );
+// };
+// export default ADFEditor

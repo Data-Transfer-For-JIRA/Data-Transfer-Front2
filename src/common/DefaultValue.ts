@@ -1,5 +1,4 @@
 import { GetAxiosResultType, ProjectTotalInfoType } from '@apis/ApiTypes';
-import { JSONDocNode, JSONNode } from '@atlaskit/editor-json-transformer/dist/types/types';
 
 export const defaultProjectTotalInfo: ProjectTotalInfoType = {
   essential: {

@@ -17,6 +17,11 @@ export const setSelectProjectList = (targetProject:string[], searchResult:GetAxi
   return tempArray;
 }
 
+/**
+ * 오브젝트 마이그레이션 데이터 기준 오름차순 정렬 함수
+ * @param axiosResult API호출결과 오브젝트
+ * @returns sorted_list 정렬결과
+ */
 export const sortObjectDate = (axiosResult:GetAxiosResultType[]):GetAxiosResultType[]=>{
   const sorted_list = axiosResult.sort(function(a, b) {
 		return new Date(a.migratedDate).getTime() - new Date(b.migratedDate).getTime();

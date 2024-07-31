@@ -10,6 +10,7 @@ type MuiDataMoreViewTableType = {
   setSubJiraKey: React.Dispatch<React.SetStateAction<string[]>>
 }
 
+// eslint-disable-next-line no-empty-pattern
 const CustomScrollbarBox = styled(Box)(({ }) => ({
   '&::-webkit-scrollbar': {
     width: '10px',
