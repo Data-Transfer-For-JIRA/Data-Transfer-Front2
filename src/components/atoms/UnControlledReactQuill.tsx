@@ -1,4 +1,5 @@
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
+import { convertJiraDataToQuill } from '@util/function';
 import { useEffect, useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';

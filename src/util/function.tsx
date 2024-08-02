@@ -30,38 +30,18 @@ export const sortObjectDate = (axiosResult:GetAxiosResultType[]):GetAxiosResultT
 }
 
 
-// Quill HTML 입력 예제
-const testQuillData = `
-<ol>
-    <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span>언 오더 리스트 탭 없음</li>
-    <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span>탭없음</li>
-    <li data-list="bullet" class="ql-indent-1"><span class="ql-ui" contenteditable="false"></span>탭1추가</li>
-    <li data-list="bullet" class="ql-indent-2"><span class="ql-ui" contenteditable="false"></span>탭2추가</li>
-    <li data-list="bullet" class="ql-indent-1"><span class="ql-ui" contenteditable="false"></span>탭1추가</li>
-    <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span>탭없음</li>
-</ol>
-<p><br></p>
-<ol>
-    <li data-list="ordered"><span class="ql-ui" contenteditable="false"></span>오더 리스트 탭 없음</li>
-    <li data-list="ordered" class="ql-indent-1"><span class="ql-ui" contenteditable="false"></span>탭 1 추가</li>
-    <li data-list="ordered" class="ql-indent-2"><span class="ql-ui" contenteditable="false"></span>탭 2추가</li>
-    <li data-list="ordered" class="ql-indent-1"><span class="ql-ui" contenteditable="false"></span>탭 1추가</li>
-    <li data-list="ordered"><span class="ql-ui" contenteditable="false"></span>탭없음</li>
-</ol>
-`;
 /** React-Quill에 입려된 데이터를 마크다운 형태로 변환하는 함수.
  * ul, ol 태그의 클래스 처리 변경, 색션분리 --- 문자열 처리, tt태그 날짜 처리
  * @param quillData : 마크다운으로 변경할 Quill데이터
  * @return convertedHtml : api파라미터를 전송할 html 데이터.
  */
-export const converQuilltoMarkDown= (quillData:string = testQuillData)=>{
+export const convertQuilltoJiraData= (quillData:string)=>{
   // 변환된 HTML 출력
   const convertedHtml = convertQuillHtmlToCustomFormat(quillData);
-  console.log(convertedHtml);
   return convertedHtml;
 }
 
-//ou ul처리 태그
+//QuillData 중 list를 jira데이터로 변형
 function convertQuillHtmlToCustomFormat(quillHtml: string): string {
     const parser = new DOMParser();
     const doc = parser.parseFromString(quillHtml, 'text/html');
@@ -105,4 +85,52 @@ function convertQuillHtmlToCustomFormat(quillHtml: string): string {
     });
 
     return result.join('');
+}
+
+
+export function convertJiraDataToQuill(jiraData:string){
+  const convertedQuillHtml = convertCustomHtmlToQuillFormat(jiraData);
+  return convertedQuillHtml;
+}
+
+
+function convertCustomHtmlToQuillFormat(customHtml: string): string {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(customHtml, 'text/html');
+
+  function processListItems(list: Element, currentTag: string, indentLevel: number = 0): string {
+      let result = '';
+      const items = Array.from(list.children);
+
+      items.forEach(item => {
+          if (item.tagName.toLowerCase() === 'li') {
+              const innerLists = Array.from(item.children).filter(child => child.tagName.toLowerCase() === 'ul' || child.tagName.toLowerCase() === 'ol');
+              const textContent = item.childNodes[0].textContent?.trim() || '';
+              const indentClass = indentLevel > 0 ? ` class="ql-indent-${indentLevel}"` : '';
+              result += `<li data-list="${currentTag}"${indentClass}><span class="ql-ui" contenteditable="false"></span>${textContent}</li>`;
+
+              innerLists.forEach(innerList => {
+                  result += processListItems(innerList, innerList.tagName.toLowerCase() === 'ul' ? 'bullet' : 'ordered', indentLevel + 1);
+              });
+          }
+      });
+
+      return result;
+  }
+
+  let result = '';
+
+  const lists = doc.body.children;
+  Array.from(lists).forEach(list => {
+      const tag = list.tagName.toLowerCase();
+      if (tag === 'ul' || tag === 'ol') {
+          const listType = tag === 'ul' ? 'bullet' : 'ordered';
+          if (result) {
+              result += '<p><br></p>';
+          }
+          result += `<ol>${processListItems(list, listType)}</ol>`;
+      }
+  });
+
+  return result;
 }

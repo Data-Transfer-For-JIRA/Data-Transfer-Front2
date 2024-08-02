@@ -7,7 +7,7 @@ import ProjectDeletePage from '@pages/ProjectDeletePage';
 import ProjectDetailPage from '@pages/ProjectDetailPage';
 import ProjectFixedDetail from '@pages/ProjectFixedDetail';
 import ProjectLinkPage from '@pages/ProjectLinkPage';
-// import ADFEditor from "@tests/Test";
+import ADFEditor from "@tests/Test";
 
 export const Router = [
   {
@@ -24,7 +24,7 @@ export const Router = [
       { path: "projectDelete", element: <ProjectDeletePage /> },
       { path: "deleteStay", element: <ErrorPage /> },
       { path: "/Login", element: <LoginPage /> },
-      // { path: "/ComponentTest", element: <ADFEditor /> },
+      { path: "/ComponentTest", element: <ADFEditor /> },
     ],
   },
 ];
