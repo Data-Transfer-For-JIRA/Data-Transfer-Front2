@@ -87,48 +87,45 @@ function convertQuillHtmlToCustomFormat(quillHtml: string): string {
     return result.join('');
 }
 
-
+/**
+ * API결과값을 Quill에 적합한 데이터 포맷으로 변경하는 함수
+ * @param jiraData api를 통해 jira에서 가져온 html 코드
+ * @returns 
+ */
 export function convertJiraDataToQuill(jiraData:string){
-  const convertedQuillHtml = convertCustomHtmlToQuillFormat(jiraData);
-  return convertedQuillHtml;
-}
-
-
-function convertCustomHtmlToQuillFormat(customHtml: string): string {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(customHtml, 'text/html');
-
-  function processListItems(list: Element, currentTag: string, indentLevel: number = 0): string {
-      let result = '';
-      const items = Array.from(list.children);
-
-      items.forEach(item => {
-          if (item.tagName.toLowerCase() === 'li') {
-              const innerLists = Array.from(item.children).filter(child => child.tagName.toLowerCase() === 'ul' || child.tagName.toLowerCase() === 'ol');
-              const textContent = item.childNodes[0].textContent?.trim() || '';
-              const indentClass = indentLevel > 0 ? ` class="ql-indent-${indentLevel}"` : '';
-              result += `<li data-list="${currentTag}"${indentClass}><span class="ql-ui" contenteditable="false"></span>${textContent}</li>`;
-
-              innerLists.forEach(innerList => {
-                  result += processListItems(innerList, innerList.tagName.toLowerCase() === 'ul' ? 'bullet' : 'ordered', indentLevel + 1);
-              });
-          }
-      });
-
-      return result;
-  }
-
+  const doc = parser.parseFromString(jiraData, 'text/html');
   let result = '';
 
-  const lists = doc.body.children;
-  Array.from(lists).forEach(list => {
-      const tag = list.tagName.toLowerCase();
-      if (tag === 'ul' || tag === 'ol') {
-          const listType = tag === 'ul' ? 'bullet' : 'ordered';
-          if (result) {
-              result += '<p><br></p>';
-          }
-          result += `<ol>${processListItems(list, listType)}</ol>`;
+  const elements = Array.from(doc.body.children);
+    elements.forEach(element => {
+        const tag = element.tagName.toLowerCase();
+
+        if (tag === 'ul' || tag === 'ol') {
+            const listType = tag === 'ul' ? 'bullet' : 'ordered';
+            result += `<ol>${processListItems(element, listType)}</ol>`;
+        } else if (tag === 'p') {
+            result += `<p>${element.innerHTML}</p>`;
+        }
+    });
+  return result;
+}
+
+//api to Quill html
+function processListItems(list: Element, currentTag: string, indentLevel: number = 0): string {
+  let result = '';
+  const items = Array.from(list.children);
+
+  items.forEach(item => {
+      if (item.tagName.toLowerCase() === 'li') {
+          const innerLists = Array.from(item.children).filter(child => child.tagName.toLowerCase() === 'ul' || child.tagName.toLowerCase() === 'ol');
+          const textContent = item.childNodes[0].textContent?.trim() || '';
+          const indentClass = indentLevel > 0 ? ` class="ql-indent-${indentLevel}"` : '';
+          result += `<li data-list="${currentTag}"${indentClass}><span class="ql-ui" contenteditable="false"></span>${textContent}</li>`;
+
+          innerLists.forEach(innerList => {
+              result += processListItems(innerList, innerList.tagName.toLowerCase() === 'ul' ? 'bullet' : 'ordered', indentLevel + 1);
+          });
       }
   });
 

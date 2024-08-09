@@ -3,7 +3,8 @@ import { convertJiraDataToQuill } from '@util/function';
 import { useEffect, useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
-import 'react-quill-new/dist/quill.snow.css';
+// import 'react-quill-new/dist/quill.snow.css';
+import 'quill/dist/quill.snow.css';
 
 const formats = [
   'font',
@@ -52,7 +53,7 @@ export default function UnControlledReactQuill({ jiraProjectFlag, control, disab
   useEffect(() => {
     let tempDefaultValue: string;
     if (jiraProjectFlag === 'P') {
-      tempDefaultValue = "";
+      tempDefaultValue = "<ol><li data-list='bullet'><span class='ql-ui' contenteditable='false'></span>언오더리스트탭없음</li><li data-list='bullet'><span class='ql-ui' contenteditable='false'></span>탭없음</li><li data-list='bullet' class='ql-indent-1'><span class='ql-ui' contenteditable='false'></span>탭1추가</li><li data-list='bullet' class='ql-indent-2'><span class='ql-ui' contenteditable='false'></span>탭2추가</li><li data-list='bullet' class='ql-indent-1'><span class='ql-ui' contenteditable='false'></span>탭1추가</li></ol><p><br></p><ol><li data-list='ordered'><span class='ql-ui' contenteditable='false'></span>오더리스트탭없음</li><li data-list='ordered' class='ql-indent-1'><span class='ql-ui' contenteditable='false'></span>탭1추가</li><li data-list='ordered' class='ql-indent-2'><span class='ql-ui' contenteditable='false'></span>탭2추가</li><li data-list='ordered' class='ql-indent-1'><span class='ql-ui' contenteditable='false'></span>탭1추가</li><li data-list='ordered'><span class='ql-ui' contenteditable='false'></span>탭없음</li></ol>";
     } else {
       tempDefaultValue = "";
     }
