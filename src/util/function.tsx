@@ -97,21 +97,28 @@ export function convertJiraDataToQuill(jiraData:string){
   const doc = parser.parseFromString(jiraData, 'text/html');
   let result = '';
 
+  //DOM자식요소는 유사 배열이라 배열형태로 변환함.
+  //doc.body.children은 body태그 아래의 직계자식만 수집함.
   const elements = Array.from(doc.body.children);
     elements.forEach(element => {
         const tag = element.tagName.toLowerCase();
-
         if (tag === 'ul' || tag === 'ol') {
             const listType = tag === 'ul' ? 'bullet' : 'ordered';
             result += `<ol>${processListItems(element, listType)}</ol>`;
         } else if (tag === 'p') {
-            result += `<p>${element.innerHTML}</p>`;
+            let innerContent  = element.innerHTML;
+            if(innerContent.includes('<tt>')){
+              console.log('in')
+              innerContent = innerContent.replace(/<tt>/g, "<span style='background-color: rgb(187, 187, 187);' class='ql-size-large'>");
+              innerContent = innerContent.replace(/<\/tt>/g, '</span>');
+            }
+            result += `<p>${innerContent}</p>`;
         }
     });
   return result;
 }
 
-//api to Quill html
+//api to Quill html(<ol></ol>, <ul></ul>)
 function processListItems(list: Element, currentTag: string, indentLevel: number = 0): string {
   let result = '';
   const items = Array.from(list.children);

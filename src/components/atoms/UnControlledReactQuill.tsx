@@ -1,9 +1,7 @@
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
-import { convertJiraDataToQuill } from '@util/function';
 import { useEffect, useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
-// import 'react-quill-new/dist/quill.snow.css';
 import 'quill/dist/quill.snow.css';
 
 const formats = [
@@ -26,17 +24,13 @@ const formats = [
 const modules = {
   toolbar: {
     container: [
-      [{ size: ['small', false, 'large', 'huge'] }],
-      [{ align: [] }],
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      [{ size: ['normal'] }],
+      // [{ align: [] }],
       // ["image", "video"],
-      ['bold', 'italic', 'underline', 'strike'],
+      // ['bold', 'italic', 'underline', 'strike'],
       [{ list: 'ordered' }, { list: 'bullet' }],
-      [
-        {
-          color: [],
-        },
-        { background: [] },
-      ],
+      // [{color: [],},{ background: [] }],
     ],
   },
 };
@@ -53,7 +47,7 @@ export default function UnControlledReactQuill({ jiraProjectFlag, control, disab
   useEffect(() => {
     let tempDefaultValue: string;
     if (jiraProjectFlag === 'P') {
-      tempDefaultValue = "<ol><li data-list='bullet'><span class='ql-ui' contenteditable='false'></span>언오더리스트탭없음</li><li data-list='bullet'><span class='ql-ui' contenteditable='false'></span>탭없음</li><li data-list='bullet' class='ql-indent-1'><span class='ql-ui' contenteditable='false'></span>탭1추가</li><li data-list='bullet' class='ql-indent-2'><span class='ql-ui' contenteditable='false'></span>탭2추가</li><li data-list='bullet' class='ql-indent-1'><span class='ql-ui' contenteditable='false'></span>탭1추가</li></ol><p><br></p><ol><li data-list='ordered'><span class='ql-ui' contenteditable='false'></span>오더리스트탭없음</li><li data-list='ordered' class='ql-indent-1'><span class='ql-ui' contenteditable='false'></span>탭1추가</li><li data-list='ordered' class='ql-indent-2'><span class='ql-ui' contenteditable='false'></span>탭2추가</li><li data-list='ordered' class='ql-indent-1'><span class='ql-ui' contenteditable='false'></span>탭1추가</li><li data-list='ordered'><span class='ql-ui' contenteditable='false'></span>탭없음</li></ol>";
+      tempDefaultValue = "<table><tbody>\n<tr>\n<th><b>테이블헤더1</b></th>\n<th><b>테이블헤더2</b></th>\n<th'><b>테이블헤더3</b></th>\n</tr>\n<tr>\n<td>테이블 1,1</td>\n<td>테이블2,1</td>\n<td>테이블3,1</td>\n</tr>\n<tr>\n<td>테이블 2,1</td>\n<td>테이블2,2</td>\n<td>테이블2,3</td>\n</tr>\n</tbody></table>\n</div>";
     } else {
       tempDefaultValue = "";
     }
