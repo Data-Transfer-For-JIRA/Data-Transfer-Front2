@@ -26,6 +26,7 @@ const modules = {
     container: [
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       [{ size: ['normal'] }],
+      [{table:true}],
       // [{ align: [] }],
       // ["image", "video"],
       // ['bold', 'italic', 'underline', 'strike'],
@@ -47,7 +48,7 @@ export default function UnControlledReactQuill({ jiraProjectFlag, control, disab
   useEffect(() => {
     let tempDefaultValue: string;
     if (jiraProjectFlag === 'P') {
-      tempDefaultValue = "<table><tbody>\n<tr>\n<th><b>테이블헤더1</b></th>\n<th><b>테이블헤더2</b></th>\n<th'><b>테이블헤더3</b></th>\n</tr>\n<tr>\n<td>테이블 1,1</td>\n<td>테이블2,1</td>\n<td>테이블3,1</td>\n</tr>\n<tr>\n<td>테이블 2,1</td>\n<td>테이블2,2</td>\n<td>테이블2,3</td>\n</tr>\n</tbody></table>\n</div>";
+      tempDefaultValue = "<hr />";
     } else {
       tempDefaultValue = "";
     }
