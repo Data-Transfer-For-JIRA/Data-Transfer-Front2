@@ -1,7 +1,7 @@
 import { ProjectTotalInfoType } from "@apis/ApiTypes";
 import UnControlledReactQuill from "@atoms/UnControlledReactQuill";
 import { defaultProjectTotalInfo } from "@common/DefaultValue";
-import { convertJiraDataToQuill } from "@util/convertQuilltoApi";
+import { convertJiraDataToQuill } from "@apis/convertQuilltoApi";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

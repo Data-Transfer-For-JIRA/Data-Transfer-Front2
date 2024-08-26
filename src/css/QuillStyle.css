@@ -1,0 +1,16 @@
+/* quill-toolbar-custom.css */
+/* .ql-toolbar .ql-divider::before {
+  background-color: red;
+} */
+
+.ql-divider::before {
+  content: '';
+  display: inline-block;
+  width: 20px; /* 아이콘의 너비 */
+  height: 20px; /* 아이콘의 높이 */
+  background-image: url('/public/images/divider.svg'); /* 아이콘 이미지 경로 */
+  background-size: contain; /* 이미지 크기를 요소 크기에 맞게 조정 */
+  background-repeat: no-repeat; /* 이미지가 반복되지 않도록 설정 */
+  background-position: center; /* 이미지가 중앙에 위치하도록 설정 */
+  vertical-align: middle; /* 텍스트와 아이콘을 중앙 정렬 */
+}

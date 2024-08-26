@@ -1,8 +1,11 @@
+import "@util/QuillDividerBlot";
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import ReactQuill from 'react-quill-new';
 import 'quill/dist/quill.snow.css';
+import '@css/QuillStyle.css';
+
 
 const formats = [
   'font',
@@ -19,22 +22,8 @@ const formats = [
   'color',
   'background',
   'size',
+  'divider',
 ];
-
-const modules = {
-  toolbar: {
-    container: [
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      [{ size: ['normal'] }],
-      [{table:true}],
-      // [{ align: [] }],
-      // ["image", "video"],
-      // ['bold', 'italic', 'underline', 'strike'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      // [{color: [],},{ background: [] }],
-    ],
-  },
-};
 
 type ReactQuillEditorType = {
   jiraProjectFlag: string;
@@ -44,11 +33,32 @@ type ReactQuillEditorType = {
 
 export default function UnControlledReactQuill({ jiraProjectFlag, control, disabled }: ReactQuillEditorType) {
   const [defaultValue, setDefaultValue] = useState<string>("");
+  const quillRef = useRef<ReactQuill | null>(null);
+
+  const modules = useMemo(() => ({
+    toolbar: {
+      container: [
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ size: ['normal'] }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ 'divider': true }]
+      ],
+      handlers: {
+        divider: function () {
+          const quillEditor = quillRef.current?.getEditor();
+          const range = quillEditor?.getSelection();
+          if (quillEditor && range) {
+            quillEditor.insertEmbed(range.index, 'divider', true);
+          }
+        }
+      }
+    }
+  }), []); 
 
   useEffect(() => {
     let tempDefaultValue: string;
     if (jiraProjectFlag === 'P') {
-      tempDefaultValue = "<hr />";
+      tempDefaultValue = "";
     } else {
       tempDefaultValue = "";
     }
@@ -63,6 +73,7 @@ export default function UnControlledReactQuill({ jiraProjectFlag, control, disab
       render={({ field }) => (
         <ReactQuill
           {...field}
+          ref={quillRef}
           theme="snow"
           modules={modules}
           formats={formats}

@@ -85,17 +85,27 @@ export function convertJiraDataToQuill(jiraData:string){
   const elements = Array.from(doc.body.children);
     elements.forEach(element => {
         const tag = element.tagName.toLowerCase();
+        //리스트 변환
         if (tag === 'ul' || tag === 'ol') {
             const listType = tag === 'ul' ? 'bullet' : 'ordered';
             result += `<ol>${convertListApiToQuill(element, listType)}</ol>`;
-        } else if (tag === 'p') {
+        }
+        //P태그와 <TT>태그 변환
+        else if (tag === 'p') {
             let innerContent  = element.innerHTML;
             innerContent = convertDayApiToQuill(innerContent);
             result += `<p>${innerContent}</p>`;
-        }else if (/^h[1-6]$/.test(tag)) {
+        }
+        //머릿글 변환
+        else if (/^h[1-6]$/.test(tag)) {
             const innerContent = element.innerHTML;
             result += `<${tag}>${innerContent}</${tag}>`; // tag는 'h1', 'h2' 등의 태그를 포함
         }
+        //구분선 변환
+        else if(tag === 'hr'){
+            const innerContent = element.innerHTML;
+            result +=`<${tag}>${innerContent}</${tag}>`;
+            }
     });
   return result;
 }

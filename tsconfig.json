@@ -28,6 +28,7 @@
       "@organisms/*": ["components/organisms/*"],
       "@atoms/*": ["components/atoms/*"],
       "@tests/*": ["components/tests/*"],
+      "@css/*" :["css/*"]
     }
   },
   "include": ["src"],
