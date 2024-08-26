@@ -17,8 +17,8 @@ export default function PageContents({fixFlag}: PageContentsType) {
   };
   const navigator = useNavigate();  
 
-  const handleMovePage = (jiraCode :string)=>{
-    if(fixFlag)navigator(`/projectFix/${jiraCode}`)
+  const handleMovePage = (jiraCode :string, projectFlag:string)=>{
+    if(fixFlag)navigator(`/projectFix/${jiraCode}/${projectFlag}`)
     else {
       navigator(`projectDetail/${jiraCode}`)
     }
@@ -38,7 +38,7 @@ export default function PageContents({fixFlag}: PageContentsType) {
   return (
     <Paper sx={{ p: 2 }}>
       <ControlledTextInput handleSearchResult={handleSearchResult} requestSearchApi={GetAxiosSearchJiraList}/>
-      <ProjectViewTable tableData ={projectList} handleMovePage={(jiraCode)=>handleMovePage(jiraCode)}/>
+      <ProjectViewTable tableData ={projectList} handleMovePage={(jiraCode,projectFlag)=>handleMovePage(jiraCode, projectFlag)}/>
     </Paper>
   ); 
 }

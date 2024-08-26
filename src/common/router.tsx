@@ -20,7 +20,7 @@ export const Router = [
       { path: "projectCreate", element: <ProjectCreatePage /> },
       { path: "projectLink", element: <ProjectLinkPage /> },
       { path: "projectFix", element: <MainPage fixFlag={true} /> },
-      { path: "projectFix/:jiraProjectCode", element: <ProjectFixedDetail/> },
+      { path: "projectFix/:jiraProjectCode/:projectFlag", element: <ProjectFixedDetail/> },
       { path: "projectDelete", element: <ProjectDeletePage /> },
       { path: "deleteStay", element: <ErrorPage /> },
       { path: "/Login", element: <LoginPage /> },

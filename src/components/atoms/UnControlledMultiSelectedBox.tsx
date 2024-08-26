@@ -17,6 +17,7 @@ export default function UnControlledMultiSelectedBox<
   const Type = PRODUCT.Type;
   const Interlock = PRODUCT.Interlock;
   const Option = PRODUCT.Option;
+  // console.log(field.value);
   return (
     <FormControl style={{ width: '100%' }}>
       <InputLabel id="productInfo1-select" htmlFor="productInfo1-select">{selectBoxProps?.label}</InputLabel>

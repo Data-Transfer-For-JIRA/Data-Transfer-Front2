@@ -6,7 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const testTicket = "TED779-8";
+const testTicket = "ED2778-1";
 
 export default function ADFEditor(){
   const URL = `${import.meta.env.VITE_API_ADDRESS}/api/platform/issue?jiraIssueKey=${testTicket}`
