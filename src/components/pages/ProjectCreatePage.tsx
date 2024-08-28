@@ -64,7 +64,7 @@ export default function ProjectCreatePage(){
           <Tab label="유지보수"/>
         </Tabs>
         <form autoComplete="off" onSubmit={handleSubmit(handlePostForm)}>
-          <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={false}/>
+          <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={false} recallFlag={true}/>
           <Button type='submit' variant="contained" sx={{float:'right', marginRight:'1rem'}}>프로젝트 생성</Button>
         </form>
       </Box>

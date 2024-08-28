@@ -5,11 +5,12 @@ import { Control } from 'react-hook-form';
 import { ProjectTotalInfoType } from '@apis/ApiTypes';
 
 type ProjectInfoGridType = {
-  projectFlag : string|undefined;
+  projectFlag : string;
   control : Control<ProjectTotalInfoType>;
   readOnlyMode : boolean;
+  recallFlag : boolean
 }
-export default function ProjectInfoGrid({projectFlag='P', control ,readOnlyMode}:ProjectInfoGridType){
+export default function ProjectInfoGrid({projectFlag, control ,readOnlyMode, recallFlag}:ProjectInfoGridType){
   return (
     <Grid container sx={{height: '100%', padding:'5px'}} spacing={2}>
       <Grid item xs={5}> 
@@ -17,7 +18,7 @@ export default function ProjectInfoGrid({projectFlag='P', control ,readOnlyMode}
       </Grid>
 
       <Grid item xs={7}>
-        <ProjectAdditionalInfoForm jiraProjectFlag={projectFlag} control={control} readOnlyMode={readOnlyMode}/>
+        <ProjectAdditionalInfoForm jiraProjectFlag={projectFlag} control={control} readOnlyMode={readOnlyMode} recallFlag={recallFlag}/>
       </Grid>
     </Grid>
   )

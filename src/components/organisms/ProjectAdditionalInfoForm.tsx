@@ -11,21 +11,26 @@ type ProjectAdditionalInfoType ={
   jiraProjectFlag :string;
   control : Control<ProjectTotalInfoType>;
   readOnlyMode : boolean;
+  recallFlag : boolean
 };
-export default function ProjectAdditionalInfoForm({jiraProjectFlag,control,readOnlyMode}:ProjectAdditionalInfoType){
+export default function ProjectAdditionalInfoForm({jiraProjectFlag,control,readOnlyMode, recallFlag}:ProjectAdditionalInfoType){
   return(
     <Box sx={{ width: "100%",padding: '10px', marginTop: '10px'}}>
       <Typography variant="h5" gutterBottom>계약정보 입력</Typography>
-
-      <UnControlledCheckBox 
-        control={control} 
-        name="common.allocationFlag"
-        defaultValue={true}
-        checkBoxProps={{
-          disabled: readOnlyMode,
-        }}
-        label = '인력배정 보드 추가 생성'
+      {
+        recallFlag === true&&(
+        <UnControlledCheckBox 
+          control={control} 
+          name="common.allocationFlag"
+          defaultValue={true}
+          checkBoxProps={{
+            disabled: readOnlyMode,
+          }}
+          label = '인력배정 보드 추가 생성'
         />
+        )
+      }
+      
       <UnControlledReactQuill jiraProjectFlag={jiraProjectFlag} control={control} disabled={readOnlyMode}/>
       <Typography variant="h5" gutterBottom sx={{marginTop: '20px'}}>추가 데이터 입력</Typography>
       <Box sx={{display:'flex', flexFlow: 'wrap', rowGap: "10px"}}>
