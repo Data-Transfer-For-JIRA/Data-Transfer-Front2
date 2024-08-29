@@ -9,16 +9,13 @@ import MainPageTemplate from '@templates/MainPageTemplate';
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 export default function ProjectFixedDetail() {
+  const navigator = useNavigate();
   const { jiraProjectCode, projectFlag } = useParams();
   const { control, handleSubmit, reset } = useForm<ProjectTotalInfoType>({defaultValues:defaultProjectTotalInfo});
-
-  const handleUpdateInfo= ()=>{
-
-  }
 
   //Modal 셋팅
   const modalRoot = document.getElementById('modal-root');
@@ -33,7 +30,10 @@ export default function ProjectFixedDetail() {
       handleModalOpen();
       setModalType('API_LOADING');
       if (jiraProjectCode && projectFlag) {
-        const result:ProjectTotalInfoType = await GetAxiosProjectBasicInfo(jiraProjectCode, projectFlag);
+        const result = await GetAxiosProjectBasicInfo(jiraProjectCode, projectFlag);
+        if(result===undefined){
+          navigator('/projectFix');
+        }
         reset(result); // 폼을 API에서 받은 데이터로 초기화
         handleModalClose();
         setModalType('NONE');
@@ -45,6 +45,13 @@ export default function ProjectFixedDetail() {
 
     callApi();
   }, [jiraProjectCode, projectFlag, reset]);
+
+  const handleUpdateInfo= (data:ProjectTotalInfoType)=>{
+    const stringData = JSON.stringify(data);
+    setModalData(`${stringData}::${jiraProjectCode}`);
+    setModalType('UPDATE_CHECK');
+    handleModalOpen();
+  }
 
   return (
     <MainPageTemplate>

@@ -5,7 +5,7 @@ import { Box, Button, Checkbox, CircularProgress, DialogContent, FormControlLabe
 import ErrorIcon from '@mui/icons-material/Error';
 
 import { PostCreateProject } from '@apis/AxiosPost';
-import { AxiosPutProjectLink } from '@apis/AxiosUpdate';
+import { AxiosPutProjectFix, AxiosPutProjectLink } from '@apis/AxiosUpdate';
 import { DeleteProjectType, PostProjectCreateResultType, ProjectTotalInfoType, UpdateProjectInfoType, UpdateProjectLinkType } from '@apis/ApiTypes';
 import { ModalType, SelectedProjectType } from '@common/CommonType';
 
@@ -48,8 +48,8 @@ export default function ModalContents({ open, onClose, modalData, setModalData, 
           {modalType==='DELETE_CHECK'&&<DeleteProjectCheckInfo modalData={modalData} setModalData={setModalData} setModalType={setModalType} onClose={onClose}/>}
           {modalType==='DELETE_SUCCESS'&&<DeleteProjectResult modalData={modalData} setModalType={setModalType}/>}
           {/* {프로젝트 수정} */}
-          {modalType==='UPDATE_CHECK'&&<div>프로젝트 수정 체크</div>}
-          {modalType==='UPDATE_SUCCESS'&&<div>프로젝트 수정 실패</div>}
+          {modalType==='UPDATE_CHECK'&&<CheckUpdateProjectInfo modalData={modalData} setModalData={setModalData} onClose={onClose} setModalType={setModalType}/>}
+          {modalType==='UPDATE_SUCCESS'&&<div>프로젝트 수정 성공</div>}
         </DialogContent>
     </ModalBase>
   )
@@ -273,7 +273,7 @@ function CheckCreateProjectInfo({modalData,onClose, setModalType, setModalData}:
     <Box>
       <Button variant="contained" color='primary' onClick={handleApiRequest} sx={{ margin: "5px" }}>확인완료</Button>
       <Button variant="contained" color='error' onClick={onClose} sx={{ margin: "5px" }}>취소</Button>      
-      <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={true}/>
+      <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={true} recallFlag={false}/>
     </Box> 
   )
 }
@@ -346,14 +346,14 @@ function ModalFailApiCall({modalData,onClose}:ModalFailApiCallType){
   return(
     <Box>
     <Box sx={{ borderBottom: `2px solid ${grey[200]}`, width: '100%', mb: 1, mt: 2 }} />
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, mt: -5 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, mt: -1 }}>
       <Box sx={{ bgcolor: red[50], borderRadius: '50%', width: '100px', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
         <ErrorIcon sx={{ color: red[600], fontSize: 50 }} />
       </Box>
-      <Typography id="modal-modal-title" variant="h4" component="h2" color={grey[900]} fontWeight="fontWeightBold">
+      <Typography id="modal-modal-title" variant="h5" component="h2" color={grey[900]} fontWeight="fontWeightBold">
         요청하신 작업에 실패했습니다.
       </Typography>
-      <Typography id="modal-modal-description" sx={{ mt: 2, color: grey[600], textAlign: 'center' }} fontWeight="fontWeightMedium">
+      <Typography id="modal-modal-description" sx={{ mt: 4, color: grey[600], textAlign: 'center' }} fontWeight="fontWeightMedium">
         {modalData}
       </Typography>
     </Box>
@@ -364,4 +364,37 @@ function ModalFailApiCall({modalData,onClose}:ModalFailApiCallType){
     </Box>
   </Box>
   );
+}
+
+type CheckUpdateProjectInfoType ={
+  modalData : string;
+  onClose : () => void; 
+  setModalType : React.Dispatch<React.SetStateAction<ModalType>>
+  setModalData : React.Dispatch<React.SetStateAction<string>>
+}
+/**프로젝트 생성정보 컨펌용 모달 컴포넌트*/
+function CheckUpdateProjectInfo({modalData,onClose, setModalType, setModalData}:CheckUpdateProjectInfoType){
+  const temp = modalData.split('::');
+  const jiraProjectCode = temp[1];
+  const jiraTotalData = temp[0]
+
+  const formData:ProjectTotalInfoType = JSON.parse(jiraTotalData);
+  const {control, getValues } = useForm<ProjectTotalInfoType>({defaultValues: formData });
+  const projectFlag = getValues("essential.projectFlag");
+
+  const handleApiRequest=async ()=>{
+    const result = await AxiosPutProjectFix(jiraProjectCode, formData);
+    if(result===undefined){
+      setModalData("서버에 Api 요청에 실패하였습니다.");
+      setModalType('API_FAIL');
+    }
+    console.log(result);
+  }
+  return(
+    <Box>
+      <Button variant="contained" color='primary' onClick={handleApiRequest} sx={{ margin: "5px" }}>확인완료</Button>
+      <Button variant="contained" color='error' onClick={onClose} sx={{ margin: "5px" }}>취소</Button>      
+      <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={true} recallFlag={false}/>
+    </Box> 
+  )
 }

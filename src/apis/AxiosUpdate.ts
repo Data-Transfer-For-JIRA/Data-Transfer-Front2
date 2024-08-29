@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { UpdateProjectInfoType, UpdateProjectLinkType } from './ApiTypes';
+import { ProjectTotalInfoType, UpdateProjectInfoType, UpdateProjectLinkType } from './ApiTypes';
+import { parsingHtmlData } from '@util/convertQuilltoApi';
 
 /** 연관 프로젝트 링크 API
  * mainJiraKey 는 단일 스트링
@@ -20,6 +21,29 @@ export const AxiosPutProjectLink = async (linkData : UpdateProjectInfoType)
   }
   catch (error) {
     console.log(error);
+    return undefined;
+  }
+}
+
+
+export const AxiosPutProjectFix = async(jiraKey:string,projectTotalInfo :ProjectTotalInfoType)=>{
+  const URL = `${import.meta.env.VITE_API_ADDRESS}/api/platform/update`;
+  const parsingData = parsingHtmlData('QuillToApi', projectTotalInfo);
+  if(parsingData===undefined){
+    alert('레전드상황발생');
+    return undefined;
+  }
+  console.log(JSON.stringify(parsingData));
+  try {
+    const result = await axios.put(URL,projectTotalInfo,{
+      params:{
+        jiraKey : jiraKey,
+      }
+    })
+    console.log(result);
+  }
+  catch(Error){
+    console.log(Error);
     return undefined;
   }
 }

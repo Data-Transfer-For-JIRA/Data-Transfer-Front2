@@ -23,6 +23,7 @@ const formats = [
   'background',
   'size',
   'divider',
+  'image',
 ];
 
 type ReactQuillEditorType = {
@@ -41,7 +42,8 @@ export default function UnControlledReactQuill({ jiraProjectFlag, control, disab
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
         [{ size: ['normal'] }],
         [{ list: 'ordered' }, { list: 'bullet' }],
-        [{ 'divider': true }]
+        [{ 'divider': true }],
+        // ['image']
       ],
       handlers: {
         divider: function () {
