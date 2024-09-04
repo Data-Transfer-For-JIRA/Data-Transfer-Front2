@@ -23,7 +23,6 @@ export default function SearchInput<T>({
   const handleChangeKeyword = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    console.log(searchKeyword);
     setSearchKeyword(event.target.value);
   };
 

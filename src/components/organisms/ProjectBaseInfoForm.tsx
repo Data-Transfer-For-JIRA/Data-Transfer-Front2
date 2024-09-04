@@ -13,11 +13,12 @@ type ProjectBaseInfoFormType = {
   jiraProjectFlag :string;
   control : Control<ProjectTotalInfoType>;
   readOnlyMode : boolean;
+  recallFlag:boolean;
 }
-export default function ProjectBaseInfoForm({jiraProjectFlag, control, readOnlyMode}:ProjectBaseInfoFormType){
+export default function ProjectBaseInfoForm({jiraProjectFlag, control, readOnlyMode, recallFlag}:ProjectBaseInfoFormType){
   return (
     <Box sx={{  width: '100%', display: 'flex', flexFlow: 'wrap', rowGap: "10px", marginTop: '15px' }}>
-      <Typography variant="h5" sx={{width: '100%'}}>프로젝트 정보 입력</Typography>
+      <Typography variant="h5" sx={{width: '100%'}}>{recallFlag===true ? `프로젝트 정보 입력`: `프로젝트 정보 수정`}</Typography>
         <FormControl style={{ width: '20%' }}>
           <UnControlledTextField
             control={control}

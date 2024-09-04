@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Box, Button, Checkbox, CircularProgress, DialogContent, FormControlLabel, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import ErrorIcon from '@mui/icons-material/Error';
+import CheckCircle from '@mui/icons-material/CheckCircle';
 
 import { PostCreateProject } from '@apis/AxiosPost';
 import { AxiosPutProjectFix, AxiosPutProjectLink } from '@apis/AxiosUpdate';
@@ -14,7 +15,7 @@ import { ModalTittle } from '@common/CommonValue';
 import ModalBase from '@organisms/ModalBase'; 
 import ProjectInfoGrid from '@organisms/ProjectInfoGrid';
 import { DeleteAxiosProject } from '@apis/AxiosDelete';
-import { grey, red } from '@mui/material/colors';
+import { green, grey, red } from '@mui/material/colors';
 
 type ModalContentsType ={
   open : boolean;
@@ -49,7 +50,7 @@ export default function ModalContents({ open, onClose, modalData, setModalData, 
           {modalType==='DELETE_SUCCESS'&&<DeleteProjectResult modalData={modalData} setModalType={setModalType}/>}
           {/* {프로젝트 수정} */}
           {modalType==='UPDATE_CHECK'&&<CheckUpdateProjectInfo modalData={modalData} setModalData={setModalData} onClose={onClose} setModalType={setModalType}/>}
-          {modalType==='UPDATE_SUCCESS'&&<div>프로젝트 수정 성공</div>}
+          {modalType==='UPDATE_SUCCESS'&&<SuccessFixProject modalData={modalData} onClose={onClose} setModalType={setModalType}/>}
         </DialogContent>
     </ModalBase>
   )
@@ -61,8 +62,6 @@ type DeleteProjectResultType = {
 }
 function DeleteProjectResult({modalData,setModalType}:DeleteProjectResultType){
   const deleteResult:DeleteProjectType[] = JSON.parse(modalData);
-  console.log(deleteResult);
-  console.log(typeof(deleteResult));
   const navigate = useNavigate();
   const handleConfirmLink = () => {
     setModalType('NONE');
@@ -217,7 +216,7 @@ function LinkProjectInfo({modalData, setModalType,onClose, setModalData}:LinkPro
     }
     else{
       setModalData("프로젝트 연결 API호출에 실패하였습니다.");
-      setModalType("API_FAIL");
+      setModalType("UPDATE_SUCCESS");
     }
   }
   return(
@@ -383,12 +382,20 @@ function CheckUpdateProjectInfo({modalData,onClose, setModalType, setModalData}:
   const projectFlag = getValues("essential.projectFlag");
 
   const handleApiRequest=async ()=>{
+    setModalType('API_LOADING');
     const result = await AxiosPutProjectFix(jiraProjectCode, formData);
     if(result===undefined){
       setModalData("서버에 Api 요청에 실패하였습니다.");
       setModalType('API_FAIL');
     }
-    console.log(result);
+    else if(result ==='DUPLICATE'){
+      setModalData("변경할 프로젝트 이름이 이미 존재합니다.");
+      setModalType('API_FAIL');
+    }
+    else{
+      setModalData(JSON.stringify(result));
+      setModalType('UPDATE_SUCCESS');
+    }
   }
   return(
     <Box>
@@ -396,5 +403,35 @@ function CheckUpdateProjectInfo({modalData,onClose, setModalType, setModalData}:
       <Button variant="contained" color='error' onClick={onClose} sx={{ margin: "5px" }}>취소</Button>      
       <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={true} recallFlag={false}/>
     </Box> 
+  )
+}
+
+type SuccessFixProjectType ={
+  modalData:string;
+  onClose : ()=>void;
+  setModalType : React.Dispatch<React.SetStateAction<ModalType>>
+}
+function SuccessFixProject({modalData, onClose}:SuccessFixProjectType){
+  const responseData = JSON.parse(modalData);
+  return (
+    <Box>
+      <Box sx={{ borderBottom: `2px solid ${grey[200]}`, width: '100%', mb: 1, mt: 2 }} />
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+        <Box sx={{ bgcolor: green[50], borderRadius: '50%', width: '100px', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
+          <CheckCircle sx={{ color: green[600], fontSize: 50 }} />
+        </Box>
+        <Typography id="modal-modal-title" variant="h4" component="h2" color={grey[900]} fontWeight="fontWeightBold">
+          수정완료
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2, color: grey[600], textAlign: 'center' }} fontWeight="fontWeightMedium">
+          {`${responseData.jiraProjectKey} 프로젝트가 정상 수정 되었습니다.`}
+        </Typography>
+      </Box>
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+        <Button variant="outlined" size="medium" onClick={onClose} sx={{ width: '150px' }}>
+          <Typography variant="h6" fontWeight="fontWeightMedium">닫기</Typography>
+        </Button>
+      </Box>
+    </Box>
   )
 }

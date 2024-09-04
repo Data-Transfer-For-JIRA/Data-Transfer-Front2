@@ -92,4 +92,11 @@ export type UserLoginInfoType = {
   id : string,
   pwd : string,
 }
+
+export type UpdateProjectFixType={
+  jiraProjectKey:string;
+  jiraIssueKey : string;
+  projectResult: string;
+  issueResult:string;
+}
 export type { GetAxiosResultType, ProjectTotalInfoType, PostProjectCreateResultType };

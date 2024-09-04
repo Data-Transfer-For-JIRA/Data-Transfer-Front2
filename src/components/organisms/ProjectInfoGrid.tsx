@@ -14,7 +14,7 @@ export default function ProjectInfoGrid({projectFlag, control ,readOnlyMode, rec
   return (
     <Grid container sx={{height: '100%', padding:'5px'}} spacing={2}>
       <Grid item xs={5}> 
-        <ProjectBaseInfoForm jiraProjectFlag={projectFlag} control={control} readOnlyMode={readOnlyMode} />
+        <ProjectBaseInfoForm jiraProjectFlag={projectFlag} control={control} readOnlyMode={readOnlyMode} recallFlag={recallFlag}/>
       </Grid>
 
       <Grid item xs={7}>

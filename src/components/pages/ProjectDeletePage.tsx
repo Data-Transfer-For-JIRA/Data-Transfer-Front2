@@ -51,7 +51,6 @@ export default function DeleteProject(){
 
   //삭제Modal 호출
   const handleRequestApiFunction = ()=>{
-    console.log(targetProject.length)
     if(targetProject.length <=0){
       alert('삭제할 프로젝트가 선택되지 않았습니다.');
       return;

@@ -39,7 +39,8 @@ export default function ProjectFixedDetail() {
         setModalType('NONE');
       }
       else{
-        alert("레전드상황발생");
+        alert("잘못된 접근입니다.");
+        navigator("/");
       }
     };
 

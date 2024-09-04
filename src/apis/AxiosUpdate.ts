@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ProjectTotalInfoType, UpdateProjectInfoType, UpdateProjectLinkType } from './ApiTypes';
+import { ProjectTotalInfoType, UpdateProjectFixType, UpdateProjectInfoType, UpdateProjectLinkType } from './ApiTypes';
 import { parsingHtmlData } from '@util/convertQuilltoApi';
 
 /** 연관 프로젝트 링크 API
@@ -25,43 +25,36 @@ export const AxiosPutProjectLink = async (linkData : UpdateProjectInfoType)
   }
 }
 
-
-export const AxiosPutProjectFix = async(jiraKey:string,projectTotalInfo :ProjectTotalInfoType)=>{
+/** 프로젝트 기본정보를 수정하는 api호출
+ * @param jiraKey 프로젝트 지라 코드(파람으로 받음.)
+ * @param projectTotalInfo 프로젝트 폼 데이터(요청 바디에 작성해야함.)
+ * @returns 결과값(성공, 실패, 중복)
+ */
+export const AxiosPutProjectFix = async(jiraKey:string,projectTotalInfo :ProjectTotalInfoType)
+:Promise<UpdateProjectFixType|undefined|string>=>{
   const URL = `${import.meta.env.VITE_API_ADDRESS}/api/platform/update`;
   const parsingData = parsingHtmlData('QuillToApi', projectTotalInfo);
   if(parsingData===undefined){
-    alert('레전드상황발생');
+    alert('데이터 입력에 문제가 발생하였습니다.');
     return undefined;
   }
-  console.log(JSON.stringify(parsingData));
   try {
     const result = await axios.put(URL,projectTotalInfo,{
       params:{
         jiraKey : jiraKey,
       }
     })
-    console.log(result);
+
+    const checkDuplicate = result.data.projectResult;
+
+    if(checkDuplicate==='UPDATE_DUPLICATE'){
+      console.log('UPDATE_DUPLICATE EXCEPTION');
+      return 'DUPLICATE';
+    }
+    return result.data;
   }
   catch(Error){
     console.log(Error);
     return undefined;
   }
-}
-
-export const testPutProjectLink= async (postJson : UpdateProjectInfoType)=>{
-  console.log(postJson);
-  return [
-    {
-    errorMessages: ["성공Death"],
-    result: true,
-    resultMessage: "링크에 성공하였습니다.",
-    value: "Test1234"
-  },
-  {
-    errorMessages: ["실패Death"],
-    result: false,
-    resultMessage: "링크에 실패하였습니다.",
-    value: "응실패 ㅋ"
-  }
-];
 }

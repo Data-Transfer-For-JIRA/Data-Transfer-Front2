@@ -16,7 +16,7 @@ type ProjectAdditionalInfoType ={
 export default function ProjectAdditionalInfoForm({jiraProjectFlag,control,readOnlyMode, recallFlag}:ProjectAdditionalInfoType){
   return(
     <Box sx={{ width: "100%",padding: '10px', marginTop: '10px'}}>
-      <Typography variant="h5" gutterBottom>계약정보 입력</Typography>
+      <Typography variant="h5" gutterBottom>{recallFlag===true ? `계약 정보 입력`: `계약 정보 수정`}</Typography>
       {
         recallFlag === true&&(
         <UnControlledCheckBox 
