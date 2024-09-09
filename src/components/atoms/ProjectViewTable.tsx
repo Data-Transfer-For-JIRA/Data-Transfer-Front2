@@ -26,7 +26,7 @@ const columns: ColumnsType[] = [
   { label: '지라코드', id: 'jiraProjectCode', width: '5%' },
   { label: '프로젝트코드', id: 'projectCode', width: '7%' },
   { label: '유형', id: 'projectType', width: '5%' },
-  { label: '프로젝트이름', id: 'jiraProjectName', width: '40%' },
+  { label: '프로젝트이름', id: 'jiraProjectName', width: '30%' },
   { label: '담당자', id: 'projectAssignees', width: '7%' },
   { label: '지라URL', id: 'jiraUrl', width: '10%' },
 ];
@@ -105,9 +105,9 @@ export default function ProjectViewTable({ tableData, handleMovePage }: ProjectV
                       </TableCell>
                     )
                   }
-                  else if(column.id=== 'jiraProjectCode' ||column.id=== 'projectCode'){
+                  else if(column.id=== 'jiraProjectCode' ||column.id=== 'projectCode'||column.id=== 'projectType'){
                     return(
-                      <TableCell key={column.id} onClick={()=>handleMovePage&&handleMovePage(row.jiraProjectCode, row.projectType)}>
+                      <TableCell key={column.id} sx={{ cursor: 'pointer' }}  onClick={()=>handleMovePage&&handleMovePage(row.jiraProjectCode, row.projectType)}>
                       {value}
                     </TableCell>
                     )

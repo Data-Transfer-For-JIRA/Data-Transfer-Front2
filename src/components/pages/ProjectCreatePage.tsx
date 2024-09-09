@@ -39,7 +39,6 @@ export default function ProjectCreatePage(){
   //모달에 전달할 form 데이터
   const [modalData, setModalData] = useState<string>('NONE');
   const handlePostForm:SubmitHandler<ProjectTotalInfoType> =  (data)=>{
-    console.log(data.common.description);
     const stringData = JSON.stringify(data);
     setModalData(stringData);
     setModalType('CREATE_CHECK');

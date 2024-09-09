@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Paper } from "@mui/material";
 
 import { GetAxiosResultType } from "@apis/ApiTypes";
-import { GetAxiosSearchJiraList } from "@apis/AxiosGet";
-import ControlledTextInput from '@atoms/ControlledTextInput';
 import ProjectViewTable from '@atoms/ProjectViewTable';
 import { useNavigate } from 'react-router-dom';
+import SearchComponents from "@organisms/SearchComponents";
 
 type PageContentsType = {
   fixFlag?: boolean
@@ -22,22 +21,11 @@ export default function PageContents({fixFlag}: PageContentsType) {
     else {
       navigator(`projectDetail/${jiraCode}`)
     }
-    
   }
 
-  useEffect(()=>{
-    const requestDefaultApi = async ()=>{
-      const result = await GetAxiosSearchJiraList(undefined);
-      handleSearchResult(result);
-    }
-    if(projectList.length===0) {
-      requestDefaultApi();
-    }
-  },[projectList])
-
   return (
-    <Paper sx={{ p: 2 }}>
-      <ControlledTextInput handleSearchResult={handleSearchResult} requestSearchApi={GetAxiosSearchJiraList}/>
+    <Paper sx={{ p: 1 }}>
+      <SearchComponents handleSearchResult={handleSearchResult} projectList={projectList}/>
       <ProjectViewTable tableData ={projectList} handleMovePage={(jiraCode,projectFlag)=>handleMovePage(jiraCode, projectFlag)}/>
     </Paper>
   ); 

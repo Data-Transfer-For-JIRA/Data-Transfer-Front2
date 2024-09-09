@@ -42,14 +42,14 @@ export default function ControlledTextInput<T>({ handleSearchResult, requestSear
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <Input
         placeholder="프로젝트 검색"
-        sx={{ width: '100%' }}
+        sx={{ width: '50%'}}
         onChange={handleSearchKeyWord}
         onKeyDown={handleKeyDown}
       />
-      <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={handleBtnOnClick}>
+      <IconButton type="button" sx={{ p: '10px'}} aria-label="search" onClick={handleBtnOnClick}>
         <SearchIcon />
       </IconButton>
     </Box>
