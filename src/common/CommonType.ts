@@ -12,3 +12,33 @@ export type SelectedProjectType = {
   jiraProjectKey:string;
   jiraProjectName:string;
 }
+
+//단순조건에 필요한 타입
+type SearchNormalFilterType = {
+  projectTypeP : boolean;
+  projectTypeM : boolean;
+  FinishedProject : boolean;
+}
+
+//조건검색에 필요한 React-hook-form Control 타입
+type SearchOptionFilterType = {
+  projectCode:string;
+  projectName : string;
+  client: string;
+  contractor: string;
+  assignee: string;
+  salesManager: string;
+}
+
+//제품유형 필터에 필요한 react-hook-form Control 타입
+type SearchProductTypeFilterType = {
+  productInfo: string[];
+}
+
+//담당자 미배정, 프로젝트코드 미발급 프로젝트 필터
+type SearchNotSetFilterType = {
+  notAssignee : boolean;
+  notProjectCode : boolean;
+}
+
+export type SearchFilterInputType = SearchNormalFilterType&SearchOptionFilterType&SearchProductTypeFilterType&SearchNotSetFilterType;

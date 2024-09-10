@@ -14,12 +14,17 @@ export default function UnControlledMultiSelectedBox<
 >({ selectBoxProps, ...props }: MuiProps & UseControllerProps<TFieldValues, TName>) {
 
   const { field } = useController(props);
-  const Type = PRODUCT.Type;
-  const Interlock = PRODUCT.Interlock;
-  const Option = PRODUCT.Option;
+  const Type = props.item.Type;
+  const Interlock = props.item.Interlock;
+  const Option = props.item.Option;
+
+  // const Type = PRODUCT.Type;
+  // const Interlock = PRODUCT.Interlock;
+  // const Option = PRODUCT.Option;
+
   return (
     <FormControl style={{ width: '100%' }}>
-      <InputLabel id="productInfo1-select" htmlFor="productInfo1-select">{selectBoxProps?.label}</InputLabel>
+      <InputLabel id={selectBoxProps?.id} htmlFor={selectBoxProps?.id}>{selectBoxProps?.label}</InputLabel>
       <Select
         {...selectBoxProps}
         {...field}
