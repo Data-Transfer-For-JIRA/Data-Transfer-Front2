@@ -125,7 +125,7 @@ export default function SearchFilter({onClose}:SearchFilterType){
               name="productInfo"
               item={PRODUCT}
               selectBoxProps={{
-                label: "4.제품정보",
+                label: "제품정보",
                 id: "productInfo-select",
                 style: { width: '100%' },
                 size: "small",
@@ -133,9 +133,10 @@ export default function SearchFilter({onClose}:SearchFilterType){
                 multiple: true,
                 inputProps: {
                   style: {
-                    width: '100%'
+                    width: '100%',
                   }
-                }
+                },
+                sx: {'& .MuiInputBase-input':{fontSize:'12px'}}
               }}
             />
           </StyledFormControl>

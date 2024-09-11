@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Box, Paper, styled } from "@mui/material";
 
 import { GetAxiosResultType } from "@apis/ApiTypes";
-import ProjectViewTable from '@atoms/ProjectViewTable';
 import { useNavigate } from 'react-router-dom';
 import SearchComponents from "@organisms/SearchComponents";
 import { useDarkModeContext } from "@context/CustomDarkmodeProvider";
