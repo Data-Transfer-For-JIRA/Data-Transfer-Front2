@@ -41,4 +41,4 @@ type SearchNotSetFilterType = {
   notProjectCode : boolean;
 }
 
-export type SearchFilterInputType = SearchNormalFilterType&SearchOptionFilterType&SearchProductTypeFilterType&SearchNotSetFilterType;
+export type SearchFilterInputType = SearchOptionFilterType&SearchProductTypeFilterType&SearchNotSetFilterType;

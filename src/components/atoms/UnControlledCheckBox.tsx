@@ -4,7 +4,7 @@ import { useController, FieldValues, FieldPath, UseControllerProps } from 'react
 
 interface MuiProps {
   checkBoxProps?: CheckboxProps;
-  label : string;
+  label ?: string;
 }
 
 export default function UnControlledCheckBox<
