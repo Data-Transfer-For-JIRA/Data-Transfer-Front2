@@ -1,6 +1,7 @@
-import { Box, IconButton, Input } from '@mui/material';
+import { Box, IconButton, Input, InputAdornment } from '@mui/material';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+import { ClearIcon } from '@mui/x-date-pickers';
 
 /**
  * 검색어 입력 컴포넌트
@@ -31,6 +32,10 @@ export default function ControlledTextInput<T>({ handleSearchResult, requestSear
     }
   };
 
+  const handleClear = ()=>{
+    setSearchKeyWord('');
+  }
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (event.key === 'Enter') {
       callSearchApi();
@@ -44,10 +49,20 @@ export default function ControlledTextInput<T>({ handleSearchResult, requestSear
   return (
     <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <Input
+        value={searchKeyWord}
         placeholder="프로젝트 검색"
         sx={{ width: '50%'}}
         onChange={handleSearchKeyWord}
         onKeyDown={handleKeyDown}
+        endAdornment={
+          searchKeyWord && (
+            <InputAdornment position="end">
+              <IconButton onClick={handleClear} edge="end">
+                <ClearIcon />
+              </IconButton>
+            </InputAdornment>
+          )
+        }
       />
       <IconButton type="button" sx={{ p: '10px'}} aria-label="search" onClick={handleBtnOnClick}>
         <SearchIcon />

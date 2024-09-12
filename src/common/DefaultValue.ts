@@ -93,5 +93,5 @@ export const TestDefaultValue: ProjectTotalInfoType = {
 export const NormalFilterDefault:SearchNormalFilterType = {
   showProjectTypeP : true,
   showProjectTypeM : true,
-  showFinishedProject : false,
+  showFinishedProject : true,
 }

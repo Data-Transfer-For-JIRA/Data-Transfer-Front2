@@ -1,6 +1,5 @@
 import { GetAxiosResultType } from "@apis/ApiTypes";
 import { GetAxiosSearchJiraList } from "@apis/AxiosGet";
-import ControlledCheckBox from "@atoms/ContorlledCheckBox";
 import ControlledTextInput from "@atoms/ControlledTextInput";
 import SearchFilter from "@atoms/SearchFilter";
 import { SearchNormalFilterType } from "@common/CommonType";
@@ -33,7 +32,7 @@ export default function SearchComponents({ handleSearchResult }: InputType){
 
   useEffect(()=>{
     const requestDefaultApi = async ()=>{
-      const result = await GetAxiosSearchJiraList(undefined);
+      const result = await GetAxiosSearchJiraList(undefined, normalFilter);
       handleSearchResult(result);
     }
       requestDefaultApi();

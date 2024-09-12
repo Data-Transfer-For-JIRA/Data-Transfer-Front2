@@ -1,8 +1,9 @@
 import axios from "axios";
 
 import { GetAxiosResultType } from "@apis/ApiTypes";
-import { sortObjectDate } from "@util/function";
+import { setOptionObject, sortObjectDate } from "@util/function";
 import { parsingHtmlData } from "@util/convertQuilltoApi";
+import { SearchNormalFilterType } from "@common/CommonType";
 
 /**
  * 프로젝트 리스트 가져오는 Axios Get 방식
@@ -11,12 +12,15 @@ import { parsingHtmlData } from "@util/convertQuilltoApi";
  * @returns (type)GetAxiosResultType의 배열형으로 테이블에 보여질 데이터. 호출실패시 빈배열 반환
  */
 export const GetAxiosSearchJiraList = async (
-  searchKeyWord: string = " "
+  searchKeyWord: string = " ",
+  normalFilter:SearchNormalFilterType
 ): Promise<GetAxiosResultType[]> => {
   const URL = `${import.meta.env.VITE_API_ADDRESS}/jira/project/search?searchKeyword=${searchKeyWord}`;
   const defaultValue: GetAxiosResultType[] = [];
+  
   try {
     const { data } = await axios(URL);
+    // setOptionObject(data,normalFilter);
     const sortData = sortObjectDate(data);
     return sortData;
   } catch (Error) {
