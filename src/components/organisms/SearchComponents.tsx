@@ -13,6 +13,8 @@ type InputType = {
 };
 
 export default function SearchComponents({ handleSearchResult }: InputType){
+  //검색용 input
+  const [searchKeyWord, setSearchKeyWord] = useState<string>("");
   //일반 검색을 위한 checkbox 라벨
   const normalFilterList = ['프로젝트', '유지보수','종료 프로젝트 제외'];
   //특수 필터를 위한 Drawer용 선언
@@ -32,7 +34,7 @@ export default function SearchComponents({ handleSearchResult }: InputType){
 
   useEffect(()=>{
     const requestDefaultApi = async ()=>{
-      const result = await GetAxiosSearchJiraList(undefined, normalFilter);
+      const result = await GetAxiosSearchJiraList(searchKeyWord, normalFilter);
       handleSearchResult(result);
     }
       requestDefaultApi();
@@ -56,7 +58,13 @@ export default function SearchComponents({ handleSearchResult }: InputType){
         ))}
         <Button type="button" variant="contained" onClick={handleDrawerOpen}>상세 검색</Button>
       </Box>
-      <ControlledTextInput handleSearchResult={handleSearchResult} requestSearchApi={GetAxiosSearchJiraList}/>
+      <ControlledTextInput
+        searchKeyWord={searchKeyWord}
+        setSearchKeyWord={setSearchKeyWord}
+        handleSearchResult={handleSearchResult} 
+        requestSearchApi={GetAxiosSearchJiraList} 
+        normalFilter={normalFilter}
+        />
       <Drawer anchor="top" open={specialFilterDrawer} onClose={handleDrawerClose}>
         <SearchFilter onClose={handleDrawerClose}/>
       </Drawer>

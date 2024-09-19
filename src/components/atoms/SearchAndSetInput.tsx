@@ -2,6 +2,7 @@ import { Box, IconButton, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from 'react';
 import { GetAxiosSearchJiraList } from '@apis/AxiosGet';
+import { NormalFilterDefault } from '@common/DefaultValue';
 
 
 type SearchMainProjectKeyType = {
@@ -13,7 +14,7 @@ export default function SearchMainProjectKey({handleJiraMainKey}:SearchMainProje
     setSearchKeyword(event.target.value);
   }
   const getMatchList = async ()=>{
-    const result = await GetAxiosSearchJiraList(searchKeyword);
+    const result = await GetAxiosSearchJiraList(searchKeyword,NormalFilterDefault);
     if(result.length===0){alert("조회된 결과가 없습니다.")}
     else if(result.length >0&&result[0].key===searchKeyword){handleJiraMainKey(searchKeyword);}
     else {alert('검색어는 Jira 프로젝트 코드만 가능합니다.')}

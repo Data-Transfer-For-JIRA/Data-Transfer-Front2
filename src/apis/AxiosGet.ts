@@ -20,8 +20,8 @@ export const GetAxiosSearchJiraList = async (
   
   try {
     const { data } = await axios(URL);
-    // setOptionObject(data,normalFilter);
-    const sortData = sortObjectDate(data);
+    const filterObject = setOptionObject(data,normalFilter);
+    const sortData = sortObjectDate(filterObject);
     return sortData;
   } catch (Error) {
     console.log(Error);

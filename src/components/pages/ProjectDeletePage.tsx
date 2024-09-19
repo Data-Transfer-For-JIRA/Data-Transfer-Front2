@@ -5,6 +5,7 @@ import ModalContents from '@atoms/ModalContents';
 import SelectedData from '@atoms/SelectedData';
 import TargetChip from '@atoms/TargetChip';
 import { ModalType, SelectedProjectType } from '@common/CommonType';
+import { NormalFilterDefault } from '@common/DefaultValue';
 import { Box, Divider, Grid, Typography } from '@mui/material';
 import MainPageTemplate from '@templates/MainPageTemplate';
 import { setSelectProjectList } from '@util/function';
@@ -16,6 +17,7 @@ import ReactDOM from 'react-dom';
  * Grid 오른쪽은 왼쪽 테이블에서 선택된 삭제 대상 프로젝트 List
  */
 export default function DeleteProject(){
+  const [searchKeyWord, setSearchKeyWord] = useState<string>("");
   //검색용 State 및 핸들러
   const [searchResult, setSearchResult] = useState<GetAxiosResultType[]>([]); //검색결과
   const handleSearchResult = (searchResult: GetAxiosResultType[]) => {setSearchResult(searchResult)};
@@ -64,7 +66,7 @@ export default function DeleteProject(){
   useEffect(()=>{
     //DataGrid 기본으로 채우는 함수.
     const requestDefaultApi = async ()=>{
-      const result = await GetAxiosSearchJiraList(undefined);
+      const result = await GetAxiosSearchJiraList(undefined, NormalFilterDefault);
       if(result){
         handleTargetProject(result);
       }
@@ -84,7 +86,13 @@ export default function DeleteProject(){
     <MainPageTemplate>
       <Grid container paddingLeft={"10px"} sx={{height : '100%'}} >
         <Grid item xs={9}>
-          <ControlledTextInput handleSearchResult={handleSearchResult} requestSearchApi={GetAxiosSearchJiraList}/>
+        <ControlledTextInput
+            searchKeyWord={searchKeyWord}
+            setSearchKeyWord={setSearchKeyWord}
+            handleSearchResult={handleSearchResult} 
+            requestSearchApi={GetAxiosSearchJiraList} 
+            normalFilter={NormalFilterDefault}
+          />
           <SelectedData gridData={searchResult} setSubJiraKey={setTargetProject}/>    
         </Grid>
         <Grid item xs={3}>

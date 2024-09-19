@@ -45,7 +45,7 @@ export default function ProjectFixedDetail() {
     };
 
     callApi();
-  }, [jiraProjectCode, projectFlag, reset]);
+  }, [jiraProjectCode, navigator, projectFlag, reset]);
 
   const handleUpdateInfo= (data:ProjectTotalInfoType)=>{
     const stringData = JSON.stringify(data);

@@ -7,7 +7,7 @@ import SearchComponents from "@organisms/SearchComponents";
 import { useDarkModeContext } from "@context/CustomDarkmodeProvider";
 import ProjectViewTableStatic from "@atoms/ProjectViewTableStatic";
 
-const CustomScrollbarBox = styled(Box)(({}) => ({
+const CustomScrollbarBox = styled(Box)(() => ({
   flex:1, 
   overflow:'auto',
   '&::-webkit-scrollbar': {

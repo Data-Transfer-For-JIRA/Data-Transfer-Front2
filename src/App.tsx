@@ -14,7 +14,7 @@ function AppLogin() {
     if (!loginState) {
       navigator("/Login")
     }
-  },[loginState])
+  },[loginState, navigator])
   return (
     (loginState ? <Outlet /> : <LoginPage />)
   )

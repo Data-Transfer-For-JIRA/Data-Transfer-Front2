@@ -1,6 +1,5 @@
 import { GetAxiosResultType } from '@apis/ApiTypes';
 import { SearchNormalFilterType, SelectedProjectType } from '@common/CommonType';
-import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 
 /** 선택된 프로젝트 코드와 Chip에 보여질 데이터 매칭 함수
  *  검색결과에 따라 비교대상이 달라져서 문제가좀 있음;
@@ -30,13 +29,33 @@ export const sortObjectDate = (axiosResult:GetAxiosResultType[]):GetAxiosResultT
   return sorted_list;
 }
 
+/**
+ * 단순 필터 처리를 위한 함수(유지보수, 프로젝트, 종료 제외 검색)
+ * @param dataObject 
+ * @param normalFilter 
+ */
 export const setOptionObject = (dataObject:GetAxiosResultType[], normalFilter:SearchNormalFilterType)=>{
-  const tempArray: GetAxiosResultType[] = [];
-  const {showProjectTypeP ,showProjectTypeM, showFinishedProject} = normalFilter;
+  let tempArray: GetAxiosResultType[] = [];
+  const {showProjectTypeP ,showProjectTypeM} = normalFilter;
 
-  if(showFinishedProject){
-    dataObject.map((item)=>{
-      console.log(item)
+  if(showProjectTypeP && showProjectTypeM){
+    tempArray =  dataObject;
+  }
+  else if (showProjectTypeP&&!showProjectTypeM){
+    tempArray = dataObject.filter((item)=>{
+      return item.flag ==='P'
     })
   }
+  else if(!showProjectTypeP&&showProjectTypeM){
+    tempArray = dataObject.filter((item)=>{
+      return item.flag ==='M'
+    })
+  }
+  else{
+    tempArray = dataObject.filter((item)=>{
+      return item.flag !=='M'&& item.flag !=='P'
+    })
+  }
+
+  return tempArray;
 }

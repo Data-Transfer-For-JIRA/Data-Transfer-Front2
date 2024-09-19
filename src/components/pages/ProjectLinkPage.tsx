@@ -15,6 +15,7 @@ import SelectedData from '@atoms/SelectedData';
 import TargetChip from '@atoms/TargetChip';
 import SearchAndSetInput from '@atoms/SearchAndSetInput';
 import ModalContents from '@atoms/ModalContents';
+import { NormalFilterDefault } from '@common/DefaultValue';
 
 /** 프로젝트 연결 컴포넌트
  * Grid왼쪽은 연결대상 프로젝트 검색해서 선택하는 컴포넌트
@@ -23,7 +24,7 @@ import ModalContents from '@atoms/ModalContents';
  */
 export default function ProjectLinkPage(){
   const location = useLocation();
-
+  const [searchKeyWord, setSearchKeyWord] = useState<string>("");
   //MainJiraKey검색State
   const [mainJiraKey, setMainJiraKey] = useState("");
   const handleJiraMainKey = (searchKeyword : string)=>{setMainJiraKey(searchKeyword);}
@@ -83,7 +84,7 @@ export default function ProjectLinkPage(){
     if (location.state !== null) { setMainJiraKey(location.state.jiraProjectCode) } 
     //페이지 로딩시 디폴트로 테이블 List 가져오기
     const requestDefaultApi = async ()=>{
-      const result = await GetAxiosSearchJiraList(undefined);
+      const result = await GetAxiosSearchJiraList(undefined, NormalFilterDefault);
       handleSearchResult(result);
     }
     if(projectList.length===0) {
@@ -104,7 +105,13 @@ export default function ProjectLinkPage(){
       <Grid container paddingLeft={"10px"} sx={{height : '100%'}}>
         <Grid item xs={9}>
           <Box>
-            <ControlledTextInput handleSearchResult={handleSearchResult} requestSearchApi={GetAxiosSearchJiraList}/>
+          <ControlledTextInput
+            searchKeyWord={searchKeyWord}
+            setSearchKeyWord={setSearchKeyWord}
+            handleSearchResult={handleSearchResult} 
+            requestSearchApi={GetAxiosSearchJiraList} 
+            normalFilter={NormalFilterDefault}
+          />
             <SelectedData gridData={projectList} setSubJiraKey={setSubJiraKey}/>
           </Box>
         </Grid>

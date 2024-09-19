@@ -20,6 +20,7 @@ export default function SearchFilter({onClose}:SearchFilterType){
   const {control, handleSubmit} = useForm<SearchFilterInputType>();
   const handleSearchFormSubmit:SubmitHandler<SearchFilterInputType> = (data)=>{
     console.log(data);
+    alert('아직 제공하지 않는 서비스입니다.');
   }
   return (
     <Box sx={{width:'60%', margin :'5px auto', pl:'3px'}}>
@@ -173,7 +174,7 @@ export default function SearchFilter({onClose}:SearchFilterType){
       <Divider sx={{mt:'5px', mb:'5px'}}/>
 
       <Box sx={{display : 'flex', gap: '12px', justifyContent:'flex-end'}}>
-        <Button type="submit" variant="contained" >적용</Button>
+        <Button type="submit" variant="contained">적용</Button>
         <Button type="button" variant="contained" onClick={onClose}>닫기</Button>
       </Box>
       </form>

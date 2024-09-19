@@ -17,7 +17,7 @@ export type SelectedProjectType = {
 export type SearchNormalFilterType = {
   showProjectTypeP : boolean;
   showProjectTypeM : boolean;
-  showFinishedProject : boolean;
+  //showFinishedProject : boolean;
 }
 
 //조건검색에 필요한 React-hook-form Control 타입
