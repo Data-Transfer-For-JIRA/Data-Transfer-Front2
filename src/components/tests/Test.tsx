@@ -44,7 +44,7 @@ export default function ADFEditor(){
   }
   return (
     <div>
-      <UnControlledReactQuill jiraProjectFlag={flag} control={control} disabled={false}/>
+      <UnControlledReactQuill name={"common.description"} control={control} disabled={false}/>
       <button onClick={handleBtn}>호출</button>
       <button onClick={handleConvert}>변환</button>
     </div>

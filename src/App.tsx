@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 function AppLogin() {
   const navigator = useNavigate();
   const { loginState } = useLoginContext();
-
+  
   useEffect(()=>{
     if (!loginState) {
       navigator("/Login")

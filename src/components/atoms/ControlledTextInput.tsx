@@ -36,16 +36,17 @@ export default function ControlledTextInput<T>
     }
   };
 
-  const handleClear = ()=>{
+  const handleClear = async ()=>{
     setSearchKeyWord('');
-  }
+    await callSearchApi();
+  };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     if (event.key === 'Enter') {
       callSearchApi();
     }
   };
-
+                                                      
   const handleBtnOnClick = () => {
     callSearchApi();
   };

@@ -13,7 +13,7 @@ type ProjectAdditionalInfoType ={
   readOnlyMode : boolean;
   recallFlag : boolean
 };
-export default function ProjectAdditionalInfoForm({jiraProjectFlag,control,readOnlyMode, recallFlag}:ProjectAdditionalInfoType){
+export default function ProjectAdditionalInfoForm({control,readOnlyMode, recallFlag}:ProjectAdditionalInfoType){
   return(
     <Box sx={{ width: "100%",padding: '10px', marginTop: '10px'}}>
       <Typography variant="h5" gutterBottom>{recallFlag===true ? `계약 정보 입력`: `계약 정보 수정`}</Typography>
@@ -31,7 +31,13 @@ export default function ProjectAdditionalInfoForm({jiraProjectFlag,control,readO
         )
       }
       
-      <UnControlledReactQuill jiraProjectFlag={jiraProjectFlag} control={control} disabled={readOnlyMode}/>
+      <UnControlledReactQuill 
+        control={control} 
+        name = "common.description"
+        disabled={readOnlyMode}
+      />
+
+      
       <Typography variant="h5" gutterBottom sx={{marginTop: '20px'}}>추가 데이터 입력</Typography>
       <Box sx={{display:'flex', flexFlow: 'wrap', rowGap: "10px"}}>
         <UnControlledMultiSelectedBox
