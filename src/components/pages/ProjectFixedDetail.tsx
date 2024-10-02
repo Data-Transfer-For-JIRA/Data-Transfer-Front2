@@ -25,6 +25,7 @@ export default function ProjectFixedDetail() {
   const handleModalClose = () => {setModalOpen(false)};
   const handleModalOpen = () => { setModalOpen(true) };
 
+
   useEffect(() => {
     const callApi = async () => {
       handleModalOpen();
@@ -53,12 +54,13 @@ export default function ProjectFixedDetail() {
     setModalType('UPDATE_CHECK');
     handleModalOpen();
   }
+  
 
   return (
     <MainPageTemplate>
       <form autoComplete="off" onSubmit={handleSubmit(handleUpdateInfo)}>
       {projectFlag !== undefined && (
-        <ProjectInfoGrid projectFlag={projectFlag==="프로젝트"?'P':"M"} control={control} readOnlyMode={false} recallFlag={false}/>
+        <ProjectInfoGrid projectFlag={projectFlag} control={control} readOnlyMode={false} recallFlag={false}/>
       )}
       <Button type='submit' variant="contained" sx={{float:'right', marginRight:'1rem'}}>프로젝트 수정</Button>
       </form>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GetAxiosResultType } from "@apis/ApiTypes";
+import { GetAxiosResultType, GetTicketListType } from "@apis/ApiTypes";
 import { setOptionObject, sortObjectDate } from "@util/function";
 import { parsingHtmlData } from "@util/convertQuilltoApi";
 import { SearchNormalFilterType } from "@common/CommonType";
@@ -37,8 +37,8 @@ export const GetAxiosSearchJiraList = async (
  * @returns returnData : 컴포넌트에서 폼에 채워질 데이터 리턴 | 파싱 또는 api호출에 실패시 undefined가 나옴
  */
 export const GetAxiosProjectBasicInfo = async (jiraKey:string, projectType:string)=>{
-  const projectFlag = projectType=== "유지보수"? "M":"P";
-  const URL = `${import.meta.env.VITE_API_ADDRESS}/api/platform/project?projectFlag=${projectFlag}&jiraKey=${jiraKey}`;
+  console.log(projectType)
+  const URL = `${import.meta.env.VITE_API_ADDRESS}/api/platform/project?projectFlag=${projectType}&jiraKey=${jiraKey}`;
   try{
     const result = await axios(URL);
     let returnData = result.data;
@@ -52,4 +52,24 @@ export const GetAxiosProjectBasicInfo = async (jiraKey:string, projectType:strin
     return undefined;
   }
 
+}
+
+/**
+ * 프로젝트 티켓리스트 가져오는 API 티켓내용까지 배열로 가져옴
+ * 기본정보를 제외한 티켓리스트를 가져온다.(wss이관 데이터 표기 티켓도 가져옴, 기본정보 티켓은 가져오지않음)
+ * @param jiraCode : 조회 대상 프로젝트.
+ * @param pageNumber : 페이징 처리시 데이터 0부터 시작.
+ * @param size : 한 페이지당 가져올 데이터.
+ * @returns 조회한 데이터
+ */
+export const GetAxiosTicketList= async(jiraCode:string, pageNumber:number, size:number):Promise<GetTicketListType|undefined>=>{
+  const URL =`${import.meta.env.VITE_API_ADDRESS}/api/platform/project/all-tickets?jiraProjectKey=${jiraCode}&page=${pageNumber}&size=${size}`;
+  try{
+    const {data} = await axios(URL);
+    return data;
+  }
+  catch(error){
+    console.log(error);
+  }
+  return undefined;
 }

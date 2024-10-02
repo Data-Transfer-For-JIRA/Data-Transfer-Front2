@@ -1,7 +1,7 @@
 /** 검색후 응답으로 받을 데이터의 타입
  *  프로젝트 조회, 프로젝트 링크, 프로젝트 수정, 프로젝트 삭제.
  */
-type GetAxiosResultType = {
+export type GetAxiosResultType = {
   key: string;
   id: string;
   jiraProjectName: string;
@@ -21,7 +21,7 @@ type GetAxiosResultType = {
  * selected   : 유지보수, 프로젝트에서 각각 필요로 하는 타입
  *              =>별도의 구분은 없고 react-hook-form의 control을 통해 필요한 값만 넘김.
  */
-type ProjectTotalInfoType ={
+export type ProjectTotalInfoType ={
   essential: {
     projectFlag: string;
     projectName: string;
@@ -60,7 +60,7 @@ type ProjectTotalInfoType ={
 }
 
 //지라 프로젝트 생성 결과 타입
-type PostProjectCreateResultType = {
+export type PostProjectCreateResultType = {
   result: string;
   jiraProjectCode: string;
   jiraProjectName: string;
@@ -93,10 +93,63 @@ export type UserLoginInfoType = {
   pwd : string,
 }
 
+//프로젝트 기본정보 수정 결과 타입
 export type UpdateProjectFixType={
   jiraProjectKey:string;
   jiraIssueKey : string;
   projectResult: string;
   issueResult:string;
 }
-export type { GetAxiosResultType, ProjectTotalInfoType, PostProjectCreateResultType };
+
+//API호출중 티켓에 관련된 타입
+export type TicketContents = {
+  createDate:string;
+  jiraProjectKey:string;
+  담당자:string;
+  댓글들:[
+    {
+      댓글_내용:string;
+      댓글_아이디:string;
+      생성일:Date;
+      업데이트일:Date;
+      작성자:string;
+      지라이슈_키:string;
+    }
+  ],
+  상세내용:string;
+  업데이트일:Date;
+  이슈_출처:boolean; //WSS 이관데이터면 false(편집기능 제어), 지라출처면 true
+  지라_이슈_제목:string;
+  지라_이슈_키:string;
+}
+//특정 프로젝트 모든 티켓 조회 결과 타입
+export type GetTicketListType = {
+  content :[
+    TicketContents
+  ],
+  empty:boolean;
+  first:boolean;
+  last:boolean;
+  number:number;
+  numberOfElements:number;
+  pageable:{
+    offset:number;
+    pageNumber:number;
+    pageSize:number;
+    paged:boolean;
+    sort:{
+      empty:boolean;
+      sorted:boolean;
+      unsorted:boolean;
+    },
+    unpaged:boolean;
+  },
+  size:number;
+  sort:{
+    empty:boolean;
+    sorted:boolean;
+    unsorted:boolean;
+  },
+  totalElements:number;
+  totalPages:number;
+}

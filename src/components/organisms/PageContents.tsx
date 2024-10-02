@@ -33,9 +33,10 @@ export default function PageContents({fixFlag}: PageContentsType) {
   const navigator = useNavigate();  
 
   const handleMovePage = (jiraCode :string, projectFlag:string)=>{
+    const projectType = projectFlag==="프로젝트"?"P":"M";
     if(fixFlag)navigator(`/projectFix/${jiraCode}/${projectFlag}`)
     else {
-      navigator(`projectDetail/${jiraCode}`)
+      navigator(`projectDetail/${jiraCode}/${projectType}`)
     }
   }
 
