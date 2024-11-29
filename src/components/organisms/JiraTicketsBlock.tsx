@@ -32,6 +32,7 @@ export default function JiraTicketsBlock({jiraProjectCode}:JiraTicketsBlockType 
   
   return (
     <Box sx={{rowGap: "10px", marginTop: '15px' }}>
+      {/* 이부분에서 projectTickets의 배열 크기가 0인지 아닌지 에 따라 아래 랜더링 조건을 바꾸고싶어 */}
     <Typography variant="h5" sx={{width: '100%'}}>{'히스토리'}</Typography>
       {projectTickets.map((item)=>(
       <div>
