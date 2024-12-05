@@ -19,7 +19,17 @@ import { defaultProjectTotalInfo } from '@common/DefaultValue';
 export default function ProjectDetailPage(){
   const navigator = useNavigate();
   //선택되서 넘어온 jiraCode
-  const {jiraProjectCode, projectFlag} = useParams();
+  // const {jiraProjectCode, projectFlag} = useParams<{ jiraProjectCode: string; projectFlag: string }>();
+  const params = useParams<{ jiraProjectCode?: string; projectFlag?: string }>();
+
+  if (!params.jiraProjectCode || !params.projectFlag) {
+    throw new Error("Missing required URL parameters");
+  }
+
+  const jiraProjectCode = params.jiraProjectCode;
+  const projectFlag = params.projectFlag;
+
+
 
    //Modal 셋팅
    const modalRoot = document.getElementById('modal-root');

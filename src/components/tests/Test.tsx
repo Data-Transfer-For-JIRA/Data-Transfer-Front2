@@ -54,6 +54,7 @@ function NormalQuill({data}:NormalQuillType){
         theme="snow"  // 스타일 테마 적용 (선택 사항)
         modules={{ toolbar: false }}  // 툴바 제거
       />
+      <ADFEditor2/>
     </div>
   ))}
     </>
@@ -61,6 +62,7 @@ function NormalQuill({data}:NormalQuillType){
 }
 
 const testTicket = "TED779-18";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ADFEditor2(){
   const tbData = "<table><tbody>\n<th>테이블헤더1</th>\n<th>테이블헤더2</th>\n<th>테이블헤더3</th>\n<td>테이블 1,1</td>\n<td>테이블2,1</td>\n<td>테이블3,1</td>\n<td>테이블 2,1</td>\n<td>테이블2,2</td>\n<td>테이블2,3</td>\n</tbody></table>\n"
 
